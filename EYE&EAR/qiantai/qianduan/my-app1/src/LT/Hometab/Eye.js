@@ -106,7 +106,7 @@ export default class Eye extends Component {
             //   this.state.dataItem.map((item, index) => {
             //     if(this.state.data.tit==item.tab_id){
             //       return(
-            <Link to={`/apphome/hometab/eye/${data.tit}`}>
+            <Link to={`/apphome/hometab/eye/${data.tit}`} style={{color:'#000'}}>
               <div onClick={() => this.click(data.tit)} style={{ border: '1px solid #8794a8', backgroundColor: '#8794a8' }}>
                 <div style={{ width: '100%', height: 85 }} onClick={this.onClick}>
                   {
@@ -126,7 +126,7 @@ export default class Eye extends Component {
         {/* <Route path={`/apphome/hometab/eye/:id`}>
 
         </Route> */}
-        <ul style={{ listStyle: 'none', margin: '10px auto',height:'100%',overflow:'auto'}}>
+        <ul style={{ listStyle: 'none', margin: '10px auto',height:'50%',overflow:'auto'}}>
           {
             this.state.dataItem.map((item, index) => (
               <Link to={'/apphome/hometab/details/' + item.article_id}>
