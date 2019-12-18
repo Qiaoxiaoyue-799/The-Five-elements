@@ -3,14 +3,14 @@ import './Cart.css'
 import { List, InputItem, TextareaItem, Grid,NavBar } from 'antd-mobile';
 import ListItem from './ListItem';
 import { HashRouter as Router, withRouter, Route, Link, Switch, Redirect } from 'react-router-dom';
-
+var finished=0;
 export default class cart extends Component {
-    constructor() {
-        super();
+
+    constructor(props) {
+        super(props);
 
         this.state = {
             list: [],
-            finished: 0,
             data1: [
                 { icon: './img/18.jpg', tit: '开心麻花《皇帝的新娘》' },
                 { icon: './img/13.jpg', tit: '2020新年音乐会' },
@@ -20,22 +20,28 @@ export default class cart extends Component {
                 { icon: './img/16.jpg', tit: '“笙声不息”交响乐团音乐会' },
             ]
         };
+        
+       
+
+	
     }
 
     updateFinished(todoItem) {
-        var sum = 0;
+        var sum=0
         this.state.list.forEach((item) => {
+           
             if (item.id === todoItem.id) {
-                item.status = todoItem.status;
+                item.gstatus = todoItem.status;
             }
-            if (item.status === 1) {
+            if (item.gstatus === 1) {
                 sum++;
+                
+                
             }
-
+            finished=sum
         });
-        this.setState({
-            finished: sum
-        });
+        // console.log(this.finished)
+        
     }
 
     updateTotal(todoItem) {
@@ -48,29 +54,35 @@ export default class cart extends Component {
                 }
             }
         });
+        // this.finished=sum
         this.setState({
             list: obj,
-            finished: sum
+            
         });
+    
     }
     componentDidMount() {
         fetch('http://localhost:5000/cartlist', {
             "method": "get",
         })
-            .then(res => res.json())
-            .then(res => {
-                console.log(res)
-                this.setState({
-                    list: res
-                })
-
-            }
-            )
+        .then(res => res.json())
+        .then(res => {
+            this.setState({
+                list:res
+            })
+        })
+        .then(res=>{
+            console.log(this.state.list)
+        })
+        
+            
     }
     handleClick = () => {
         this.inputRef.focus();
     }
+    
     render() {
+    
         // var a = this.state.list.length-this.state.finished;
         return (
             <div style={{width: '100%',height:'108%',backgroundColor: '#fff',zIndex:999,position:'absolute',overflow:'auto'}}>
@@ -109,25 +121,30 @@ export default class cart extends Component {
                     </List>
                 </div>
                 <p id="wen">以下是您选购的商品</p>
-                <div className="container" style={{width:'100%',height:'100%',overflow:'scroll',marginBottom:'30px'}}>
+                <div className="container" style={{width:'100%',height:'56%',overflow:'scroll',marginBottom:'30px'}}>
                     <ul>
+                     
+                       
                         {this.state.list.map((item, index) =>
+                            
                             <ListItem
                                 item={item}
                                 finishedChange={this.updateFinished.bind(this)}
                                 totalChange={this.updateTotal.bind(this)}
                                 key={index}
                             />
+                          
                         )}
-                        <li>
-                            <span style={{ display: 'block', paddingLeft: '50%', margin: 0, float: 'left' }}>
-                                已选中：{this.state.finished}
-                            </span>
+                        <li style={{position:'absolute',bottom:0,right:0}}>
+                            {/* <span style={{ display: 'block', paddingLeft: '50%', margin: 0, float: 'left' }}>
+                                已选中：{finished}
+                            </span> */}
                             <button style={{
                                 height: 40, width: 80, border: '1px solid rgb(241, 98, 42)',
                                 borderRadius: '5px', marginLeft: 15, color: 'white',
                                 background: 'rgb(241, 98, 42)',
                                 textAlign: 'center',
+                                float:'right'
                             }}>
                                 购买
                             </button>

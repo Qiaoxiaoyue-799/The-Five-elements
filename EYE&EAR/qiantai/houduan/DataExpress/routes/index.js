@@ -724,6 +724,20 @@ router.get('/cartlist',function(req,res,next) {
     }
   });
 })
+router.post('/cart2',function(req,res,next) {
+  var id=req.body.id
+  console.log(id)
+  var con = mysql.createConnection(dbconfig);
+  con.connect();
+  con.query("delete from cart where id=?",[id],function(err,result) {
+    if(err) {
+      console.log(err);
+    } else {
+    
+    }
+  })
+})
+
 /**
  * update chapters set content-? where chapterid=?
  */
