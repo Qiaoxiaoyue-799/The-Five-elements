@@ -12,23 +12,13 @@ import { Grid } from 'antd-mobile';
 import 'antd-mobile/dist/antd-mobile.css';
 import './mychat.css'
 
-// const data = Array.from(new Array(17)).map((_val, i) => ({
-//   icon: './img/夜晚.png',
-//   text: `name${i}`,
-// }));
-// const GridExample = () => (
-//   <div>
-//     <div className="sub-title">Carousel</div>
-//     <Grid data={data} isCarousel onClick={_el => console.log(_el)} />
-//   </div>
-// );
-
+const t = new Date().getTime();
 export default class MyChat extends Component {
   state = {
     inputValue: '',
     messages: [
       {
-        timestamp: 1545925494422,
+        timestamp: t,
         userInfo: {
           avatar: "http://img.binlive.cn/6.png",
           name: "游客1544365758856",
@@ -37,7 +27,7 @@ export default class MyChat extends Component {
         value: "你好！"
       },
       {
-        timestamp: 1545925534218,
+        timestamp: t,
         userInfo: {
           avatar: "http://img.binlive.cn/6.png",
           name: "游客1544365758856",

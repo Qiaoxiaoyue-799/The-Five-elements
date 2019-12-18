@@ -39,23 +39,36 @@ router.get('/login',function(req,res,next) {
 });
 
 router.post('/register',function(req,res,next) {
-  username = req.body.username;
-  password = req.body.password;
-  var mobile = req.body.mobile;
-  console.log(typeof username);
-  console.log(typeof password);
-  console.log(typeof mobile);
+  var username1 = req.body.username;
+  var password1 = req.body.password;
+  var mobile1 = req.body.mobile;
+  var time = new Date();
+  time = time.toLocaleDateString();
   var con = mysql.createConnection(dbconfig);
   con.connect();
-  con.query("insert into user(username,password,mobile) values(?,?,?)",[username,password,mobile],function(err,result) {
-    if(err) {            
+  con.query("select * from user",function(err,result) {
+    if(err) {
       console.log(err);
     } else {
-      console.log(result);
-      res.send({status:'success'});
-      
-    }
-  });
+      console.log(result)
+      var is = true;
+      for(var i = 0; i < result.length; i++){
+        if(result[i].username == username1){
+          res.send({state:false});
+          return;
+        }
+      }
+      if(is){
+        con.query("insert into user(username,password,mobile,time) values(?,?,?,?)",[username1,password1,mobile1,time],function(err,result) {
+          if(err) {            
+            console.log(err);
+          } else {
+            console.log(result);
+            res.send({state:true});
+          }
+        });
+      }}
+  }); 
 })
 router.get('/list',function(req,res,next) {
   var con = mysql.createConnection(dbconfig);

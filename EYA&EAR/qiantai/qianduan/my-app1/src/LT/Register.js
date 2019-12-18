@@ -41,10 +41,9 @@ export default class Register extends Component {
     .then(res=>res.json())
     .then(res=>{
       console.log(res)
-      if(res) {
-        this.props.history.push('/apphome');        
-      }
-      else {
+      if(res.state) {
+        this.props.history.push('/login');        
+      }else {
         window.alert('验证失败，输入格式有误，请重新输入');
       //   this.setState({
       //     data:res[0]
