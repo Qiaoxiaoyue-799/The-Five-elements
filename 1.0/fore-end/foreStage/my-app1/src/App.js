@@ -6,6 +6,7 @@ import Login from './LT/Login';
 import Register from './LT/Register';
 import Greeting from './LT/Greeting';
 import One from './LT/One';
+import cart from './LT/Shoptab/Cart';
 
 export default class App extends React.Component {
  
@@ -20,6 +21,7 @@ export default class App extends React.Component {
         <Route path='/register' component={Register}/> 
         <Route path='/login' component={Login}/> 
         <Route path='/apphome' component={Apphome}/> 
+        <Route path='/apphome/shoptab/cart' component={cart}/> 
         {/* <Route path='/home' component={Home}/>
         <Route path='/search' component={Search}/>       
         <Route path='/member' component={Member}/>

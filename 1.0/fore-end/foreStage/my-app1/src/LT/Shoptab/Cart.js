@@ -12,12 +12,12 @@ export default class cart extends Component {
             list: [],
             finished: 0,
             data1: [
-                { icon: './img/13.jpg', tit: '开心麻花《皇帝的新娘》' },
-                { icon: './img/14.jpg', tit: '2020新年音乐会' },
-                { icon: './img/15.jpg', tit: '舞剧《梁祝》' },
-                { icon: './img/16.jpg', tit: '《冰上迪士尼-勇敢追梦》' },
-                { icon: './img/17.jpg', tit: '汉秀' },
-                { icon: './img/18.jpg', tit: '“笙声不息”交响乐团音乐会' },
+                { icon: './img/18.jpg', tit: '开心麻花《皇帝的新娘》' },
+                { icon: './img/13.jpg', tit: '2020新年音乐会' },
+                { icon: './img/17.jpg', tit: '舞剧《梁祝》' },
+                { icon: './img/14.jpg', tit: '《冰上迪士尼-勇敢追梦》' },
+                { icon: './img/15.jpg', tit: '汉秀' },
+                { icon: './img/16.jpg', tit: '“笙声不息”交响乐团音乐会' },
             ]
         };
     }

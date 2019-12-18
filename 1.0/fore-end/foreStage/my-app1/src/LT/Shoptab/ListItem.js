@@ -8,15 +8,14 @@ class ListItem extends Component {
 		this.handleDelete = this.handleDelete.bind(this);
 	} 
 
-	handleFinished () {
-		var status = this.props.item.status;
+	handleFinished (item) {
 
-		status = (status === 0 ? 1 : 0);
+		item.status = (item.status === 0 ? 1 : 0);
 
 		var obj = {
-			id: this.props.item.id,
-			name: this.props.item.name,
-			status: status
+			id: item.id,
+			name: item.name,
+			status: item.status
 		}
 		
 		this.props.finishedChange(obj);	
@@ -32,7 +31,7 @@ class ListItem extends Component {
 		return (
 			<li key={item.id}>
 				<span 
-					onClick={this.handleFinished} 
+					onClick={this.handleFinished(item)} 
 					id={item.id}
 					className="check-btn"
 					style={{backgroundColor: item.status === 0 ? '#fff' : 'gray',float:'left',marginTop:12}}
@@ -49,6 +48,7 @@ class ListItem extends Component {
 				
 				<p onClick={this.handleDelete} className="delete-btn">删除</p>
 			</li>
+			
 		);
 	}
 }
