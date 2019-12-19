@@ -71,7 +71,7 @@ export default class Details extends Component {
                 if(item.article_id==id){
                     return(
                     <div className='box'>
-                        <div className="header" onWheel={(e) => this.handleScroll(e)} style={this.state.style}>
+                        <div className="header" style={this.state.style}>
                             <p className='p1'><Link to={'/'+content.First_type}><span style={{fontSize:'35px'}}className="iconfont icon-htmal5icon37"></span></Link></p>                    
                             <Link to={'/apphome/hometab/author/' + item.article_id} style={{marginLeft:'1px',display:"inline-block",float:'left',marginTop:'5px'}}>
                                 <img src={item.avatar}/>
@@ -96,7 +96,7 @@ export default class Details extends Component {
                             <h2 style={{marginTop:'30px'}}>
                                 {item.title}
                             </h2>                                      
-                            <div dangerouslySetInnerHTML={{ __html: item.content }}>
+                            <div dangerouslySetInnerHTML={{ __html: item.content }} style={{fontSize:16,textAlign:'justify'}}>
                             </div>                   
                         </div>
                     </div>

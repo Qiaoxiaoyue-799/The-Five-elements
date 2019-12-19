@@ -131,8 +131,7 @@ export default class Shop_publish extends Component {
         })})
       .then(res=>res.json())
       .then(res=>{
-        console.log("haahha")
-        this.props.history.push('/apphome');     
+        console.log("haahha")   
         }
       )
     }
@@ -153,7 +152,7 @@ export default class Shop_publish extends Component {
   render(){  
     const{files}=this.state; 
     return (
-      <div style={{width: '100%',height:'108%',backgroundColor: '#fff',zIndex:999,position:'absolute',overflow:'auto'}}>
+      <div style={{width: '100%',height:'90%',backgroundColor: '#fff',zIndex:999,position:'absolute',overflow:'auto'}}>
         <div style={{width:'100%',height:'200px',backgroundColor:'#7a727f'}}>
             <div style={{width: '80px',height:'80px',margin:'0px auto'}}>
             <img src={`./images/16.jpg`} style={{marginTop:'20px',width: '80px',height:'80px',border:'1px solid black',borderRadius:"50%"}} />
@@ -171,13 +170,14 @@ export default class Shop_publish extends Component {
         </form>
 
         <ImagePicker
+        style={{overflow:'auto'}}
           files={files}
           onChange={this.onChange}
           selectable={files.length < 6}
           multiple
           accept="image/gif,image/jpeg,image/jpg,image/png"
         />
-        <Button onClick={this.click} style={{width:'90%',margin:'0 auto',backgroundColor:'#7a727f',marginTop:'120px',color:'white'}}>发布</Button>
+        <Button onClick={this.click} style={{width:'90%',margin:'0 auto',backgroundColor:'#7a727f',marginTop:'0px',color:'white'}}>发布</Button>
         </div>
     );
   }

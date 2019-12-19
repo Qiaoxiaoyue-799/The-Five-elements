@@ -121,7 +121,7 @@ export default class cart extends Component {
                     </List>
                 </div>
                 <p id="wen">以下是您选购的商品</p>
-                <div className="container" style={{width:'100%',height:'56%',overflow:'scroll',marginBottom:'30px'}}>
+                <div className="container" style={{width:'100%',height:'56%',overflow:'scroll',marginBottom:'50px'}}>
                     <ul>
                      
                        
@@ -153,7 +153,7 @@ export default class cart extends Component {
                     {/* <Dialog addNewTask={this.addTask.bind(this)} nums={this.state.list.length}/> */}
                 </div>
                 <div className="Cbottom">
-                    <p style={{ display: 'inline-block', fontSize: 20, border: '1px solid #bbb', padding: '10px 10px', borderRadius: '10px' }}>猜你喜欢</p>
+                    <p style={{ display: 'inline-block', fontSize: 20, border: '1px solid #bbb', padding: '10px 10px', borderRadius: '10px',marginTop:"15px" }}>猜你喜欢</p>
                     <Grid data={this.state.data1}
                         // style={{border:'1px solid #fff'}}
                         columnNum={2}

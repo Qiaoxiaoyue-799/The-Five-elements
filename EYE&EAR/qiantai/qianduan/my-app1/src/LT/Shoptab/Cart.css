@@ -103,7 +103,8 @@ ul li:last-child{
 	border: 1px #ccc solid;
 	border-style: outset;
 	border-radius: 50%;
-	margin-right: 20px; 
+	margin-right: 20px;
+	margin-top:13px;
 	cursor: pointer;
 }
 

@@ -142,10 +142,10 @@ export default class Shop_detail_one extends Component {
                 </div>
                 <div style={{ width: '90%', margin: '0 auto', marginTop: '20px', color: 'white' }}>
                     <Pagination total={'20000'} current={1} locale={locale} id='num' />
-                    <p>+</p><input type="text" value="" /><span>-</span>
+                    <p>+</p><span>-</span>
                 </div>
 
-                <Button style={{ width: '90%', margin: '0 auto', backgroundColor: '#ccc0d4', marginTop: '20px', color: 'white' }}>立即购买</Button>
+                <Button style={{ width: '90%', margin: '0 auto', backgroundColor: '#ccc0d4', marginTop: '5px', color: 'white' }}>立即购买</Button>
                 <Link to='/apphome/shoptab/cart'><Button style={{ width: '90%', margin: '0 auto', backgroundColor: '#ccc0d4', marginTop: '20px', color: 'white' }} onClick={this.click}>加入购物车</Button></Link>
 
 

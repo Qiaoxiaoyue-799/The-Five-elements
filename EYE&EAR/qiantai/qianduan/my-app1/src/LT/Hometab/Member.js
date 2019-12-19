@@ -71,18 +71,14 @@ export default class App extends Component {
               
               <p style={{background:'#ccc0d4',border:'1px solid white',borderRadius:'10px',height:'30px',lineHeight:'30px',fontSize:'20px'}} className="neirong">性别：{this.state.data.sex}</p>
               
-              <p style={{background:'#8794a8',border:'1px solid white',borderRadius:'10px',height:'30px',lineHeight:'30px',fontSize:'20px'}} className="neirong">生日：{this.state.data.birth}年*月*日</p>
+              <p style={{background:'#8794a8',border:'1px solid white',borderRadius:'10px',height:'30px',lineHeight:'30px',fontSize:'20px'}} className="neirong">生日：{this.state.data.birth}</p>
               
               <p style={{background:'#ccc0d4',border:'1px solid white',borderRadius:'10px',height:'30px',lineHeight:'30px',fontSize:'20px'}} className="neirong">星座：{this.state.data.star}</p>
               <p style={{background:'#8794a8',border:'1px solid white',borderRadius:'10px',height:'30px',lineHeight:'30px',fontSize:'20px'}} className="neirong">职业：{this.state.data.job}</p>
               <p style={{background:'#ccc0d4',border:'1px solid white',borderRadius:'10px',height:'30px',lineHeight:'30px',fontSize:'20px'}} className="neirong">爱好：{this.state.data.hobby}</p>
               <p style={{background:'#8794a8',border:'1px solid white',borderRadius:'10px',height:'30px',lineHeight:'30px',fontSize:'20px'}} className="neirong">所在地：{this.state.data.place}</p>
               <p  style={{background:'#ccc0d4',border:'1px solid white',borderRadius:'10px',height:'30px',lineHeight:'30px',fontSize:'20px'}}className="neirong">个性签名：{this.state.data.sign}</p>
-              
             </div>
-            
-            
-               
           </div>
       </div>
       </div>

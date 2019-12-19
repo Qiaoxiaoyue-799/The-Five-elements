@@ -4,7 +4,7 @@ class ListItem extends Component {
 	constructor (props) {
 		super(props);
 		this.state={
-			style:{backgroundColor: '#fff',float:'left'}
+			style:{backgroundColor: '#fff',float:'left',marginTop:'20',display:'block'}
 		}
 		// this.handleFinished = this.handleFinished.bind(this);
 		this.handleDelete = this.handleDelete.bind(this);
@@ -52,12 +52,12 @@ class ListItem extends Component {
 		
 		return (
 			<li key={item.id} style={{width:'100%',borderBottom:'2px solid #fff'}}>
-				<p
+				<span
 					onClick={()=>this.handleFinished(item)} 
 					id={item.id}
 					className="check-btn"
 					style={this.state.style}
-				></p>
+				></span>
 				<span style={{display:'inline-block',float:'left',width:'90%',fontSize:15}}>
 					{item.gName}
 				</span>
@@ -67,8 +67,7 @@ class ListItem extends Component {
 				<span style={{display:'inline-block',marginLeft:'10%',fontSize:15}}>
 					{item.gNum}
 				</span>
-				
-				<p onClick={()=>this.handleDelete(item)} className="delete-btn">删除</p>
+				{/* <p onClick={()=>this.handleDelete(item)}>??</p> */}
 			</li>
 			
 		);
