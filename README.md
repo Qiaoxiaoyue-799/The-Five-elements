@@ -27,3 +27,6 @@ EYE&EAR是一个为人们带来文体娱乐活动第一消息的APP，方便用�
     * GitHub：https://github.com/liitng3
     
 ### 项目截图
+
+![图片名][1]
+[1]:http://latex.codecogs.com/gif.latex?\prod%20\(n_{i}\)+1
