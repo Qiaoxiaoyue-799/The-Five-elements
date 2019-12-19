@@ -28,5 +28,4 @@ EYE&EAR是一个为人们带来文体娱乐活动第一消息的APP，方便用�
     
 ### 项目截图
 
-![图片名][1]
-[1]:http://latex.codecogs.com/gif.latex?\prod%20\(n_{i}\)+1
+![](http://upload-images.jianshu.io/upload_images/1874524-b9be15e31c25eba2.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
