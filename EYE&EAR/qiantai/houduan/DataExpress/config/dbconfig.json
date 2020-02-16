@@ -1,6 +1,6 @@
 {
-    "host":"localhost",
+    "host":"139.155.6.69",
     "database":"dbsystem",
     "user":"root",
-    "password":""
+    "password":"123456"
 }
