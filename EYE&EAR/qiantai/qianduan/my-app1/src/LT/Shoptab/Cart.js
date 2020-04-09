@@ -62,7 +62,7 @@ export default class cart extends Component {
     
     }
     componentDidMount() {
-        fetch('http://localhost:5000/cartlist', {
+        fetch('http://139.155.6.69:5000/cartlist', {
             "method": "get",
         })
         .then(res => res.json())

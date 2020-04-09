@@ -26,7 +26,7 @@ export default class Shop_detail_one extends Component {
     }
     componentDidMount() {
         console.log(this.props.match.params.id)
-        fetch('http://localhost:5000/detail1?id=' + this.props.match.params.id, {
+        fetch('http://139.155.6.69:5000/detail1?id=' + this.props.match.params.id, {
             "method": "get",
             // params:JSON.stringify({"id":1})
             // headers: {'Content-Type': 'application/json; charset=utf-8'},
@@ -60,7 +60,7 @@ export default class Shop_detail_one extends Component {
         var tPrice = this.state.data.tPrice2
         // var num=
         console.log(num)
-        fetch('http://localhost:5000/cart1', {
+        fetch('http://139.155.6.69:5000/cart1', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json; charset=utf-8' },
             body: JSON.stringify({

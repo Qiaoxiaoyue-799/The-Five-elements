@@ -27,7 +27,7 @@ export default class Community extends Component {
         }
     }
     componentDidMount() {
-        fetch('http://localhost:5000/active', {
+        fetch('http://139.155.6.69:5000/active', {
             method: 'GET'
         })
             .then(res => res.json())
@@ -37,7 +37,7 @@ export default class Community extends Component {
 
                 })
             })
-        fetch('http://localhost:5000/login', {
+        fetch('http://139.155.6.69:5000/login', {
             method: 'GET',
             headers: { 'Content-Type': 'application/json; charset=utf-8' },
         })

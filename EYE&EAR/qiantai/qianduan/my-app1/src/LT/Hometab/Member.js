@@ -31,7 +31,7 @@ export default class App extends Component {
   componentDidMount(){
         //api请求函数
 
-      fetch('http://localhost:5000/login',{
+      fetch('http://139.155.6.69:5000/login',{
         method:'GET', 
         headers: {'Content-Type': 'application/json; charset=utf-8'},
       })

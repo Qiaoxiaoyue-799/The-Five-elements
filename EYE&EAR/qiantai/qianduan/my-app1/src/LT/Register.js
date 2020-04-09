@@ -30,7 +30,7 @@ export default class Register extends Component {
     })
   }
   getConnect = () => {  //api请求函数    
-    fetch('http://localhost:5000/register',{
+    fetch('http://139.155.6.69:5000/register',{
       method:'POST', 
       headers: {'Content-Type': 'application/json; charset=utf-8'},
       body: JSON.stringify({

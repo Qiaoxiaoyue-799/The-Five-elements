@@ -26,7 +26,7 @@ export default class Shop_detail_two extends Component {
     }
     componentDidMount() {
         console.log(this.props.match.params.id)
-        fetch('http://localhost:5000/detail2?id=' + this.props.match.params.id, {
+        fetch('http://139.155.6.69:5000/detail2?id=' + this.props.match.params.id, {
             "method": "get",
             // params:JSON.stringify({"id":1})
             // headers: {'Content-Type': 'application/json; charset=utf-8'},
@@ -50,7 +50,7 @@ export default class Shop_detail_two extends Component {
     click = () => {
         var aName = this.state.data.aName
         var aPrice = this.state.data.aPrice2
-        fetch('http://localhost:5000/cart', {
+        fetch('http://139.155.6.69:5000/cart', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json; charset=utf-8' },
             body: JSON.stringify({
@@ -97,7 +97,7 @@ export default class Shop_detail_two extends Component {
                                 <img
                                     //src={require(`./images/${val}.png`)}
 
-                                    src={'http://localhost:5000/images?imgname=' + val}
+                                    src={'http://139.155.6.69:5000/images?imgname=' + val}
                                     alt=""
                                     style={{ width: '100%', verticalAlign: 'top' }}   //图片记得写上宽度百分之百
                                     onLoad={() => {

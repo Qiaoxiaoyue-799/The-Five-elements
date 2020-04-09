@@ -19,7 +19,7 @@ export default class Search extends Component {
 
     }
     componentDidMount() {
-        fetch('http://localhost:5000/apphome/hometab/eye', {
+        fetch('http://139.155.6.69:5000/apphome/hometab/eye', {
             method: 'GET',
         })
             .then(res => res.json())
@@ -35,7 +35,7 @@ export default class Search extends Component {
     }
     click = (value) => {
         console.log(value);
-        fetch('http://localhost:5000/apphome/hometab/eye/search?content=' + value, {
+        fetch('http://139.155.6.69:5000/apphome/hometab/eye/search?content=' + value, {
             method: 'GET',
         })
             .then(res => res.json())

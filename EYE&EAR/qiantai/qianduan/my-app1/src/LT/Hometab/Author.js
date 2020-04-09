@@ -23,7 +23,7 @@ export default class Author extends Component {
 
   componentDidMount() {
     id = this.props.match.params.id;
-    fetch('http://localhost:5000/apphome/hometab/eye', {
+    fetch('http://139.155.6.69:5000/apphome/hometab/eye', {
       method: 'GET',
     })
       .then(res => res.json())

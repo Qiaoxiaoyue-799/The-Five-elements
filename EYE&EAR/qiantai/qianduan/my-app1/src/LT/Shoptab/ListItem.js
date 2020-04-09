@@ -34,7 +34,7 @@ class ListItem extends Component {
 
 	handleDelete =(item)=> {
 		this.props.totalChange(this.props.item);
-			fetch('http://localhost:5000/cart2',{
+			fetch('http://139.155.6.69:5000/cart2',{
 				method:'POST', 
 				headers: {'Content-Type': 'application/json; charset=utf-8'},
 				body: JSON.stringify({

@@ -35,7 +35,7 @@ export default class Details extends Component {
         // window.addEventListener('scroll', this.handleScroll);
         id = this.props.match.params.id;//
         console.log(id);
-        fetch('http://localhost:5000/apphome/hometab/details',
+        fetch('http://139.155.6.69:5000/apphome/hometab/details',
         {method:'GET'})//
         .then((res)=>res.json())
         .then((res)=>{
@@ -52,7 +52,7 @@ export default class Details extends Component {
     componentDidUpdate(prevProps,prevState){
         if(prevProps.match.params.id!==this.props.match.params.id){//
             let id = this.props.match.params.id//
-            fetch('http://localhost:5000/apphome/hometab/details/',
+            fetch('http://139.155.6.69:5000/apphome/hometab/details/',
             {method:'GET'})//
             .then((res)=>res.json())
             .then((res)=>{

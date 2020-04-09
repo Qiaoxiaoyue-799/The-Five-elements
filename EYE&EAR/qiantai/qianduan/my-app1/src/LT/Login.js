@@ -49,7 +49,7 @@ export default class Login extends React.Component {
     //     // console.log(error)//错误处理 相当于error
     //     // window.alert('验证失败，用户名或密码错误');
     //   })
-    fetch('http://localhost:5000/login',{
+    fetch('http://139.155.6.69:5000/login',{
       method:'POST', 
       headers: {'Content-Type': 'application/json; charset=utf-8'},
       body: JSON.stringify({
