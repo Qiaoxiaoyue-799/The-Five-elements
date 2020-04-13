@@ -34,7 +34,6 @@ export default class Register extends Component {
     } else {
         var len = 0;  
         for (var i = 0; i < con.length; i++ ) {
-            // 如果是中文，就+2；否则+1
             if (con[i].match(/^[\u4e00-\u9fa5]{0,}$/)) {
                 len += 2;
             } else {
