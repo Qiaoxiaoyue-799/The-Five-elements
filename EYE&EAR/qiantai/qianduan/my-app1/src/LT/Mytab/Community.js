@@ -106,7 +106,7 @@ export default class Community extends Component {
                                                     this.state.data.map((item, index) => (
 
                                                         <li style={{ height: '110px', width: '95%', margin: '0 auto', marginBottom: '10px', border: '1px solid #8794a8' }} key={index}>
-                                                            <img style={{ width: '90px', height: '90px', float: 'left' }} src={'http://localhost:5000/img?imgname=' + item.img1} />
+                                                            <img style={{ width: '90px', height: '90px', float: 'left' }} src={'http://139.155.6.69:5000/img?imgname=' + item.img1} />
                                                             <div style={{ display: 'inline-block', marginLeft: '10px' }}>
                                                                 <p style={{ overflow: 'hidden', width: '200px', height: '40px' }}>{item.content}</p>
                                                                 <p>{item.time}</p>
