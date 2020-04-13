@@ -21,12 +21,15 @@
 .form{
   margin-top: 10%;
 }
-.form input{
+form input{
   width: 75%;
   height: 35px;
   border-radius: 15px;
-  margin-bottom: 10px;
   padding-left:10px;
+}
+.button {
+  margin-top: 20px;
+  margin-right: 30px;
 }
 .placeholder .form span{
   text-align: left;
@@ -38,4 +41,14 @@ ul li{
   border:none;
   float: left;
   margin-left: 50px;
+}
+.tip {
+  height: 10px;
+  width: 75%;
+  margin-top: -10px;
+  line-height: 30px;
+  margin-left: 35px;
+  text-align: left;
+  color: red;
+  font-size: xx-small;
 }
