@@ -71,6 +71,55 @@ router.post('/register', function (req, res, next) {
     }
   });
 })
+router.get('/apphome/hometab/member',function(req,res,next) {
+  var con = mysql.createConnection(dbconfig);
+  con.connect();
+  con.query("select * from user where username = ? and password = ?",[username,password],function(err,result) {
+    if(err) {
+      console.log(err);
+    } else {
+      console.log( result);
+      res.send(result);
+    }
+  });
+});
+router.post('/apphome/hometab/member',function(req,res,next) {
+  console.log('33');
+  console.log('44');
+  var name1=req.body.name;
+  var username1 = req.body.username;
+  var age1 = req.body.age;
+  var sex1 = req.body.sex;
+  var birth1=req.body.birth;
+  var star1 = req.body.star;
+  var job1 = req.body.job;
+  var hobby1=req.body.hobby;
+  var place1 = req.body.place;
+  var sign1=req.body.sign;
+  var time = new Date();
+  console.log(username1);
+  time = time.toLocaleDateString();
+  var con = mysql.createConnection(dbconfig);
+  con.connect();
+  console.log('55');
+  console.log(age1);
+  con.query("select * from user",function(err,result) {
+    if(err) {
+      console.log(err);
+    } else {
+      console.log(result)
+      con.query("update user set username=?,age=?,sex=?,birth=?,star=?,job=?,hobby=?,place=?,sign=? where name = ?",
+          [username1,age1,sex1,birth1,star1,job1,hobby1,place1,sign1,name1],function(err,result) {
+            if(err) {            
+              console.log(err);
+            } else {
+              console.log(result);
+              res.send({state:true});
+            }
+          });
+        }
+      })
+});
 router.get('/list', function (req, res, next) {
   var con = mysql.createConnection(dbconfig);
   con.connect();
