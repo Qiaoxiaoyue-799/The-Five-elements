@@ -111,7 +111,7 @@ router.post('/apphome/hometab/member',function(req,res,next) {
       con.query("update user set username=?,age=?,sex=?,birth=?,star=?,job=?,hobby=?,place=?,sign=? where name = ?",
           [username1,age1,sex1,birth1,star1,job1,hobby1,place1,sign1,name1],function(err,result) {
             if(err) {            
-              console.log(err);
+              console.log(err)
             } else {
               console.log(result);
               res.send({state:true});

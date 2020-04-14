@@ -128,15 +128,7 @@ export default class App extends Component {
     .then(res=>{
       console.log('1');
       // if(res.state) {
-        window.alert('修改成功！');
-
-        // this.props.history.push('/login');        
-      // }else {
-      //   window.alert('验证失败，输入格式有误，请重新输入');
-      //   this.setState({
-      //     data:res[0]
-      //   })
-      // }
+        window.alert('修改成功！');      
     } 
     )
   }
