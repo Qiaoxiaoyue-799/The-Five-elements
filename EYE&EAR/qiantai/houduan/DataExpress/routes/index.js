@@ -739,7 +739,40 @@ router.post('/cart2',function(req,res,next) {
     }
   })
 })
-
+router.post('/heart',function(req,res,next) {
+  userId = req.body.userId;
+  num = req.body.num
+  id = req.body.id;
+  console.log(num);
+  console.log(userId)
+  var con = mysql.createConnection(dbconfig);
+  con.connect();
+  con.query("update eye set num=?,people=? where article_id = ?",[num,userId,id],function(err,result) {
+    if(err) {            
+      console.log(err);
+    } else {
+      console.log(1111);
+      res.send({status:'success'});      
+    }
+  });
+})
+router.post('/heart1',function(req,res,next) {
+  userId = req.body.userId;
+  num = req.body.num
+  id = req.body.id;
+  console.log(num);
+  console.log(userId)
+  var con = mysql.createConnection(dbconfig);
+  con.connect();
+  con.query("update ear set num=?,people=? where article_id = ?",[num,userId,id],function(err,result) {
+    if(err) {            
+      console.log(err);
+    } else {
+      console.log(1111);
+      res.send({status:'success'});      
+    }
+  });
+})
 /**
  * update chapters set content-? where chapterid=?
  */
