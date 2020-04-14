@@ -118,7 +118,6 @@
 <script>
   for (let index = 0; index < $('.order_message').length; index++) {
       $("#del"+index).click(() => {
-      // window.location = "http://localhost:8000/b1/user_management"
       $.ajax({
       	type: 'post',
       	url: 'http://localhost:8000/b1/user_management/del',

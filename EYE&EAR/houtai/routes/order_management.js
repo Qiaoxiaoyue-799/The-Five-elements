@@ -40,6 +40,29 @@ router.post('/search', (req, res,next) => {
     }
   })
 })
+router.post('/del', function(req, res, next) {
+  var id = req.body.id;
+  console.log(id)
+  var con = mysql.createConnection(dbconfig);
+  con.connect();
+  con.query("select * from cart",(err,result)=>{
+    if(err){
+      console.log(err);
+    }else{
+      for(var i = 0; i < result.length; i++){
+        if(result[i].id == id){
+          con.query("delete from cart where id=?",[id],function(err,result){
+            if(err){
+              console.log(err);
+            }
+          })
+          res.end("delete success");
+        }
+      }
+      res.end("没有信息");
+    }
+  })
+});
 router.post('/view', (req, res,next) => {
   var index = parseInt(req.body.view_id);
   console.log(index);

@@ -134,12 +134,15 @@
 				is_user:$("#is_user").val(),
 			},
 			success: function(data){
+				console.log(data)
 				if(data == "insert success"){
-					window.alert("insert success");
+					window.alert(data);
 					window.location = "http://localhost:8000/b1/user_management";
 				}else if(data == "密码输入错误"){
-					window.alert("密码输入错误");
+					window.alert(data);
 					window.location = "http://localhost:8000/b1/user_management/add";
+				}else{
+					window.alert(data);
 				}
 			}
 		})

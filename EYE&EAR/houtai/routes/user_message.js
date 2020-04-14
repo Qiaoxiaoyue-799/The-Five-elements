@@ -40,4 +40,28 @@ router.post('/search', (req, res,next) => {
   })
 })
 
+
+router.post('/del', function(req, res, next) {
+  var username = req.body.username;
+  var con = mysql.createConnection(dbconfig);
+  con.connect();
+  con.query("select * from user",(err,result)=>{
+    if(err){
+      console.log(err);
+    }else{
+      for(var i = 0; i < result.length; i++){
+        if(result[i].username == username){
+          con.query("delete from user where username=?",[username],function(err,result){
+            if(err){
+              console.log(err);
+            }
+          })
+          res.end("delete success");
+        }
+      }
+      res.end("没有信息");
+    }
+  })
+});
+
 module.exports = router;

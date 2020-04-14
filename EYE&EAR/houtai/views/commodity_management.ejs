@@ -100,18 +100,19 @@
 								打印表格</p>
 						</div>
 						<div id="dataTable"
-							style="width: 960px;background-color:#fff;padding: 0 10px 0 10px;border:none;margin: 0;">
-							<ul id="order_message">
+							style="width: 960px;background-color:#fff;padding: 0 10px 0 0;border:none;margin: 0;overflow: hidden;">
+							<ul id="order_message" style="width: 1200px;">
 								<li>编号</li>
 								<li>商品名称</li>
 								<li>缩略图</li>
 								<li>价格</li>
 								<li>状态</li>
+								<li>操作</li>
 							</ul>
 							<div id="add">
 								<%for(var i=0; i < result.length; i++){%>
 								<ul class="order_message"
-									style="border-bottom: 1px solid #d4d4d4;width: 100%;height: 100px;padding-left: 0;margin-top: 30px;position: static;">
+									style="border-bottom: 1px solid #d4d4d4;width: 1200px;height: 100px;padding-left: 0;margin-top: 30px;position: static;">
 									<li><%=result[i].id%></li>
 									<li><%=result[i].tName%></li>
 									<li><img src="../<%=result[i].tImg%>" alt=""
@@ -119,6 +120,11 @@
 									<li><%=result[i].money%></li>
 									<li>
 										<p id="state<%=i%>" style="cursor: pointer;"><%=result[i].state%></p>
+									</li>
+									<li>
+										<span style="color: red;font-size: 12px;cursor:pointer;"
+											id="del<%=i%>">删除</span>
+										<span style='color: blue;font-size: 12px;cursor:pointer;' id="view">查看</span>
 									</li>
 								</ul>
 								<%}%>
@@ -148,89 +154,89 @@
 </body>
 <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
 <script>
- var idTmr;
+	var idTmr;
 
-function getExplorer() {
-	var explorer = window.navigator.userAgent;
-	//ie  
-	if(explorer.indexOf("MSIE") >= 0) {
-		return 'ie';
-	}
-	//firefox  
-	else if(explorer.indexOf("Firefox") >= 0) {
-		return 'Firefox';
-	}
-	//Chrome  
-	else if(explorer.indexOf("Chrome") >= 0) {
-		return 'Chrome';
-	}
-	//Opera  
-	else if(explorer.indexOf("Opera") >= 0) {
-		return 'Opera';
-	}
-	//Safari  
-	else if(explorer.indexOf("Safari") >= 0) {
-		return 'Safari';
-	}
-}
-
-function method5(tableid) {
-	if(getExplorer() == 'ie') {
-		var curTbl = document.getElementById(tableid);
-		var oXL = new ActiveXObject("Excel.Application");
-		var oWB = oXL.Workbooks.Add();
-		var xlsheet = oWB.Worksheets(1);
-		var sel = document.body.createTextRange();
-		sel.moveToElementText(curTbl);
-		sel.select();
-		sel.execCommand("Copy");
-		xlsheet.Paste();
-		oXL.Visible = true;
-
-		try {
-			var fname = oXL.Application.GetSaveAsFilename("Excel.xls",
-				"Excel Spreadsheets (*.xls), *.xls");
-		} catch(e) {
-			print("Nested catch caught " + e);
-		} finally {
-			oWB.SaveAs(fname);
-			oWB.Close(savechanges = false);
-			oXL.Quit();
-			oXL = null;
-			idTmr = window.setInterval("Cleanup();", 1);
+	function getExplorer() {
+		var explorer = window.navigator.userAgent;
+		//ie  
+		if (explorer.indexOf("MSIE") >= 0) {
+			return 'ie';
 		}
-
-	} else {
-		tableToExcel(tableid)
-	}
-}
-
-function Cleanup() {
-	window.clearInterval(idTmr);
-	CollectGarbage();
-}
-var tableToExcel = (function() {
-	var uri = 'data:application/vnd.ms-excel;base64,',
-		template = '<html><head><meta charset="UTF-8"></head><body><table  border="1">{table}</table></body></html>',
-		base64 = function(
-			s) {
-			return window.btoa(unescape(encodeURIComponent(s)))
-		},
-		format = function(s, c) {
-			return s.replace(/{(\w+)}/g, function(m, p) {
-				return c[p];
-			})
+		//firefox  
+		else if (explorer.indexOf("Firefox") >= 0) {
+			return 'Firefox';
 		}
-	return function(table, name) {
-		if(!table.nodeType)
-			table = document.getElementById(table)
-		var ctx = {
-			worksheet: name || 'Worksheet',
-			table: table.innerHTML
+		//Chrome  
+		else if (explorer.indexOf("Chrome") >= 0) {
+			return 'Chrome';
 		}
-		window.location.href = uri + base64(format(template, ctx))
+		//Opera  
+		else if (explorer.indexOf("Opera") >= 0) {
+			return 'Opera';
+		}
+		//Safari  
+		else if (explorer.indexOf("Safari") >= 0) {
+			return 'Safari';
+		}
 	}
-})()
+
+	function method5(tableid) {
+		if (getExplorer() == 'ie') {
+			var curTbl = document.getElementById(tableid);
+			var oXL = new ActiveXObject("Excel.Application");
+			var oWB = oXL.Workbooks.Add();
+			var xlsheet = oWB.Worksheets(1);
+			var sel = document.body.createTextRange();
+			sel.moveToElementText(curTbl);
+			sel.select();
+			sel.execCommand("Copy");
+			xlsheet.Paste();
+			oXL.Visible = true;
+
+			try {
+				var fname = oXL.Application.GetSaveAsFilename("Excel.xls",
+					"Excel Spreadsheets (*.xls), *.xls");
+			} catch (e) {
+				print("Nested catch caught " + e);
+			} finally {
+				oWB.SaveAs(fname);
+				oWB.Close(savechanges = false);
+				oXL.Quit();
+				oXL = null;
+				idTmr = window.setInterval("Cleanup();", 1);
+			}
+
+		} else {
+			tableToExcel(tableid)
+		}
+	}
+
+	function Cleanup() {
+		window.clearInterval(idTmr);
+		CollectGarbage();
+	}
+	var tableToExcel = (function () {
+		var uri = 'data:application/vnd.ms-excel;base64,',
+			template = '<html><head><meta charset="UTF-8"></head><body><table  border="1">{table}</table></body></html>',
+			base64 = function (
+				s) {
+				return window.btoa(unescape(encodeURIComponent(s)))
+			},
+			format = function (s, c) {
+				return s.replace(/{(\w+)}/g, function (m, p) {
+					return c[p];
+				})
+			}
+		return function (table, name) {
+			if (!table.nodeType)
+				table = document.getElementById(table)
+			var ctx = {
+				worksheet: name || 'Worksheet',
+				table: table.innerHTML
+			}
+			window.location.href = uri + base64(format(template, ctx))
+		}
+	})()
 
 
 
@@ -245,269 +251,306 @@ var tableToExcel = (function() {
 			},
 			success: function (data) {
 				$('#add').text('');
-				if(data.result.length == 0){
+				if (data.result.length == 0) {
 					$("#but2").val(0);
 					$('#but4').text(0);
-				}else{
+				} else {
 					$("#but2").val(1);
 					$('#but4').text(data.result.length);
 					$('#page_num').val(1);
 					for (var i = 0; i < data.result.length; i++) {
 						var ulNode = $(
-							"<ul class='order_message' style='border-bottom: 1px solid #d4d4d4;width: 100%;height: 100px;padding-left: 0;margin-top: 30px;position: static;'>"+
-								" <li>"+data.result[i].id+"</li>"+
-								" <li>"+data.result[i].tName+"</li>"+
-								" <li><img src=../"+data.result[i].tImg+" style='width: 40px;height: 40px;position: relative;top:12px'></li>"+
-								" <li>"+data.result[i].money+"</li>"+
-								" <li>"+
-									" <p style='cursor: pointer;' id='state"+i+"'>"+data.result[i].state+"</p>"+
-								" </li>"+
+							"<ul class='order_message' style='border-bottom: 1px solid #d4d4d4;width: 1200px;height: 100px;padding-left: 0;margin-top: 30px;position: static;'>" +
+							" <li>" + data.result[i].id + "</li>" +
+							" <li>" + data.result[i].tName + "</li>" +
+							" <li><img src=../" + data.result[i].tImg + " style='width: 40px;height: 40px;position: relative;top:12px'></li>" +
+							" <li>" + data.result[i].money + "</li>" +
+							" <li>" +
+							" <p style='cursor: pointer;' id='state" + i + "'>" + data.result[i].state + "</p>" +
+							" </li>" +
+							"<li>" +
+							"<span style='color: blue;font-size: 12px;cursor:pointer;' id='view'>查看</span>" +
+							"<span style='color: red;font-size: 12px;cursor:pointer;' id='del" + i + "'>删除</span>" +
+							"</li>" +
 							"</ul>");
 						$("#add").append(ulNode);
 						Pagination();
 					}
-				}	
+				}
 			}
 		})
 	})
 	for (let index = 0; index < $('.order_message').length; index++) {
 		var state = '';
-		if($("#state"+index)[0].innerHTML == '上架'){
-			$("#state"+index).css('color','blue');
-		}else{
-			$("#state"+index).css('color','red');
+		if ($("#state" + index)[0].innerHTML == '上架') {
+			$("#state" + index).css('color', 'blue');
+		} else {
+			$("#state" + index).css('color', 'red');
 		}
-		$("#state"+index).click(() => {
-			if($("#state"+index)[0].innerHTML == '上架'){
+		$("#state" + index).click(() => {
+			if ($("#state" + index)[0].innerHTML == '上架') {
 				state = '下架'
-			}else{
+			} else {
 				state = '上架'
 			}
 			$.ajax({
 				type: 'post',
 				url: "http://localhost:8000/b1/commodity_management/state",
 				data: {
-					id:index,
+					id: index,
 					state: state,
-					old_state:$("#state"+index)[0].innerHTML
+					old_state: $("#state" + index)[0].innerHTML
 				},
 				success: function (data) {
-					$("#state"+index)[0].innerHTML = data;
+					$("#state" + index)[0].innerHTML = data;
 					for (let index = 0; index < $('.order_message').length; index++) {
 						var state = '';
-						if($("#state"+index)[0].innerHTML == '上架'){
-							$("#state"+index).css('color','blue');
-						}else{
-							$("#state"+index).css('color','red');
+						if ($("#state" + index)[0].innerHTML == '上架') {
+							$("#state" + index).css('color', 'blue');
+						} else {
+							$("#state" + index).css('color', 'red');
 						}
 					}
 				}
 			})
 		})
-  	}
+		// console.log($("#del" + index).parent().parent()[0].children[1].innerHTML)
+		$("#del" + index).click(() => {
+			$.ajax({
+				type: 'post',
+				url: 'http://localhost:8000/b1/commodity_management/del',
+				data: {
+					name: $("#del" + index).parent().parent()[0].children[1].innerHTML
+				},
+				success: function (data) {
+					if (data == "delete success") {
+						window.alert("delete success");
+						window.location = "http://localhost:8000/b1/commodity_management";
+					} else if (data == "没有信息") {
+						window.alert("没有信息");
+						window.location = "http://localhost:8000/b1/commodity_management";
+					}
+				}
+			})
+		})
+	}
+	$(".order_message #view").click(function () {
+		var i = $(".order_message #view").index(this);
+		console.log(i)
+		var index = $(".order_message #view").parent().siblings()[i * 5].innerHTML;
+		console.log(index)
+		$.ajax({
+			type: 'post',
+			url: "http://localhost:8000/b1/commodity_management/view",
+			data: { view_id: index },
+			success: function (data) {
+				window.location = "http://localhost:8000/b1/commodity_management/order?id=" + data.result[0].id
+			}
+		})
+	})
 
-function Pagination() {
-    var page_num = document.getElementById('page_num');
-    var but1 = document.getElementById('but1');
-    var but2 = document.getElementById('but2');
-    var but3 = document.getElementById('but3');
-    var but4 = document.getElementById('but4');
-    var but5 = document.getElementById('but5');
-    var order_message = document.getElementsByClassName('order_message');
-    var page = order_message.length;
-	but4.innerHTML = page;
-	for (let index = 0; index < $('.order_message').length; index++) {
-		var state = '';
-		if($("#state"+index)[0].innerHTML == '上架'){
-			$("#state"+index).css('color','blue');
-		}else{
-			$("#state"+index).css('color','red');
+	function Pagination() {
+		var page_num = document.getElementById('page_num');
+		var but1 = document.getElementById('but1');
+		var but2 = document.getElementById('but2');
+		var but3 = document.getElementById('but3');
+		var but4 = document.getElementById('but4');
+		var but5 = document.getElementById('but5');
+		var order_message = document.getElementsByClassName('order_message');
+		var page = order_message.length;
+		but4.innerHTML = page;
+		for (let index = 0; index < $('.order_message').length; index++) {
+			var state = '';
+			if ($("#state" + index)[0].innerHTML == '上架') {
+				$("#state" + index).css('color', 'blue');
+			} else {
+				$("#state" + index).css('color', 'red');
+			}
+		}
+		for (var i = 0; i < order_message.length; i++) {
+			if (but2.value - 1 == i) {
+				order_message[i].style.display = 'block';
+			} else {
+				order_message[i].style.display = 'none'
+			}
+
+		}
+		but1.onclick = () => {
+			if (but2.value <= 1) {
+				but1.style.cursor = "not-allowed";
+			} else {
+				but1.style.cursor = "pointer";
+				but1.onclick = function () {
+					if (but2.value <= 1) {
+						but1.style.cursor = "not-allowed";
+					} else {
+						but1.style.cursor = "pointer";
+						but2.value -= 1;
+					}
+					if (page_num.value == 1) {
+						for (var i = 0; i < order_message.length; i++) {
+							if (but2.value - 1 == i) {
+								order_message[i].style.display = 'block';
+							} else {
+								order_message[i].style.display = 'none'
+							}
+
+						}
+					} else if (page_num.value == 2) {
+						for (var i = 0; i < order_message.length; i++) {
+							if (2 * but2.value - 2 == i || 2 * but2.value - 1 == i) {
+								order_message[i].style.display = 'block';
+							} else {
+								order_message[i].style.display = 'none'
+							}
+
+						}
+					} else if (page_num.value == 5) {
+						for (var i = 0; i < order_message.length; i++) {
+							if (5 * but2.value - 5 == i || 5 * but2.value - 4 == i || 5 * but2.value - 3 == i || 5 * but2.value -
+								2 == i || 5 * but2.value - 1 == i) {
+								order_message[i].style.display = 'block';
+							} else {
+								order_message[i].style.display = 'none'
+							}
+
+						}
+					}
+
+				}
+			}
+		}
+		but3.onclick = () => {
+			if (but2.value >= page) {
+				but3.style.cursor = "not-allowed";
+			} else {
+				but3.style.cursor = "pointer";
+				but3.onclick = function () {
+					if (but2.value >= page) {
+						but3.style.cursor = "not-allowed";
+					} else {
+						but3.style.cursor = "pointer";
+						but2.value++;
+					}
+					if (page_num.value == 1) {
+						for (var i = 0; i < order_message.length; i++) {
+							if (but2.value - 1 == i) {
+								order_message[i].style.display = 'block';
+							} else {
+								order_message[i].style.display = 'none'
+							}
+
+						}
+					} else if (page_num.value == 2) {
+						for (var i = 0; i < order_message.length; i++) {
+							if (2 * but2.value - 2 == i || 2 * but2.value - 1 == i) {
+								order_message[i].style.display = 'block';
+							} else {
+								order_message[i].style.display = 'none'
+							}
+
+						}
+					} else if (page_num.value == 5) {
+						for (var i = 0; i < order_message.length; i++) {
+							if (5 * but2.value - 5 == i || 5 * but2.value - 4 == i || 5 * but2.value - 3 == i || 5 * but2.value -
+								2 == i || 5 * but2.value - 1 == i) {
+								order_message[i].style.display = 'block';
+							} else {
+								order_message[i].style.display = 'none'
+							}
+
+						}
+					}
+				}
+			}
+		}
+		but5.onchange = () => {
+			but2.value = but5.value;
+			if (but5.value == '') {
+				but2.value = 1;
+			}
+			if (page_num.value == 1) {
+				for (var i = 0; i < order_message.length; i++) {
+					if (but2.value - 1 == i) {
+						order_message[i].style.display = 'block';
+					} else {
+						order_message[i].style.display = 'none'
+					}
+
+				}
+			} else if (page_num.value == 2) {
+				for (var i = 0; i < order_message.length; i++) {
+					if (2 * but2.value - 2 == i || 2 * but2.value - 1 == i) {
+						order_message[i].style.display = 'block';
+					} else {
+						order_message[i].style.display = 'none'
+					}
+
+				}
+			} else if (page_num.value == 5) {
+				for (var i = 0; i < order_message.length; i++) {
+					if (5 * but2.value - 5 == i || 5 * but2.value - 4 == i || 5 * but2.value - 3 == i || 5 * but2.value - 2 ==
+						i || 5 * but2.value - 1 == i) {
+						order_message[i].style.display = 'block';
+					} else {
+						order_message[i].style.display = 'none'
+					}
+
+				}
+			}
+		}
+		page_num.onchange = () => {
+			switch (page_num.value) {
+				case '1':
+					page = order_message.length;
+					page = Math.ceil(page / page_num.value);
+					but2.value = 1;
+					but5.value = '';
+					but4.innerHTML = page;
+					for (var i = 0; i < order_message.length; i++) {
+						if (but2.value - 1 == i) {
+							order_message[i].style.display = 'block';
+						} else {
+							order_message[i].style.display = 'none'
+						}
+
+					}
+					break;
+
+				case '2':
+					page = order_message.length;
+					page = Math.ceil(page / page_num.value);
+					but2.value = 1;
+					but5.value = '';
+					but4.innerHTML = page;
+					for (var i = 0; i < order_message.length; i++) {
+						if (i == 0 || i == 1) {
+							order_message[i].style.display = 'block';
+						} else {
+							order_message[i].style.display = 'none'
+						}
+
+					}
+					break;
+
+				case '5':
+					page = order_message.length;
+					page = Math.ceil(page / page_num.value);
+					but2.value = 1;
+					but5.value = '';
+					but4.innerHTML = page;
+					for (var i = 0; i < order_message.length; i++) {
+						if (i == 0 || i == 1 || i == 2 || i == 3 || i == 4) {
+							order_message[i].style.display = 'block';
+						} else {
+							order_message[i].style.display = 'none'
+						}
+
+					}
+					break;
+			}
 		}
 	}
-    for (var i = 0; i < order_message.length; i++) {
-      if (but2.value - 1 == i) {
-        order_message[i].style.display = 'block';
-      } else {
-        order_message[i].style.display = 'none'
-      }
-
-    }
-    but1.onclick = () => {
-      if (but2.value <= 1) {
-        but1.style.cursor = "not-allowed";
-      } else {
-        but1.style.cursor = "pointer";
-        but1.onclick = function () {
-          if (but2.value <= 1) {
-            but1.style.cursor = "not-allowed";
-          } else {
-            but1.style.cursor = "pointer";
-            but2.value -= 1;
-          }
-          if (page_num.value == 1) {
-            for (var i = 0; i < order_message.length; i++) {
-              if (but2.value - 1 == i) {
-                order_message[i].style.display = 'block';
-              } else {
-                order_message[i].style.display = 'none'
-              }
-
-            }
-          } else if (page_num.value == 2) {
-            for (var i = 0; i < order_message.length; i++) {
-              if (2 * but2.value - 2 == i || 2 * but2.value - 1 == i) {
-                order_message[i].style.display = 'block';
-              } else {
-                order_message[i].style.display = 'none'
-              }
-
-            }
-          } else if (page_num.value == 5) {
-            for (var i = 0; i < order_message.length; i++) {
-              if (5 * but2.value - 5 == i || 5 * but2.value - 4 == i || 5 * but2.value - 3 == i || 5 * but2.value -
-                2 == i || 5 * but2.value - 1 == i) {
-                order_message[i].style.display = 'block';
-              } else {
-                order_message[i].style.display = 'none'
-              }
-
-            }
-          }
-
-        }
-      }
-    }
-    but3.onclick = () => {
-      if (but2.value >= page) {
-        but3.style.cursor = "not-allowed";
-      } else {
-        but3.style.cursor = "pointer";
-        but3.onclick = function () {
-          if (but2.value >= page) {
-            but3.style.cursor = "not-allowed";
-          } else {
-            but3.style.cursor = "pointer";
-            but2.value++;
-          }
-          if (page_num.value == 1) {
-            for (var i = 0; i < order_message.length; i++) {
-              if (but2.value - 1 == i) {
-                order_message[i].style.display = 'block';
-              } else {
-                order_message[i].style.display = 'none'
-              }
-
-            }
-          } else if (page_num.value == 2) {
-            for (var i = 0; i < order_message.length; i++) {
-              if (2 * but2.value - 2 == i || 2 * but2.value - 1 == i) {
-                order_message[i].style.display = 'block';
-              } else {
-                order_message[i].style.display = 'none'
-              }
-
-            }
-          } else if (page_num.value == 5) {
-            for (var i = 0; i < order_message.length; i++) {
-              if (5 * but2.value - 5 == i || 5 * but2.value - 4 == i || 5 * but2.value - 3 == i || 5 * but2.value -
-                2 == i || 5 * but2.value - 1 == i) {
-                order_message[i].style.display = 'block';
-              } else {
-                order_message[i].style.display = 'none'
-              }
-
-            }
-          }
-        }
-      }
-    }
-    but5.onchange = () => {
-      but2.value = but5.value;
-      if (but5.value == '') {
-        but2.value = 1;
-      }
-      if (page_num.value == 1) {
-        for (var i = 0; i < order_message.length; i++) {
-          if (but2.value - 1 == i) {
-            order_message[i].style.display = 'block';
-          } else {
-            order_message[i].style.display = 'none'
-          }
-
-        }
-      } else if (page_num.value == 2) {
-        for (var i = 0; i < order_message.length; i++) {
-          if (2 * but2.value - 2 == i || 2 * but2.value - 1 == i) {
-            order_message[i].style.display = 'block';
-          } else {
-            order_message[i].style.display = 'none'
-          }
-
-        }
-      } else if (page_num.value == 5) {
-        for (var i = 0; i < order_message.length; i++) {
-          if (5 * but2.value - 5 == i || 5 * but2.value - 4 == i || 5 * but2.value - 3 == i || 5 * but2.value - 2 ==
-            i || 5 * but2.value - 1 == i) {
-            order_message[i].style.display = 'block';
-          } else {
-            order_message[i].style.display = 'none'
-          }
-
-        }
-      }
-    }
-    page_num.onchange = () => {
-      switch (page_num.value) {
-        case '1':
-          page = order_message.length;
-          page = Math.ceil(page / page_num.value);
-          but2.value = 1;
-          but5.value = '';
-          but4.innerHTML = page;
-          for (var i = 0; i < order_message.length; i++) {
-            if (but2.value - 1 == i) {
-              order_message[i].style.display = 'block';
-            } else {
-              order_message[i].style.display = 'none'
-            }
-
-          }
-          break;
-
-        case '2':
-          page = order_message.length;
-          page = Math.ceil(page / page_num.value);
-          but2.value = 1;
-          but5.value = '';
-          but4.innerHTML = page;
-          for (var i = 0; i < order_message.length; i++) {
-            if (i == 0 || i == 1) {
-              order_message[i].style.display = 'block';
-            } else {
-              order_message[i].style.display = 'none'
-            }
-
-          }
-          break;
-
-        case '5':
-          page = order_message.length;
-          page = Math.ceil(page / page_num.value);
-          but2.value = 1;
-          but5.value = '';
-          but4.innerHTML = page;
-          for (var i = 0; i < order_message.length; i++) {
-            if (i == 0 || i == 1 || i == 2 || i == 3 || i == 4) {
-              order_message[i].style.display = 'block';
-            } else {
-              order_message[i].style.display = 'none'
-            }
-
-          }
-          break;
-      }
-    }
-  }
-  Pagination();
+	Pagination();
 </script>
 </html>
