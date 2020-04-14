@@ -157,7 +157,7 @@ export default class App extends Component {
                 <input type='text' style={{width:'197px',background:'#ccc0d4',
                 height:'27px',lineHeight:'29px',fontSize:'20px'}}
                  name='username'  placeholder={this.state.data.username}  value={this.state.username} onChange={this.change1}/>  
-              </p>             
+              </p> 
               <p style={{background:'#8794a8',border:'1px solid white',borderRadius:'10px',height:'30px',lineHeight:'30px',fontSize:'20px'}} className="neirong">
                 年龄：
                 <input type='text' style={{width:'197px',background:'#8794a8',

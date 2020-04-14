@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './Cart.css'
-import { List, InputItem, TextareaItem, Grid,NavBar } from 'antd-mobile';
+import { List, InputItem, TextareaItem, Grid,NavBar,Toast } from 'antd-mobile';
 import ListItem from './ListItem';
 import { HashRouter as Router, withRouter, Route, Link, Switch, Redirect } from 'react-router-dom';
 var finished=0;
@@ -18,16 +18,29 @@ export default class cart extends Component {
                 { icon: './img/14.jpg', tit: '《冰上迪士尼-勇敢追梦》' },
                 { icon: './img/15.jpg', tit: '汉秀' },
                 { icon: './img/16.jpg', tit: '“笙声不息”交响乐团音乐会' },
-            ]
+            ],
+            hasError: false,
+            value: '',
         };
-        
-       
-
-	
     }
 
+    onChange = (value) => {
+        if (value.replace(/\s/g, '').length < 11) {
+          this.setState({
+            hasError: true,
+          });
+        } else {
+          this.setState({
+            hasError: false,
+          });
+        }
+        this.setState({
+          value,
+        });
+      }
+
     updateFinished(todoItem) {
-        var sum=0
+        var sum=0;
         this.state.list.forEach((item) => {
            
             if (item.id === todoItem.id) {
@@ -35,8 +48,6 @@ export default class cart extends Component {
             }
             if (item.gstatus === 1) {
                 sum++;
-                
-                
             }
             finished=sum
         });
@@ -44,7 +55,7 @@ export default class cart extends Component {
         
     }
 
-    updateTotal(todoItem) {
+    updateTotal(todoItem){
         var obj = [], sum = 0;
         this.state.list.forEach((item) => {
             if (item.id !== todoItem.id) {
@@ -57,7 +68,6 @@ export default class cart extends Component {
         // this.finished=sum
         this.setState({
             list: obj,
-            
         });
     
     }
@@ -72,7 +82,7 @@ export default class cart extends Component {
             })
         })
         .then(res=>{
-            console.log(this.state.list)
+            // console.log(this.state.list)
         })
         
             
@@ -82,7 +92,6 @@ export default class cart extends Component {
     }
     
     render() {
-    
         // var a = this.state.list.length-this.state.finished;
         return (
             <div style={{width: '100%',height:'108%',backgroundColor: '#fff',zIndex:999,position:'absolute',overflow:'auto'}}>
@@ -101,8 +110,15 @@ export default class cart extends Component {
                             <div onClick={() => this.labelFocusInst.focus()}>收货人</div>
                         </InputItem>
                         <InputItem
+                            error={this.state.hasError}
+                            onErrorClick ={ () => {
+                                if (this.state.hasError) {
+                                  Toast.info('请输入正确的手机号');
+                                }
+                            }}
+                            onChange={this.onChange}
                             placeholder="请输入您的电话"
-                            ref={el => this.labelFocusInst = el}
+                            value={this.state.value}
                         >
                             <div onClick={() => this.labelFocusInst.focus()} style={{ float: 'left' }}>收货电话</div>
                         </InputItem>
@@ -121,10 +137,8 @@ export default class cart extends Component {
                     </List>
                 </div>
                 <p id="wen">以下是您选购的商品</p>
-                <div className="container" style={{width:'100%',height:'56%',overflow:'scroll',marginBottom:'50px'}}>
-                    <ul>
-                     
-                       
+                <div className="container" style={{width:'100%',overflow:'scroll',marginBottom:'50px'}}>
+                    <ul style={{width:'100%'}}>
                         {this.state.list.map((item, index) =>
                             
                             <ListItem
@@ -135,7 +149,7 @@ export default class cart extends Component {
                             />
                           
                         )}
-                        <li style={{position:'absolute',bottom:0,right:0}}>
+                        <li style={{position:'absolute',bottom:180,right:10}}>
                             {/* <span style={{ display: 'block', paddingLeft: '50%', margin: 0, float: 'left' }}>
                                 已选中：{finished}
                             </span> */}
