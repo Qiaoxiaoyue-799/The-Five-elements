@@ -78,8 +78,8 @@ export default class Register extends Component {
       mobile: e.target.value
     })
   }
-  blur3 = () => {
-    var con = this.state.pwd;
+  blur3 = (e) => {
+    var con = e.target.value;
     var tipPwd = document.getElementsByClassName('tipPwd')[0];
     var reg1 = /^[0-9]*$/g;
     var reg2 = /[`~!@#$%^&*()\-+=<>?:"{}|,.\/;'\\[\]·~！@#￥%……&*（）——\-+={}|《》？：“”【】、；‘'，。、]/g;
