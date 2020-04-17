@@ -28,7 +28,9 @@ export default class Details extends Component {
                 position: '',
                 transition: 'all  1s linear',
                 fontSize: '25px',
-            }
+            },
+            data:[],
+            userdata:[]
         }
     }
     componentDidMount() {
@@ -47,7 +49,30 @@ export default class Details extends Component {
         }).then(()=>{
             console.log(this.state.dataItem);
         })
-        
+        fetch('http://139.155.6.69:5000/login', {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json; charset=utf-8' },
+        })
+            .then(res => res.json())
+            .then(res => {
+                this.setState({
+                    data: res[0].user_id
+                })
+            }
+            )  
+        fetch('http://139.155.6.69:5000/loginlist', {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json; charset=utf-8' },
+        })
+            .then(res => res.json())
+            .then(res => {
+                this.setState({
+                    userdata: res
+                })
+            }
+            ).then(()=>{
+                console.log(this.state.userdata);
+            })
     }
     componentDidUpdate(prevProps,prevState){
         if(prevProps.match.params.id!==this.props.match.params.id){//
@@ -62,12 +87,116 @@ export default class Details extends Component {
             })
         }
     }
+    change = (e) => {
+        this.setState({
+          comment: e.target.value
+        })
+      }
+    publish = (item) => {
+        var user_id = [];
+        if(item.comment_user_id) {
+            user_id = item.comment_user_id.split(',')
+        }
+        user_id.push(this.state.data)
+        user_id = user_id.join(',')
 
+        var commentlist = [];
+        if(item.comment) {
+            commentlist = item.comment.split(',')
+        }
+        var date=new Date();
+        var year=date.getFullYear();
+        var month=date.getMonth();
+        var day=date.getDate();
+
+        var hour=date.getHours();
+        var minute=date.getMinutes();
+        var second=date.getSeconds();
+        if (hour<10) {
+            hour='0'+hour;
+        }
+        if (minute<10) {
+            minute='0'+minute;
+        }
+        if (second<10) {
+            second='0'+second;
+        }
+        var time="+"+year+'/'+month+'/'+day+'/'+hour+':'+minute+':'+second
+        var commenttime=this.state.comment+time
+        commentlist.push(commenttime);
+        commentlist = commentlist.join(',')
+        console.log(commentlist)
+        fetch('http://139.155.6.69:5000/comment1',{
+            method:'POST', 
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            body: JSON.stringify({
+              user_id:user_id,
+              comment:commentlist,
+              id:id
+            })})
+          .then(res=>res.json())
+          .then(res=>{   
+            console.log(this.state.data)
+            console.log(user_id)
+            console.log("评论存储成功！")
+        })
+    }
+    btn = (item) => {
+        var num = [];
+        var tip = 0;
+        var len = 0;
+        if(item.people) {
+            num = item.people.split(',')
+            len = num.length;
+        }
+        for(var i=0;i<num.length;i++) {
+            if(num[i] == this.state.data) {
+                num.splice(i);
+                len--;
+                tip = 1;
+            }
+        }
+        if(tip == 0) {
+            len++;
+            num.push(this.state.data)
+        }
+        num = num.join(',')
+        let id = this.props.match.params.id
+        fetch('http://139.155.6.69:5000/heart1',{
+            method:'POST', 
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            body: JSON.stringify({
+              userId:num,
+              num:len,
+              id:id
+            })})
+          .then(res=>res.json())
+          .then(res=>{      
+        })
+        fetch('http://139.155.6.69:5000/apphome/hometab/details1/',
+        {method:'GET'})
+        .then((res)=>res.json())
+        .then((res)=>{
+            this.setState({
+                dataItem:res
+            })                
+        })
+    }
     render() {     
         return(
             <div style={{width: '100%',height:'108%',backgroundColor: '#fff',zIndex:999,position:'absolute',overflow:'auto'}}>
             {
             this.state.dataItem.map((item,index)=>{
+                var arr = [];
+                if(item.people) {
+                    arr = item.people.split(',')
+                }
+                var color = '#666';
+                for(var i = 0; i < arr.length; i++) {
+                    if(arr[i] == this.state.data) {
+                        color = 'red';
+                    }
+                }
                 if(item.article_id==id){
                     return(
                     <div className='box'>
@@ -89,16 +218,56 @@ export default class Details extends Component {
                         </div>
                         <p></p>
                         <div className='part2 container'>
-                            {/* <ol className='breadcrumb' >
-                                <li><Link to={'/'+content.First_type}>{content.First_type}</Link></li> 
-                                <li className="active">{item.tab_id}</li> 
-                            </ol> */}
                             <h2 style={{marginTop:'30px'}}>
                                 {item.title}
                             </h2>                                      
                             <div dangerouslySetInnerHTML={{ __html: item.content }} style={{fontSize:16,textAlign:'justify'}}>
                             </div>                   
                         </div>
+                        <div className='part3'>
+                            <div className='commentall'>
+                                <input  name='comment'value={this.state.comment} className='comment' placeholder='在此处评论' onChange={this.change}/>
+                                <input  className='commentbutton' value='发表' onClick={()=>this.publish(item)}/>
+                            </div>
+                            <span style={{color:color,float:'right'}}>
+                                <i style={{fontSize:22,lineHeight:'35px'}} onClick={()=>this.btn(item)} className='iconfont icon-xin'></i>
+                                <span style={{color:'black',fontSize:'20px'}}> {item.num}</span>
+                            </span>
+                        </div>
+                        <div className='part6'>
+                        <div className='part4'>
+                        {
+                            item.comment.split(',').map((item,index)=>{
+                                var arr=item.split("+")
+                                return(
+                                    <div className='comment1' style={{width:"90%",height:'40px',marginTop:"10px"}}>
+                                        <div>{arr[1]}</div>
+                                        <div>{arr[0]}</div>
+                                    </div>
+                                    
+                                )
+                            })
+                        }
+                        
+                        </div>
+                        <div className='part5'>
+                        {
+                            item.comment_user_id.split(',').map((item,index)=>{
+                                var that=this
+                                var b
+                                that.state.userdata.map((a,index)=>{
+                                    if(a.user_id==item){
+                                        b=a.avatar
+                                    }
+                                })
+                                return(
+                                <img src={b} style={{width:'40px',height:'40px',marginTop:"10px",marginLeft:'5px'}}/>
+                                )
+                                
+                            })
+                        }
+                         </div>
+                         </div>
                     </div>
                     )
                 } 

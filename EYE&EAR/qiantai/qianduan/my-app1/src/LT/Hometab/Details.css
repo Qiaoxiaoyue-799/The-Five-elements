@@ -78,3 +78,67 @@
     content: "\e629";
   }
   
+  .part3 {
+    height: 45px;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    background-color: #8794a8;
+    padding-right: 10px;      
+}
+
+.part3 span {
+    color: #999;
+    display: inline;
+}
+.commentall{
+    float:left;
+   padding-right: 0cm;
+    width: 70%;
+    height:35px;
+    background-color: white;
+    margin-top: 4px;
+    margin-left: 5px;
+    border-radius: 15px;
+}
+.comment{
+    margin: 0 auto;
+    width: 80%;
+    height:35px;
+    border-radius: 15px;
+    border-color: white;
+    border-width: 0ch;
+    padding-left: 20px;   
+
+}
+.commentbutton{
+    width: 50px;
+    border-width: 0ch;
+    height:35px;
+    border-radius: 15px; 
+    background-color: white;
+    color:#8794a8 ;
+}
+.part4{
+    width: 85%;
+    float: right;
+    height:300px;
+}
+.comment1{
+    background-color:white;
+    border-width: 1px;
+    border-color: white;
+    margin:0 auto;
+    margin-top: 5px;
+    
+}
+.part5{
+    float: left;
+    width: 40px;
+    height:300px;
+}
+.part6{
+    display: inline;
+    background-color:#8794a8 ;
+    opacity: 0.6;
+}

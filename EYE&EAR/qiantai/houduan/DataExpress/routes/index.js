@@ -757,7 +757,7 @@ router.post('/heart',function(req,res,next) {
       res.send({status:'success'});      
     }
   });
-})
+});
 router.post('/heart1',function(req,res,next) {
   userId = req.body.userId;
   num = req.body.num
@@ -774,7 +774,48 @@ router.post('/heart1',function(req,res,next) {
       res.send({status:'success'});      
     }
   });
+});
+router.post('/comment',function(req,res,next) {
+  user_id=req.body.user_id
+  console.log(user_id)
+  comment=req.body.comment
+  id = req.body.id;
+  var con = mysql.createConnection(dbconfig);
+  con.connect();
+  con.query("update eye set comment=?,comment_user_id=? where article_id = ?",[comment,user_id,id],function(err,result) {
+    if(err) {            
+      console.log(err);
+    } else {
+      res.send({status:'success'});      
+    }
+  });
+});
+router.post('/comment1',function(req,res,next) {
+  user_id=req.body.user_id
+  console.log(user_id)
+  comment=req.body.comment
+  id = req.body.id;
+  var con = mysql.createConnection(dbconfig);
+  con.connect();
+  con.query("update ear set comment=?,comment_user_id=? where article_id = ?",[comment,user_id,id],function(err,result) {
+    if(err) {            
+      console.log(err);
+    } else {
+      res.send({status:'success'});      
+    }
+  });
 })
+router.get('/loginlist',function(req,res,next) {
+  var con = mysql.createConnection(dbconfig);
+  con.connect();
+  con.query("select * from user ",function(err,result) {
+    if(err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
 
 /**
  * update chapters set content-? where chapterid=?
