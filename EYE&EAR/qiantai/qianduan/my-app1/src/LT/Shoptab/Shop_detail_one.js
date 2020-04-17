@@ -73,8 +73,7 @@ export default class Shop_detail_one extends Component {
                 // this.setState({
                 //     data1:res
                 // })
-            }
-            )
+            })
     }
     //获取父级对像
 
@@ -121,8 +120,8 @@ export default class Shop_detail_one extends Component {
                     </Carousel>
                     <p style={{ width: '90%', margin: '30px auto' }}>{this.state.data.tContent}</p>
                 </div>
-                <div style={{ width: '90%', margin: '0 auto', border: '0px solid #8794a8', marginTop: '20px' }}><h1 style={{ margin: '0 auto', fontSize: '25px' }}>城市</h1> <SegmentedControl
-
+                <div style={{ width: '90%', margin: '0 auto', border: '0px solid #8794a8', marginTop: '20px' }}>
+                    <h1 style={{ margin: '0 auto', fontSize: '25px' }}>城市</h1> <SegmentedControl
                     values={this.state.data2}
                     tintColor={'#8794a8'}
                     style={{ height: '40px', width: '250px' }}

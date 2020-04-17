@@ -32,7 +32,7 @@ export default class VIP extends Component {
             {icon:'iconfont icon-huiyuan',tit:'会员福利'},
             {icon:'iconfont icon-zu',tit:'更多'},
           ],
-          grade:0
+          grade:5
         }
     }
     componentDidMount(){

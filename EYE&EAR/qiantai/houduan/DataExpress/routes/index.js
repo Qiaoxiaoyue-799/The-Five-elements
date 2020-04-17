@@ -39,7 +39,7 @@ router.get('/login', function (req, res, next) {
 });
 
 router.post('/register', function (req, res, next) {
-  var username1 = req.body.username;
+  var username1 = req.body.username; 
   var password1 = req.body.password;
   var mobile1 = req.body.mobile;
   var time = new Date();

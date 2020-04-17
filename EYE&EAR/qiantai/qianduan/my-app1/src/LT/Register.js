@@ -134,7 +134,7 @@ export default class Register extends Component {
       body: JSON.stringify({
         username:this.state.name,
         password:this.state.pwd,
-        mobile:this.state.mobile
+        mobile:this.state.mobile 
       })})
     .then(res=>res.json())
     .then(res=>{
