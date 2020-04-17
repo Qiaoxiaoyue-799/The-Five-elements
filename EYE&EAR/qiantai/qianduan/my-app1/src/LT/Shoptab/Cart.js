@@ -149,19 +149,22 @@ export default class cart extends Component {
                             />
                           
                         )}
-                        <li style={{position:'absolute',bottom:180,right:10}}>
+                        <li style={{position:'absolute',bottom:160,right:10}}>
                             {/* <span style={{ display: 'block', paddingLeft: '50%', margin: 0, float: 'left' }}>
                                 已选中：{finished}
                             </span> */}
-                            <button style={{
-                                height: 40, width: 80, border: '1px solid rgb(241, 98, 42)',
-                                borderRadius: '5px', marginLeft: 15, color: 'white',
-                                background: 'rgb(241, 98, 42)',
-                                textAlign: 'center',
-                                float:'right'
-                            }}>
-                                购买
-                            </button>
+                            <Link to='/apphome/shoptab/buy'>
+                                <button style={{
+                                    height: 40, width: 80, border: '1px solid rgb(241, 98, 42)',
+                                    borderRadius: '5px', marginLeft: 15, color: 'white',
+                                    background: 'rgb(241, 98, 42)',
+                                    textAlign: 'center',
+                                    float:'right'
+                                }}>
+                                    购买
+                                </button>
+                            </Link>
+                         
                         </li>
                     </ul>
                     {/* <Dialog addNewTask={this.addTask.bind(this)} nums={this.state.list.length}/> */}

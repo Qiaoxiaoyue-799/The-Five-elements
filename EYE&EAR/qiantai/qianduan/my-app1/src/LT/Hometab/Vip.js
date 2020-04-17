@@ -20,17 +20,40 @@ const steps = [{
   }].map((s, i) => <Step key={i} title={s.title} description={s.description} />);
   
 export default class VIP extends Component {
-    state={
-        data1:[
+    constructor(props) {
+        super(props);
+        this.state = {
+          data: [],
+          data1:[
             {icon:'iconfont icon-chongzhi',tit:'充值'},
             {icon:'iconfont icon-wodehezi',tit:'私人搭配'},
             {icon:'iconfont icon-huiyuan-',tit:'选购指南'},
             {icon:'iconfont icon-yifu',tit:'外观'},
             {icon:'iconfont icon-huiyuan',tit:'会员福利'},
             {icon:'iconfont icon-zu',tit:'更多'},
-        ],
-        examIndex:'5'
+          ],
+          grade:0
+        }
     }
+    componentDidMount(){
+        //api请求函数
+
+        fetch('http://139.155.6.69:5000/login',{
+        method:'GET', 
+        headers: {'Content-Type': 'application/json; charset=utf-8'},
+        })
+        .then(res=>res.json())
+        .then(res=>{
+            this.setState({
+            data:res[0]
+            })
+            console.log(this.state.data);
+            this.state.grade=this.state.data.growth/10+1;
+            console.log(this.state.grade);
+        } 
+        )
+    }
+
     render() {
         return (
             <div style={{width: '100%',height:'108%',backgroundColor: '#fff',zIndex:999,position:'absolute'}}>
@@ -43,19 +66,18 @@ export default class VIP extends Component {
                     <div className="Vmessage">
                         <img src="./images/16.jpg" id="Vtou" style={{width:80,height:80}}></img>
                         <p id="Vname">KIki</p>
-                        <p id="Vdevelop">成长值：0</p>
-                        <p id="Vgrade">积分：0</p>
+                        <p id="Vdevelop">成长值：{this.state.data.growth}</p>
+                        <p id="Vgrade">积分：{this.state.data.integral}</p>
                     </div>
                 </div>
                 <div className="Vbody">
                     <div className="Vb1" style={{marginTop:'15px'}}><p>会员等级</p></div>
                     <div className="Vb2">
-                        
                         <WhiteSpace/>
                         {/* <Steps current={1} direction="horizontal" size="small">
                             {steps}
                         </Steps> */}
-                        <Progress nums={10} index={this.state.examIndex} progressColor='#dabb84' />
+                        <Progress nums={10} index={this.state.grade} progressColor='#dabb84' />
                         {/* <Progress nums={10} index={1} progressColor='#dabb84' /> */}
                         <WhiteSpace />
                     </div>
