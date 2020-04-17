@@ -54,5 +54,53 @@ router.post('/search', (req, res,next) => {
     }
   })
 })
-
+router.post('/del', function(req, res, next) {
+  var tName = req.body.name;
+  console.log(tName)
+  var con = mysql.createConnection(dbconfig);
+  con.connect();
+  con.query("select * from ticket",(err,result)=>{
+    if(err){
+      console.log(err);
+    }else{
+      for(var i = 0; i < result.length; i++){
+        if(result[i].tName == tName){
+          con.query("delete from ticket where tName=?",[tName],function(err,result){
+            if(err){
+              console.log(err);
+            }
+          })
+          res.end("delete success");
+        }
+      }
+      res.end("没有信息");
+    }
+  })
+});
+router.post('/view', (req, res,next) => {
+  var index = parseInt(req.body.view_id);
+  console.log(index);
+  var con = mysql.createConnection(dbconfig);
+  con.connect();
+  con.query("select * from ticket where id=?",[index], (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send({result:result});
+    }
+  })
+})
+router.get('/order', (req, res,next) => {
+  var index = parseInt(req.query.id);
+  console.log(index);
+  var con = mysql.createConnection(dbconfig);
+  con.connect();
+  con.query("select * from ticket where id=?",[index], (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.render("commodity_management_order",{result:result});
+    }
+  })
+})
 module.exports = router;

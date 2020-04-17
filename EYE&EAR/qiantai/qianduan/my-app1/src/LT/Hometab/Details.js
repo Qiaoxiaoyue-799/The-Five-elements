@@ -28,8 +28,7 @@ export default class Details extends Component {
                 position: '',
                 transition: 'all  1s linear',
                 fontSize: '25px',
-            },
-            data:[]
+            }
         }
     }
     componentDidMount() {
@@ -48,17 +47,6 @@ export default class Details extends Component {
         }).then(()=>{
             console.log(this.state.dataItem);
         })
-        fetch('http://139.155.6.69:5000/login', {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json; charset=utf-8' },
-        })
-            .then(res => res.json())
-            .then(res => {
-                this.setState({
-                    data: res[0].user_id
-                })
-            }
-            )  
         
     }
     componentDidUpdate(prevProps,prevState){
@@ -75,62 +63,11 @@ export default class Details extends Component {
         }
     }
 
-    btn = (item) => {
-        var num = [];
-        var tip = 0;
-        var len = 0;
-        if(item.people) {
-            num = item.people.split(',')
-            len = num.length;
-        }
-        for(var i=0;i<num.length;i++) {
-            if(num[i] == this.state.data) {
-                num.splice(i);
-                len--;
-                tip = 1;
-            }
-        }
-        if(tip == 0) {
-            len++;
-            num.push(this.state.data)
-        }
-        num = num.join(',')
-        let id = this.props.match.params.id
-        fetch('http://139.155.6.69:5000/heart',{
-            method:'POST', 
-            headers: {'Content-Type': 'application/json; charset=utf-8'},
-            body: JSON.stringify({
-              userId:num,
-              num:len,
-              id:id
-            })})
-          .then(res=>res.json())
-          .then(res=>{      
-        })
-        fetch('http://139.155.6.69:5000/apphome/hometab/details/',
-        {method:'GET'})
-        .then((res)=>res.json())
-        .then((res)=>{
-            this.setState({
-                dataItem:res
-            })                
-        })
-    }
     render() {     
         return(
             <div style={{width: '100%',height:'108%',backgroundColor: '#fff',zIndex:999,position:'absolute',overflow:'auto'}}>
             {
             this.state.dataItem.map((item,index)=>{
-                var arr = [];
-                if(item.people) {
-                    arr = item.people.split(',')
-                }
-                var color = '#666';
-                for(var i = 0; i < arr.length; i++) {
-                    if(arr[i] == this.state.data) {
-                        color = 'red';
-                    }
-                }
                 if(item.article_id==id){
                     return(
                     <div className='box'>
@@ -161,12 +98,6 @@ export default class Details extends Component {
                             </h2>                                      
                             <div dangerouslySetInnerHTML={{ __html: item.content }} style={{fontSize:16,textAlign:'justify'}}>
                             </div>                   
-                        </div>
-                        <div className='part3'>
-                            <span style={{color:color,float:'right'}}>
-                                <i style={{fontSize:22,lineHeight:'35px'}} onClick={()=>this.btn(item)} className='iconfont icon-xin'></i>
-                                <span style={{color:'black',fontSize:'20px'}}> {item.num}</span>
-                            </span>
                         </div>
                     </div>
 

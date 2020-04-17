@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { HashRouter as Router, withRouter, Route, Link, Switch, Redirect } from 'react-router-dom';
 
-
 const axios = require('axios');
 const querystring = require('querystring');
 let id = 0;

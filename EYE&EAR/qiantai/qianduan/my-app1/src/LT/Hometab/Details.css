@@ -78,15 +78,3 @@
     content: "\e629";
   }
   
-  .part3 {
-    height: 30px;
-    width: 100%;
-    position: fixed;
-    bottom: 0;
-    background-color: white;
-    padding-right: 35px;      
-}
-
-.part3 span {
-    color: #999;
-}

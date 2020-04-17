@@ -3,6 +3,7 @@ import './vip.css';
 import { Icon } from 'antd-mobile';
 import {HashRouter  as Router,withRouter,Route,Link,Switch,Redirect} from 'react-router-dom';
 import { Grid,Steps,WhiteSpace,NavBar } from 'antd-mobile';
+import Progress from './Progress';
 const Step = Steps.Step;
 const steps = [{
     title: '1级',
@@ -27,7 +28,8 @@ export default class VIP extends Component {
             {icon:'iconfont icon-yifu',tit:'外观'},
             {icon:'iconfont icon-huiyuan',tit:'会员福利'},
             {icon:'iconfont icon-zu',tit:'更多'},
-        ]
+        ],
+        examIndex:'5'
     }
     render() {
         return (
@@ -50,9 +52,11 @@ export default class VIP extends Component {
                     <div className="Vb2">
                         
                         <WhiteSpace/>
-                        <Steps current={1} direction="horizontal" size="small">
+                        {/* <Steps current={1} direction="horizontal" size="small">
                             {steps}
-                        </Steps>
+                        </Steps> */}
+                        <Progress nums={10} index={this.state.examIndex} progressColor='#dabb84' />
+                        {/* <Progress nums={10} index={1} progressColor='#dabb84' /> */}
                         <WhiteSpace />
                     </div>
                 </div>

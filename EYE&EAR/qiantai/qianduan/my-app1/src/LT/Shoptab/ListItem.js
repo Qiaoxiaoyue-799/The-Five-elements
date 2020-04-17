@@ -34,7 +34,7 @@ class ListItem extends Component {
 
 	handleDelete =(item)=> {
 		this.props.totalChange(this.props.item);
-			fetch('http://139.155.6.69:5000/cart2',{
+			fetch('http://localhost:5000/cart2',{
 				method:'POST', 
 				headers: {'Content-Type': 'application/json; charset=utf-8'},
 				body: JSON.stringify({
@@ -58,14 +58,14 @@ class ListItem extends Component {
 					className="check-btn"
 					style={this.state.style}
 				></span>
-				<span style={{display:'inline-block',float:'left',width:'90%',fontSize:15}}>
+				<span style={{display:'inline-block',float:'left',width:'80%',fontSize:18}}>
 					{item.gName}
 				</span>
-				<span style={{display:'inline-block',marginLeft:'50%',fontSize:15}}>
-					{item.gPrice2}
+				<span style={{display:'inline-block',marginLeft:'35%',fontSize:15}}>
+					单价：{item.gPrice2}
 				</span>
 				<span style={{display:'inline-block',marginLeft:'10%',fontSize:15}}>
-					{item.gNum}
+					数量：{item.gNum}
 				</span>
 				{/* <p onClick={()=>this.handleDelete(item)}>??</p> */}
 			</li>

@@ -34,6 +34,7 @@ export default class Register extends Component {
     } else {
         var len = 0;  
         for (var i = 0; i < con.length; i++ ) {
+            // 如果是中文，就+2；否则+1
             if (con[i].match(/^[\u4e00-\u9fa5]{0,}$/)) {
                 len += 2;
             } else {
@@ -77,8 +78,8 @@ export default class Register extends Component {
       mobile: e.target.value
     })
   }
-  blur3 = () => {
-    var con = this.state.pwd;
+  blur3 = (e) => {
+    var con = e.target.value;
     var tipPwd = document.getElementsByClassName('tipPwd')[0];
     var reg1 = /^[0-9]*$/g;
     var reg2 = /[`~!@#$%^&*()\-+=<>?:"{}|,.\/;'\\[\]·~！@#￥%……&*（）——\-+={}|《》？：“”【】、；‘'，。、]/g;
