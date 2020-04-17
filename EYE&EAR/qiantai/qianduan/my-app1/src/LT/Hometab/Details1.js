@@ -235,38 +235,43 @@ export default class Details extends Component {
                             </span>
                         </div>
                         <div className='part6'>
-                        <div className='part4'>
-                        {
-                            item.comment.split(',').map((item,index)=>{
-                                var arr=item.split("+")
-                                return(
-                                    <div className='comment1' style={{width:"90%",height:'40px',marginTop:"10px"}}>
-                                        <div>{arr[1]}</div>
-                                        <div>{arr[0]}</div>
-                                    </div>
-                                    
-                                )
-                            })
-                        }
-                        
-                        </div>
-                        <div className='part5'>
-                        {
-                            item.comment_user_id.split(',').map((item,index)=>{
-                                var that=this
-                                var b
-                                that.state.userdata.map((a,index)=>{
-                                    if(a.user_id==item){
-                                        b=a.avatar
-                                    }
-                                })
-                                return(
-                                <img src={b} style={{width:'40px',height:'40px',marginTop:"10px",marginLeft:'5px'}}/>
-                                )
-                                
-                            })
-                        }
-                         </div>
+                            {
+                                item.comment == null ? <div></div> :
+                                <div className='part4'>
+                                    {                            
+                                        item.comment.split(',').map((item,index)=>{
+                                            var arr=item.split("+")
+                                            return(
+                                                <div className='comment1' style={{width:"90%",height:'40px',marginTop:"10px"}}>
+                                                    <div>{arr[1]}</div>
+                                                    <div>{arr[0]}</div>
+                                                </div>
+                                                
+                                            )
+                                        })
+                                    }                        
+                                </div>
+                            }
+                            {
+                                item.comment_user_id == null ? <div></div> :                         
+                                <div className='part5'>
+                                {                        
+                                    item.comment_user_id.split(',').map((item,index)=>{
+                                        var that=this
+                                        var b
+                                        that.state.userdata.map((a,index)=>{
+                                            if(a.user_id==item){
+                                                b=a.avatar
+                                            }
+                                        })
+                                        return(
+                                        <img src={b} style={{width:'40px',height:'40px',marginTop:"10px",marginLeft:'5px'}}/>
+                                        )
+                                        
+                                    })
+                                }
+                                </div>
+                            }
                          </div>
                     </div>
                     )
