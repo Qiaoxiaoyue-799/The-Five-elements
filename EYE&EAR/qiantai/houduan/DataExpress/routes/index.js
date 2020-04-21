@@ -84,8 +84,7 @@ router.get('/apphome/hometab/member',function(req,res,next) {
   });
 });
 router.post('/apphome/hometab/member',function(req,res,next) {
-  console.log('33');
-  console.log('44');
+  var user_id1=req.body.user_id;
   var name1=req.body.name;
   var username1 = req.body.username;
   var age1 = req.body.age;
@@ -97,6 +96,7 @@ router.post('/apphome/hometab/member',function(req,res,next) {
   var place1 = req.body.place;
   var sign1=req.body.sign;
   var time = new Date();
+  console.log(user_id1);
   console.log(username1);
   time = time.toLocaleDateString();
   var con = mysql.createConnection(dbconfig);
@@ -108,10 +108,10 @@ router.post('/apphome/hometab/member',function(req,res,next) {
       console.log(err);
     } else {
       console.log(result)
-      con.query("update user set username=?,age=?,sex=?,birth=?,star=?,job=?,hobby=?,place=?,sign=? where name = ?",
-          [username1,age1,sex1,birth1,star1,job1,hobby1,place1,sign1,name1],function(err,result) {
+      con.query("update user set username=?,age=?,sex=?,birth=?,star=?,job=?,hobby=?,place=?,sign=? where user_id = ?",
+          [username1,age1,sex1,birth1,star1,job1,hobby1,place1,sign1,user_id1],function(err,result) {
             if(err) {            
-              console.log(err)
+              console.log(err);
             } else {
               console.log(result);
               res.send({state:true});

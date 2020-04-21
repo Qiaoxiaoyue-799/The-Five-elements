@@ -110,6 +110,7 @@ export default class App extends Component {
       method:'POST', 
       headers: {'Content-Type': 'application/json; charset=utf-8'},
       body: JSON.stringify({
+        user_id:this.state.data.user_id,
         username:this.state.name,
         name:this.state.data.name,
         age:this.state.age,
