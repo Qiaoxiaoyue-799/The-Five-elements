@@ -277,7 +277,7 @@ export default class Details extends Component {
                                             }
                                         })
                                         return(
-                                        <img src={b} style={{width:'40px',height:'40px',marginTop:"10px",marginLeft:'5px'}}/>
+                                        <img src={'http://139.155.6.69:5000/img?imgname=' + b} style={{width:'40px',height:'40px',marginTop:"10px",marginLeft:'5px'}}/>
                                         )
                                         
                                     })

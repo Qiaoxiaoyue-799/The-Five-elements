@@ -74,7 +74,7 @@ export default class Community extends Component {
                             width: 80,
                             height: 80,
                             borderRadius: 20,
-                            backgroundImage: 'url(' + this.state.name.avatar + ')',
+                            backgroundImage: 'url(' + 'http://139.155.6.69:5000/img?imgname=' + this.state.name.avatar + ')',
                             backgroundSize: '120% 100%',
                             float: 'left',
                             marginRight: 15

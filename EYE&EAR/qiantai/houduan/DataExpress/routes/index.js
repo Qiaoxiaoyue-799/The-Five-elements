@@ -816,7 +816,31 @@ router.get('/loginlist',function(req,res,next) {
     }
   });
 });
-
+router.post('/avatar', function (req, res, next) {
+  var time=req.body.time;
+  var img= req.body.img0;
+  var name= req.body.name0;
+  var user_id=req.body.user_id
+  name = time + name
+  var base64Data = img.replace(/^data:image\/\w+;base64,/, "");
+  var dataBuffer = Buffer.from(base64Data, 'base64');
+  console.log(__dirname + "\\img\\" + name)
+  fs.writeFile(__dirname + "\\img\\" + name, dataBuffer, function (err) {
+    if (err) {
+    } else {
+      console.log("更改头像存储成功！")
+    }
+  });
+  var con = mysql.createConnection(dbconfig);
+  con.connect();
+  con.query("update user set avatar = ? where user_id = ?",[name,user_id],function(err,result) {
+    if(err) {            
+      console.log(err);
+    } else {
+      console.log('更改头像成功');      
+    }
+  });
+})
 /**
  * update chapters set content-? where chapterid=?
  */

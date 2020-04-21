@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import '../../index_fxy.css';
-import { Icon, Grid } from 'antd-mobile';
+import { Icon, Grid,ImagePicker } from 'antd-mobile';
 import {HashRouter  as Router,withRouter,Route,Link,Switch,Redirect} from 'react-router-dom';
 import { Z_BLOCK } from 'zlib';
 const list = [
@@ -26,6 +26,7 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      files: [],
       data: [],
       name: '',
       age: '',
@@ -36,7 +37,10 @@ export default class App extends Component {
       hobby:'',
       place:'',
       sign:''
-    }
+    };
+    this.time='';
+    this.img0='';
+    this.name0='';
   }
   componentDidMount(){
         //api请求函数
@@ -50,7 +54,7 @@ export default class App extends Component {
           this.setState({
             data:res[0]
           })
-          console.log(this.state.data);
+          console.log(this.state.data.avatar);
       } 
       )
     
@@ -133,9 +137,41 @@ export default class App extends Component {
     } 
     )
   }
- 
+  onChange = (files, type, index) => {
+    console.log(files, type, index);
+    this.setState({
+      files,
+    });
+    var files = this.state.files;
+    this.img0=files[0].url;
+    this.name0=files[0].file.name;
+    var timeStr = '-';
+    var curDate = new Date();
+    var curYear =curDate.getFullYear();  
+    var curMonth = curDate.getMonth()+1;  
+    var curDay = curDate.getDate();       
+    var curHour = curDate.getHours();     
+    var curMinute = curDate.getMinutes();   
+    var curSecond = curDate.getSeconds(); 
+    this.time= curYear+'年'+curMonth+'月'+curDay+'日'+curHour+'时'+curMinute+'分'+curSecond+'秒';
+
+    fetch('http://139.155.6.69:5000/avatar',{
+            method:'POST',
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            body: JSON.stringify({
+              user_id:this.state.data.user_id,
+              time:this.time,
+              img0:this.img0,
+              name0:this.name0,
+            })})
+          .then(res=>res.json())
+          .then(res=>{
+          } 
+        )
+  } 
   render() {
     var {todo} = this.props;
+    const{files}=this.state
     return (
       <div style={{width: '100%',height:'108%',backgroundColor: '#fff',zIndex:999,position:'absolute',overflow:'auto'}}>
         <div style={{width:'100%',position:'relative',background:"#8794a8"}}>
@@ -143,7 +179,16 @@ export default class App extends Component {
         </div>
         {/* <i className={dataItem.icon} style={{fontSize:40,color:'black',height:80,width:80,paddingTop:1,float:'left'}} ></i> */}
         <div style={{width:'100%',position:'relative',marginTop:'10px'}}>
-          <img src="./images/16.jpg" style={{width:'60px',height:'60px','margin-top':'10px',borderRadius:'10px',marginLeft:'20px'}}/>
+          <div style={{width:"28px",height:"28px",position:"absolute",top:"50px",left:"60px",backgroundColor:"#8794a8"}}>
+            <ImagePicker
+              files={files}
+              onChange={this.onChange}
+              selectable={files.length < 1}
+              multiple
+              accept="image/gif,image/jpeg,image/jpg,image/png"
+            />
+          </div>
+          <img src={'http://139.155.6.69:5000/img?imgname=' + this.state.data.avatar}  style={{width:'60px',height:'60px','margin-top':'10px',borderRadius:'10px',marginLeft:'20px'}}/>
           <font style={{marginBottom:'60px',fontSize:'20px',marginLeft:'20px',marginTop:'10px'}}>{this.state.data.username}</font>
           <div style={{background:'white',display:'inline-block',width:"55px",marginLeft:'10px'}}>关注 {this.state.data.like_number}</div>
           <div style={{background:'white',display:'inline-block',width:"55px"}}>粉丝 {this.state.data.liked_number}</div>
