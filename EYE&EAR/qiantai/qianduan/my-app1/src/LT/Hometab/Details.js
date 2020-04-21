@@ -80,6 +80,18 @@ export default class Details extends Component {
             })
         
     }
+    componentWillReceiveProps(nextProps) {
+        if(this.props != nextProps) {
+          fetch('http://139.155.6.69:5000/apphome/hometab/details/',
+          {method:'GET'})
+          .then((res)=>res.json())
+          .then((res)=>{
+              this.setState({
+                dataItem:res
+              })                
+          })
+        }
+    }
     componentDidUpdate(prevProps,prevState){
         
         if(prevProps.match.params.id!==this.props.match.params.id){//
@@ -89,7 +101,7 @@ export default class Details extends Component {
             .then((res)=>res.json())
             .then((res)=>{
                 this.setState({
-                    data:res
+                    dataItem:res
                 })                
             })
         }
