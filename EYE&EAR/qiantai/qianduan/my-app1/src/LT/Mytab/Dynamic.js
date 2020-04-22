@@ -27,7 +27,9 @@ export default class Dynamic extends Component {
     super(props);
     this.state = {
       files: [],
-      content:''
+      content:'',
+      data:[],
+      user_id:''
       
     };
     
@@ -51,6 +53,19 @@ export default class Dynamic extends Component {
       }
       componentDidMount() {
         //this.autoFocusInst.focus();
+        fetch('http://139.155.6.69:5000/login',{
+        method:'GET', 
+        headers: {'Content-Type': 'application/json; charset=utf-8'},
+      })
+      .then(res=>res.json())
+      .then(res=>{
+          this.setState({
+            data:res[0]
+          })
+          console.log(this.state.data);
+      } 
+      )
+    
       }
       onChange = (files, type, index) => {
         console.log(files, type, index);
@@ -147,6 +162,7 @@ export default class Dynamic extends Component {
             method:'POST',
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             body: JSON.stringify({
+              user_id:this.state.data.user_id,
               time:this.time,
               content:this.state.content, 
               img0:this.img0,

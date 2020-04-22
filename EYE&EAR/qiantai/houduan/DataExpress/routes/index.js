@@ -193,7 +193,104 @@ router.post('/apphome/hometab/member', function (req, res, next) {
     }
   });
 })
-
+router.post('/apphome/hometab/dressup',function(req,res,next) {
+  var user_id1=req.body.user_id;
+  var backgroundImage1=req.body.backgroundImage
+  var time = new Date();
+  console.log(user_id1);
+  time = time.toLocaleDateString();
+  var con = mysql.createConnection(dbconfig);
+  con.connect();
+  con.query("select * from user",function(err,result) {
+    if(err) {
+      console.log(err);
+    } else {
+      console.log(result)
+      con.query("update user set backgroundImage=? where user_id = ?",
+          [backgroundImage1,user_id1],function(err,result) {
+            if(err) {            
+              console.log(err);
+            } else {
+              console.log(result);
+              res.send({state:true});
+            }
+          });
+        }
+      })
+});
+router.post('/apphome/hometab/myvippic',function(req,res,next) {
+  var user_id1=req.body.user_id;
+  var backgroundImage1=req.body.backgroundImage
+  var img = req.body.img0;
+  var name = req.body.name0;
+  // var time = new Date();
+  console.log(user_id1);
+  var con = mysql.createConnection(dbconfig);
+  con.connect();
+  var base64Data = img.replace(/^data:image\/\w+;base64,/, "");
+  var dataBuffer = Buffer.from(base64Data, 'base64');
+  fs.writeFile(__dirname+"\\images\\"+name, dataBuffer, function(err) {
+    if(err){
+    }else{
+      // res.send("保存成功！");
+      console.log(name)
+    }
+  });
+  name='./images/'+name;
+  con.query("select * from user",function(err,result) {
+    if(err) {
+      console.log(err);
+    } else {
+      console.log(result)
+      con.query("update user set backgroundImage=? where user_id = ?",
+          [name,user_id1],function(err,result) {
+            if(err) {            
+              console.log(err);
+            } else {
+              console.log(result);
+              res.send({state:true});
+            }
+          });
+        }
+      })
+});
+router.post('/apphome/hometab/sticky',function(req,res,next) {
+  var user_id1=req.body.user_id;
+  var time2=req.body.time;
+  var time3=req.body.time1;
+  var id1=req.body.id;
+  var a=1;
+  console.log(id1);
+  var con = mysql.createConnection(dbconfig);
+  con.connect();
+  con.query("update active set id=? where time = ? ",
+          [100,time2],function(err,result) {
+    if(err) {            
+      console.log(err);
+    } else {
+      console.log(result);
+      // res.send({status:'success'});      
+    }
+  });
+  con.query("update active set id=? where time=? ",
+          [id1,time3],function(err,result) {
+    if(err) {            
+      console.log(err);
+    } else {
+      console.log(result);
+      // res.send({status:'success'});      
+    }
+  });
+  con.query("update active set id=? where time = ? ",
+          [1,time2],function(err,result) {
+    if(err) {            
+      console.log(err);
+    } else {
+      console.log(result);
+      // res.send({status:'success'});      
+    }
+  });
+});
 router.get('/apphome/hometab/eye/class', function (req, res, next) {
   var id = req.query.tab_id;
   var con = mysql.createConnection(dbconfig);
@@ -575,7 +672,8 @@ router.get('/img', function (req, res, next) {
     }
   }
 });
-router.post('/dynamic', function (req, res, next) {
+router.post('/dynamic',function(req,res,next) {
+  var user_id1=req.body.user_id;
   var time = req.body.time;
   var content = req.body.content;
   var img0 = req.body.img0;
@@ -590,81 +688,82 @@ router.post('/dynamic', function (req, res, next) {
   var name3 = req.body.name3;
   var name4 = req.body.name4;
   var name5 = req.body.name5;
-  var length = req.body.length
+  var length=req.body.length
 
-  var time0 = req.body.time;
-  var time1 = req.body.time;
-  var time2 = req.body.time;
-  var time3 = req.body.time;
-  var time4 = req.body.time;
-  var time5 = req.body.time;
+  var time0=req.body.time;
+  var time1=req.body.time;
+  var time2=req.body.time;
+  var time3=req.body.time;
+  var time4=req.body.time;
+  var time5=req.body.time;
 
 
-  for (var i = 0; i < length; i++) {
-    (function (i) {
-      var img = ''
-      var name = ''
-      if (i == 0) {
-        img = img0
-        if (name0.indexOf("0.png") != -1) {
-          time0 = '';
+  for(var i=0;i<length;i++){
+    (function(i){
+      var img=''
+      var name=''
+      if(i==0){
+        img=img0
+        if(name0.indexOf("0.png")!=-1){
+          time0='';
         }
-        name = time0 + name0
+        name=time0+name0
         console.log(name)
 
       }
-      if (i == 1) {
-        img = img1
-        if (name1.indexOf("0.png") != -1) {
-          time1 = '';
+      if(i==1){
+        img=img1
+        if(name1.indexOf("0.png")!=-1){
+          time1='';
         }
-        name = time1 + req.body.name1
+        name=time1+req.body.name1
       }
-      if (i == 2) {
-        img = img2
-        if (name2.indexOf("0.png") != -1) {
-          time2 = '';
+      if(i==2){
+        img=img2
+        if(name2.indexOf("0.png")!=-1){
+          time2='';
         }
-        name = time2 + req.body.name2
+        name=time2+req.body.name2
       }
-      if (i == 3) {
-        img = img3
-        if (name3.indexOf("0.png") != -1) {
-          time3 = '';
+      if(i==3){
+        img=img3
+        if(name3.indexOf("0.png")!=-1){
+          time3='';
         }
-        name = time3 + req.body.name3
+        name=time3+req.body.name3
       }
-      if (i == 4) {
-        img = img4
-        if (name4.indexOf("0.png") != -1) {
-          time4 = '';
+      if(i==4){
+        img=img4
+        if(name4.indexOf("0.png")!=-1){
+          time4='';
         }
-        name = time4 + req.body.name4
+        name=time4+req.body.name4
       }
-      if (i == 5) {
-        img = img5
-        if (name5.indexOf("0.png") != -1) {
-          time5 = '';
+      if(i==5){
+        img=img5
+        if(name5.indexOf("0.png")!=-1){
+          time5='';
         }
-        name = time5 + req.body.name5
+        name=time5+req.body.name5
       }
       var base64Data = img.replace(/^data:image\/\w+;base64,/, "");
       var dataBuffer = Buffer.from(base64Data, 'base64');
-      console.log(__dirname + "\\img\\" + name)
-      fs.writeFile(__dirname + "\\img\\" + name, dataBuffer, function (err) {
-        if (err) {
-        } else {
-          // res.send("保存成功！");
-          // console.log(name)
-          console.log(i)
-        }
+      console.log(__dirname+"\\img\\"+name)
+      fs.writeFile(__dirname+"\\img\\"+name, dataBuffer, function(err) {
+          if(err){
+          }else{
+            // res.send("保存成功！");
+            // console.log(name)
+            console.log(i)
+          }
       });
     })(i)
   }
   var con = mysql.createConnection(dbconfig);
   con.connect();
-  con.query("insert into active(img1,content,time,img2,img3,img4,img5,img6) values(?,?,?,?,?,?,?,?)", [time + name0, content, time, time + name1, time + name2, time + name3, time + name4, time + name5], function (err, result) {
-    if (err) {
+  con.query("insert into active(img1,content,time,img2,img3,img4,img5,img6,user_id) values(?,?,?,?,?,?,?,?,?)",
+  [time+name0,content,time,time+name1,time+name2,time+name3,time+name4,time+name5,user_id1],function(err,result) {
+    if(err) {            
       console.log(err);
     } else {
       console.log(result);

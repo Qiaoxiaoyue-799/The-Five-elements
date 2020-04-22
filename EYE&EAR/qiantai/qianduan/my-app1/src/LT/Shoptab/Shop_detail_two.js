@@ -129,15 +129,15 @@ export default class Shop_detail_two extends Component {
                             <ul style={{ listStyle: 'none', margin: '10px auto' }}>
                                 <li style={{ height: 'auto', width: '100%', margin: '10px auto' }} >
                                     <div dangerouslySetInnerHTML={{ __html: this.state.data.detail1 }}></div>
-                                    <img style={{ height: 'auto', width: '100%', margin: '0px auto' }} src={'http://localhost:5000/images?imgname=' + this.state.data.img_1} />
+                                    <img style={{ height: 'auto', width: '100%', margin: '0px auto' }} src={'http://139.155.6.69:5000/images?imgname=' + this.state.data.img_1} />
 
                                 </li>
                                 <li style={{ height: 'auto', width: '100%', margin: '20px auto' }} >
-                                    <img style={{ height: 'auto', width: '100%', margin: '0px auto' }} src={'http://localhost:5000/images?imgname=' + this.state.data.img_2} />
+                                    <img style={{ height: 'auto', width: '100%', margin: '0px auto' }} src={'http://139.155.6.69:5000/images?imgname=' + this.state.data.img_2} />
                                     <div dangerouslySetInnerHTML={{ __html: this.state.data.detail2 }}></div>
                                 </li>
                                 <li style={{ height: 'auto', width: '100%', margin: '20px auto' }} >
-                                    <img style={{ height: 'auto', width: '100%', margin: '0px auto' }} src={'http://localhost:5000/images?imgname=' + this.state.data.img_3} />
+                                    <img style={{ height: 'auto', width: '100%', margin: '0px auto' }} src={'http://139.155.6.69:5000/images?imgname=' + this.state.data.img_3} />
                                     <div dangerouslySetInnerHTML={{ __html: this.state.data.detail3 }}></div>
                                 </li>
                             </ul>

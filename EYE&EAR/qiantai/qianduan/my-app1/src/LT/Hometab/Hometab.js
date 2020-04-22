@@ -12,6 +12,9 @@ import Member from './Member';
 import Vip from './Vip';
 import Search from './Search';
 import Connectus from './Connectus';
+import Dressup from './Dressup';
+import Myvippic from './Myvippic';
+import Sticky from './Sticky';
 
 export default class Hometab extends Component {
   render() {
@@ -32,6 +35,9 @@ export default class Hometab extends Component {
             <Route path='/apphome/hometab/connectus' component={Connectus}/>
             <Route path='/apphome/hometab/vip' component={Vip}/>
             <Route path='/apphome/hometab/search' component={Search}/>
+            <Route path='/apphome/hometab/dressup' component={Dressup}/>
+            <Route path='/apphome/hometab/sticky' component={Sticky}/>
+            <Route path='/apphome/hometab/myvippic' component={Myvippic}/>
         </Switch>
         
       </div>

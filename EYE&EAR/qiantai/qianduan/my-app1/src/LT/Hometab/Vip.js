@@ -25,12 +25,12 @@ export default class VIP extends Component {
         this.state = {
           data: [],
           data1:[
-            {icon:'iconfont icon-chongzhi',tit:'充值'},
-            {icon:'iconfont icon-wodehezi',tit:'私人搭配'},
-            {icon:'iconfont icon-huiyuan-',tit:'选购指南'},
-            {icon:'iconfont icon-yifu',tit:'外观'},
-            {icon:'iconfont icon-huiyuan',tit:'会员福利'},
-            {icon:'iconfont icon-zu',tit:'更多'},
+            {icon:'iconfont icon-chongzhi',tit:'个人定制',src:'/apphome/hometab/dressup'},
+            {icon:'iconfont icon-wodehezi',tit:'动态置顶',src:'/apphome/hometab/sticky'},
+            {icon:'iconfont icon-huiyuan-',tit:'选购指南',src:'/apphome/hometab/dressup'},
+            {icon:'iconfont icon-yifu',tit:'外观',src:'/apphome/hometab/sticky'},
+            {icon:'iconfont icon-huiyuan',tit:'会员福利',src:'/apphome/hometab/dressup'},
+            {icon:'iconfont icon-zu',tit:'更多',src:'/apphome/hometab/sticky'},
           ],
           grade:5
         }
@@ -87,8 +87,10 @@ export default class VIP extends Component {
                     <Grid data={this.state.data1}
                         columnNum={3}
                         renderItem={dataItem => (
+                            <Link to={`${dataItem.src}`} style={{color:'black'}}>
                             <div id="homeimg">
                                 <div style={{width:'100%',height:60}}>
+
                                 {
                                     <i className={dataItem.icon} style={{fontSize:50,color:'black',height:60,width:80,textAlign:'center'}} ></i>
                                 }
@@ -96,6 +98,7 @@ export default class VIP extends Component {
                                 <div id="Vp">{dataItem.tit}</div>
                                 {/* style={{fontSize:25,color:'black',height:80,width:80,paddingTop:1,float:'left'}} */}
                             </div>
+                            </Link>
                         )}
                     />
                 </div>

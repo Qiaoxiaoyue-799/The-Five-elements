@@ -173,12 +173,13 @@ export default class App extends Component {
     var {todo} = this.props;
     const{files}=this.state
     return (
-      <div style={{width: '100%',height:'108%',backgroundColor: '#fff',zIndex:999,position:'absolute',overflow:'auto'}}>
-        <div style={{width:'100%',position:'relative',background:"#8794a8"}}>
+      <div style={{width: '100%',height:'108%',backgroundImage: 'url(' +this.state.data.backgroundImage + ')',zIndex:999,
+      position:'absolute',overflow:'auto'}}>        
+      <div style={{width:'100%',position:'relative',background:"#8794a8"}}>
         <Link to='/apphome' style={{color:'black',background:"#8794a8"}}><Icon style={{width:"40px",height:"40px"}} type="left" /></Link>
         </div>
         {/* <i className={dataItem.icon} style={{fontSize:40,color:'black',height:80,width:80,paddingTop:1,float:'left'}} ></i> */}
-        <div style={{width:'100%',position:'relative',marginTop:'10px'}}>
+        <div style={{backgroundImage: 'url(' +this.state.data.backgroundImage + ')',width:'100%',position:'relative',marginTop:'10px'}}>
           <div style={{width:"28px",height:"28px",position:"absolute",top:"50px",left:"60px",backgroundColor:"#8794a8"}}>
             <ImagePicker
               files={files}
@@ -195,8 +196,8 @@ export default class App extends Component {
 
           {/* <p className='name'>Kika Kong</p> */}
         </div>
-        <div style={{background:'white',width:'100%',height:'500px',opacity:"1"}}>
-          <div style={{background:'white',width:'270px',height:'110px',margin:'0 auto',marginTop:'30px'}}>
+        <div style={{width:'100%',height:'500px',opacity:"1"}}>
+          <div style={{width:'270px',height:'110px',margin:'0 auto',marginTop:'30px'}}>
             <div style={{width:'269px',height:'109px',margin:'0 auto'}}>    
               <p style={{background:'#ccc0d4',border:'1px solid white',borderRadius:'10px',height:'30px',lineHeight:'30px',fontSize:'20px'}} className="neirong">
                 昵称：           
