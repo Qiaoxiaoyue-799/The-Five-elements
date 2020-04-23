@@ -49,7 +49,7 @@ export default class Login extends React.Component {
     //     // console.log(error)//错误处理 相当于error
     //     // window.alert('验证失败，用户名或密码错误');
     //   })
-    fetch('http://139.155.6.69:5000/login',{
+    fetch('http://localhost:5000/login',{
       method:'POST', 
       headers: {'Content-Type': 'application/json; charset=utf-8'},
       body: JSON.stringify({
@@ -83,11 +83,12 @@ export default class Login extends React.Component {
             </div>
             <form className='form'>
               <input name='username' placeholder='username' value={this.state.name} onChange={this.change1} />
+              <p></p>
               <input type="password" placeholder='密码' name="password" id="" value={this.state.pwd} onChange={this.change2} />
               <br />
               <span><a>忘记密码？</a></span>
               <br />
-              <input  value='登录 ' onClick={this.getConnect} style={{ background: '#8693a6', color: '#fff' ,textAlign:'center'}}/>
+              <input  value='登录 ' className='button' type='button' onClick={this.getConnect} style={{ background: '#8693a6', color: '#fff' ,textAlign:'center',borderRadius: '15px',width:'75%'}}/>
             </form>
           </div>
         </Flex>
