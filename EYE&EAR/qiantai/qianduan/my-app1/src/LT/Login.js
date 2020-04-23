@@ -83,11 +83,12 @@ export default class Login extends React.Component {
             </div>
             <form className='form'>
               <input name='username' placeholder='username' value={this.state.name} onChange={this.change1} />
+              <p></p>
               <input type="password" placeholder='密码' name="password" id="" value={this.state.pwd} onChange={this.change2} />
               <br />
               <span><a>忘记密码？</a></span>
               <br />
-              <input  value='登录 ' onClick={this.getConnect} style={{ background: '#8693a6', color: '#fff' ,textAlign:'center'}}/>
+              <input  value='登录 ' className='button' type='button' onClick={this.getConnect} style={{ background: '#8693a6', color: '#fff' ,textAlign:'center',borderRadius: '15px',width:'75%'}}/>
             </form>
           </div>
         </Flex>
