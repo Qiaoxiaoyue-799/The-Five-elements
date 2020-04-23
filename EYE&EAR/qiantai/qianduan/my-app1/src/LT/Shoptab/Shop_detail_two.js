@@ -26,7 +26,7 @@ export default class Shop_detail_two extends Component {
     }
     componentDidMount() {
         console.log(this.props.match.params.id)
-        fetch('http://139.155.6.69:5000/detail2?id=' + this.props.match.params.id, {
+        fetch('http://localhost:5000/detail2?id=' + this.props.match.params.id, {
             "method": "get",
             // params:JSON.stringify({"id":1})
             // headers: {'Content-Type': 'application/json; charset=utf-8'},
@@ -50,7 +50,7 @@ export default class Shop_detail_two extends Component {
     click = () => {
         var aName = this.state.data.aName
         var aPrice = this.state.data.aPrice2
-        fetch('http://139.155.6.69:5000/cart', {
+        fetch('http://localhost:5000/cart', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json; charset=utf-8' },
             body: JSON.stringify({
@@ -97,7 +97,7 @@ export default class Shop_detail_two extends Component {
                                 <img
                                     //src={require(`./images/${val}.png`)}
 
-                                    src={'http://139.155.6.69:5000/images?imgname=' + val}
+                                    src={'http://localhost:5000/images?imgname=' + val}
                                     alt=""
                                     style={{ width: '100%', verticalAlign: 'top' }}   //图片记得写上宽度百分之百
                                     onLoad={() => {
@@ -129,15 +129,15 @@ export default class Shop_detail_two extends Component {
                             <ul style={{ listStyle: 'none', margin: '10px auto' }}>
                                 <li style={{ height: 'auto', width: '100%', margin: '10px auto' }} >
                                     <div dangerouslySetInnerHTML={{ __html: this.state.data.detail1 }}></div>
-                                    <img style={{ height: 'auto', width: '100%', margin: '0px auto' }} src={'http://139.155.6.69:5000/images?imgname=' + this.state.data.img_1} />
+                                    <img style={{ height: 'auto', width: '100%', margin: '0px auto' }} src={'http://localhost:5000/images?imgname=' + this.state.data.img_1} />
 
                                 </li>
                                 <li style={{ height: 'auto', width: '100%', margin: '20px auto' }} >
-                                    <img style={{ height: 'auto', width: '100%', margin: '0px auto' }} src={'http://139.155.6.69:5000/images?imgname=' + this.state.data.img_2} />
+                                    <img style={{ height: 'auto', width: '100%', margin: '0px auto' }} src={'http://localhost:5000/images?imgname=' + this.state.data.img_2} />
                                     <div dangerouslySetInnerHTML={{ __html: this.state.data.detail2 }}></div>
                                 </li>
                                 <li style={{ height: 'auto', width: '100%', margin: '20px auto' }} >
-                                    <img style={{ height: 'auto', width: '100%', margin: '0px auto' }} src={'http://139.155.6.69:5000/images?imgname=' + this.state.data.img_3} />
+                                    <img style={{ height: 'auto', width: '100%', margin: '0px auto' }} src={'http://localhost:5000/images?imgname=' + this.state.data.img_3} />
                                     <div dangerouslySetInnerHTML={{ __html: this.state.data.detail3 }}></div>
                                 </li>
                             </ul>

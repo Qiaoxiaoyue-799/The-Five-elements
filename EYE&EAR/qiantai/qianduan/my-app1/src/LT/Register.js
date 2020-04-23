@@ -128,7 +128,7 @@ export default class Register extends Component {
     }
   }
   up = () => {
-    fetch('http://139.155.6.69:5000/register',{
+    fetch('http://localhost:5000/register',{
       method:'POST', 
       headers: {'Content-Type': 'application/json; charset=utf-8'},
       body: JSON.stringify({

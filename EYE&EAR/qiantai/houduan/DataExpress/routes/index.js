@@ -660,13 +660,14 @@ router.get('/images', function (req, res, next) {
 router.get('/img', function (req, res, next) {
   console.log(req.query.imgname)
   var files = fs.readdirSync(__dirname + "/img");
-  console.log(files);
+  // console.log(files);
   for (var i = 0; i < files.length; i++) {
     if (files[i] == req.query.imgname) {
       fs.readFile(__dirname + "/img/" + files[i], function (err, data) {
         if (err) throw err;
 
         res.send(data);
+        console.log(data)
       });
 
     }
@@ -940,6 +941,35 @@ router.post('/avatar', function (req, res, next) {
     }
   });
 })
+router.post('/authorLiked',function(req,res,next) {
+  let author_likedId = req.body.author_likedId;
+  let author_liked = req.body.num
+  let id = req.body.id;
+  var con = mysql.createConnection(dbconfig);
+  con.connect();
+  con.query("update eye set author_liked=?,author_likedId=? where article_id = ?",[author_liked,author_likedId,id],function(err,result) {
+    if(err) {            
+      console.log(err);
+    } else {
+      res.send({status:'success'});      
+    }
+  });
+});
+
+router.post('/authorLiked1',function(req,res,next) {
+  let author_likedId = req.body.author_likedId;
+  let author_liked = req.body.num
+  let id = req.body.id;
+  var con = mysql.createConnection(dbconfig);
+  con.connect();
+  con.query("update ear set author_liked=?,author_likedId=? where article_id = ?",[author_liked,author_likedId,id],function(err,result) {
+    if(err) {            
+      console.log(err);
+    } else {
+      res.send({status:'success'});      
+    }
+  });
+});
 /**
  * update chapters set content-? where chapterid=?
  */

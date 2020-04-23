@@ -4,6 +4,7 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
+var users = require('./routes/users');
 
 var app = express();
 //设置允许跨域访问该服务.
@@ -24,6 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // app.use(bodyParser.urlencoded({ "limit":"10000kb"})); 
 // app.use(bodyParser.json({ “limit”:“10000kb”}));
 app.use('/', index);
+app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

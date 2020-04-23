@@ -17,7 +17,7 @@ export default class Home extends Component {
     componentDidMount(){
       //api请求函数
 
-    fetch('http://139.155.6.69:5000/login',{
+    fetch('http://localhost:5000/login',{
       method:'GET', 
       headers: {'Content-Type': 'application/json; charset=utf-8'},
     })
@@ -39,7 +39,7 @@ export default class Home extends Component {
             return (<List.Item key={index}
                 style={{marginBottom:'10px',marginTop:'10px'}}
             ><Link to='/apphome/hometab/member' style={{color:'black'}}>
-            <img src={'http://139.155.6.69:5000/img?imgname=' + this.state.name.avatar} style={{ width: '60px',height:'60px',marginLeft:'110px',border:'1px solid black',borderRadius:"50%"}} />
+            <img src={'http://localhost:5000/img?imgname=' + this.state.name.avatar} style={{ width: '60px',height:'60px',marginLeft:'110px',border:'1px solid black',borderRadius:"50%"}} />
             <p style={{marginLeft:'120px',marginTop:'10px',marginBottom:30}}>{this.state.name.username}</p></Link></List.Item>);
           }    
         if(index === 1){

@@ -106,7 +106,7 @@ export default class Shop_publish extends Component {
       } 
 
       }
-      fetch('http://139.155.6.69:5000/publish',{
+      fetch('http://localhost:5000/publish',{
         "method":"post", 
         // params:JSON.stringify({"id":1})
         headers: {'Content-Type': 'application/json; charset=utf-8'},

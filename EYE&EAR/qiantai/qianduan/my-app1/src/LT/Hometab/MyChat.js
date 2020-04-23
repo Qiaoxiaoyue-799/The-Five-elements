@@ -2,17 +2,12 @@ import React, { Component } from 'react';
 import '../../index_fxy.css';
 import { Link } from 'react-router-dom';
 import Chat from 'chat-react';
-// import {Native} from 'react-router-dom';
-// import Sendmessage from './Sendmessage';
-// import Todolist from './ToDolist/Todolist'
-import { Accordion, List,NavBar } from 'antd-mobile';
-import Todoing from './ToDolist/Todoing';
-import Todoinput from './ToDolist/Todoinput';
-import { Grid } from 'antd-mobile';
+import { NavBar } from 'antd-mobile';
 import 'antd-mobile/dist/antd-mobile.css';
 import './mychat.css'
 
 const t = new Date().getTime();
+const local = window.location.hash.split('/');
 export default class MyChat extends Component {
   state = {
     inputValue: '',
@@ -21,8 +16,8 @@ export default class MyChat extends Component {
         timestamp: t,
         userInfo: {
           avatar: "http://img.binlive.cn/6.png",
-          name: "游客1544365758856",
-          userId: "1544365758856"
+          name: "小E",
+          userId: "0"
         },
         value: "你好！"
       },
@@ -30,14 +25,40 @@ export default class MyChat extends Component {
         timestamp: t,
         userInfo: {
           avatar: "http://img.binlive.cn/6.png",
-          name: "游客1544365758856",
-          userId: "1544365758856"
+          name: "小E",
+          userId: "0"
         },
         value: "一起来聊天吧！",
         error: true
       }],
     timestamp: new Date().getTime()
   }
+  username = '';
+  avatar = '';
+  componentDidMount(){
+    fetch('http://localhost:5000/users/chatroom',{
+      method:'POST', 
+      headers: {'Content-Type': 'application/json; charset=utf-8'},
+      body: JSON.stringify({
+        id:local[local.length-1],
+        data:JSON.stringify(this.state.messages)
+      })})
+    .then(res=>res.json())
+    .then(res=>{
+      console.log('消息存储成功')
+    })
+    fetch('http://localhost:5000/login',{
+      method:'GET', 
+      headers: {'Content-Type': 'application/json; charset=utf-8'}
+      })
+    .then(res=>res.json())
+    .then(res=>{
+      this.username = res[0].username;
+      this.avatar = 'http://localhost:5000/img?imgname='+res[0].avatar;
+      // console.log(res[0],this.username,this.avatar)
+    })
+  }
+  
   setInputfoucs = () => {
     this.chat.refs.input.inputFocus();  //set input foucus
   }
@@ -52,8 +73,8 @@ export default class MyChat extends Component {
       timestamp: new Date().getTime(),
       userInfo: {
         avatar: "http://img.binlive.cn/6.png",
-        name: "游客1544365758856",
-        userId: "1544365758856"
+        name: "小E",
+        userId: "0"
       },
       value: value,
       error: true
@@ -66,12 +87,16 @@ export default class MyChat extends Component {
   onChange = (key) => {
     console.log(key);
   }
+  onUser = (username)=>{
+    this.props.history.push('/apphome/hometab/member');
+  }
   render() {
+    console.log(this.avatar)
     const { inputValue, messages, timestamp } = this.state;
     const userInfo = {
-      avatar: "./images/16.jpg",
+      avatar: this.avatar,
       userId: "59e454ea53107d66ceb0a598",
-      name: 'ricky'
+      name: this.username
     };
     return (
       <div style={{ width:'100%',height: '100%', background: "white",zIndex:99999,position:'fixed',top:0,bottom:0}}>
@@ -89,6 +114,7 @@ export default class MyChat extends Component {
           sendMessage={this.sendMessage}
           timestamp={timestamp}
           placeholder="请输入"
+          avatarClick={this.onUser}
           messageListStyle={{ width: '100%', height: '80%', color: 'black', background: 'white',top:30,overflow:'auto'}}
         />
       </div>

@@ -121,7 +121,7 @@ export default class Goods extends Component {
     }
     componentDidMount() {
         window.addEventListener('scroll', this.handleScroll);
-        fetch('http://139.155.6.69:5000/apphome',{
+        fetch('http://localhost:5000/apphome',{
             method:'GET' 
             })
           .then(res=>res.json())
@@ -132,7 +132,7 @@ export default class Goods extends Component {
             console.log(this.state.data)
           } 
           )
-          fetch('http://139.155.6.69:5000/apphome1',{
+          fetch('http://localhost:5000/apphome1',{
             method:'GET' 
             })
           .then(res=>res.json())
@@ -211,7 +211,7 @@ export default class Goods extends Component {
                                 <Link to={'/apphome/shoptab/shop_detail_two/'+item.id}>
                                 {/* <Link to='/apphome/shoptab_detail_two'> */}
                                 <li style={{height:'110px',width:'95%',margin:'0 auto',marginBottom:'10px',border:'1px solid #8794a8'}} key={1}>
-                                    <img style={{width:'90px',height:'90px',float:'left'}} src={'http://139.155.6.69:5000/images?imgname='+item.aImg}/>
+                                    <img style={{width:'90px',height:'90px',float:'left'}} src={'http://localhost:5000/images?imgname='+item.aImg}/>
                                     <div style={{display:'inline-block',marginLeft:'10px'}}>
                                     <h4>{item.aName}</h4>
                                     </div>

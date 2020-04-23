@@ -45,7 +45,7 @@ export default class App extends Component {
   componentDidMount(){
         //api请求函数
 
-      fetch('http://139.155.6.69:5000/login',{
+      fetch('http://localhost:5000/login',{
         method:'GET', 
         headers: {'Content-Type': 'application/json; charset=utf-8'},
       })
@@ -110,7 +110,7 @@ export default class App extends Component {
     console.log(this.state.data.username);
     console.log(this.state.username);
     console.log(this.state.name);
-    fetch('http://139.155.6.69:5000/apphome/hometab/member',{
+    fetch('http://localhost:5000/apphome/hometab/member',{
       method:'POST', 
       headers: {'Content-Type': 'application/json; charset=utf-8'},
       body: JSON.stringify({
@@ -155,7 +155,7 @@ export default class App extends Component {
     var curSecond = curDate.getSeconds(); 
     this.time= curYear+'年'+curMonth+'月'+curDay+'日'+curHour+'时'+curMinute+'分'+curSecond+'秒';
 
-    fetch('http://139.155.6.69:5000/avatar',{
+    fetch('http://localhost:5000/avatar',{
             method:'POST',
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             body: JSON.stringify({
@@ -176,7 +176,7 @@ export default class App extends Component {
       <div style={{width: '100%',height:'108%',backgroundImage: 'url(' +this.state.data.backgroundImage + ')',zIndex:999,
       position:'absolute',overflow:'auto'}}>        
       <div style={{width:'100%',position:'relative',background:"#8794a8"}}>
-        <Link to='/apphome' style={{color:'black',background:"#8794a8"}}><Icon style={{width:"40px",height:"40px"}} type="left" /></Link>
+        <Icon onClick={()=>{this.props.history.go(-1)}} style={{width:"40px",height:"40px"}} type="left" />
         </div>
         {/* <i className={dataItem.icon} style={{fontSize:40,color:'black',height:80,width:80,paddingTop:1,float:'left'}} ></i> */}
         <div style={{backgroundImage: 'url(' +this.state.data.backgroundImage + ')',width:'100%',position:'relative',marginTop:'10px'}}>
@@ -189,7 +189,7 @@ export default class App extends Component {
               accept="image/gif,image/jpeg,image/jpg,image/png"
             />
           </div>
-          <img src={'http://139.155.6.69:5000/img?imgname=' + this.state.data.avatar}  style={{width:'60px',height:'60px','margin-top':'10px',borderRadius:'10px',marginLeft:'20px'}}/>
+          <img src={'http://localhost:5000/img?imgname=' + this.state.data.avatar}  style={{width:'60px',height:'60px','margin-top':'10px',borderRadius:'10px',marginLeft:'20px'}}/>
           <font style={{marginBottom:'60px',fontSize:'20px',marginLeft:'20px',marginTop:'10px'}}>{this.state.data.username}</font>
           <div style={{background:'white',display:'inline-block',width:"55px",marginLeft:'10px'}}>关注 {this.state.data.like_number}</div>
           <div style={{background:'white',display:'inline-block',width:"55px"}}>粉丝 {this.state.data.liked_number}</div>

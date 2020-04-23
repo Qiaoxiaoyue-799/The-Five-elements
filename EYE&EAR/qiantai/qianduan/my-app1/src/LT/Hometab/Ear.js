@@ -24,7 +24,7 @@ export default class Eye extends Component {
   }
 
   componentDidMount() {
-    fetch('http://139.155.6.69:5000/apphome/hometab/ear', {
+    fetch('http://localhost:5000/apphome/hometab/ear', {
       method: 'GET',
     })
       .then(res => res.json())
@@ -39,7 +39,7 @@ export default class Eye extends Component {
     })
   }
   change = (ev) => {
-    fetch('http://139.155.6.69:5000/apphome/hometab/ear/search', {
+    fetch('http://localhost:5000/apphome/hometab/ear/search', {
       method: 'GET',
     })
       .then(res => res.json())
@@ -56,7 +56,7 @@ export default class Eye extends Component {
 
   submit = (value) => {
     // console.log(value);
-    fetch('http://139.155.6.69:5000/apphome/hometab/ear/search?content=' + value, {
+    fetch('http://localhost:5000/apphome/hometab/ear/search?content=' + value, {
       method: 'GET',
     })
       .then(res => res.json())
@@ -72,7 +72,7 @@ export default class Eye extends Component {
   }
   click=(id)=>{
     console.log(id)
-    fetch('http://139.155.6.69:5000/apphome/hometab/ear/class?tab_id='+id, {
+    fetch('http://localhost:5000/apphome/hometab/ear/class?tab_id='+id, {
       method: 'GET',
     })
       .then(res => res.json())

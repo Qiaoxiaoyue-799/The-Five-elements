@@ -26,7 +26,7 @@ export default class App extends Component {
   componentDidMount(){
     //api请求函数
 
-  fetch('http://139.155.6.69:5000/login',{
+  fetch('http://localhost:5000/login',{
     method:'GET', 
     headers: {'Content-Type': 'application/json; charset=utf-8'},
   })
@@ -53,7 +53,7 @@ change = (e) => {
 getConnect = (e) => {  //api请求函数
   console.log(this.state.data.backgroundImage);
   console.log(this.state.data.backgroundImage1);
-  fetch('http://139.155.6.69:5000/apphome/hometab/dressup',{
+  fetch('http://localhost:5000/apphome/hometab/dressup',{
     method:'POST', 
     headers: {'Content-Type': 'application/json; charset=utf-8'},
     body: JSON.stringify({
@@ -86,7 +86,7 @@ click = () => {
   // this.img0='0.png'   
  
 
-  fetch('http://139.155.6.69:5000/apphome/hometab/dressup',{
+  fetch('http://localhost:5000/apphome/hometab/dressup',{
       method:'POST',
       headers: {'Content-Type': 'application/json; charset=utf-8'},
       body: JSON.stringify({

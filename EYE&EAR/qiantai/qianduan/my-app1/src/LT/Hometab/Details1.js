@@ -37,7 +37,7 @@ export default class Details extends Component {
         // window.addEventListener('scroll', this.handleScroll);
         id = this.props.match.params.id;//
         console.log(id);
-        fetch('http://139.155.6.69:5000/apphome/hometab/details1',
+        fetch('http://localhost:5000/apphome/hometab/details1',
         {method:'GET'})//
         .then((res)=>res.json())
         .then((res)=>{
@@ -49,7 +49,7 @@ export default class Details extends Component {
         }).then(()=>{
             console.log(this.state.dataItem);
         })
-        fetch('http://139.155.6.69:5000/login', {
+        fetch('http://localhost:5000/login', {
             method: 'GET',
             headers: { 'Content-Type': 'application/json; charset=utf-8' },
         })
@@ -60,7 +60,7 @@ export default class Details extends Component {
                 })
             }
             )  
-        fetch('http://139.155.6.69:5000/loginlist', {
+        fetch('http://localhost:5000/loginlist', {
             method: 'GET',
             headers: { 'Content-Type': 'application/json; charset=utf-8' },
         })
@@ -76,7 +76,7 @@ export default class Details extends Component {
     }
     componentWillReceiveProps(nextProps) {
         if(this.props != nextProps) {
-          fetch('http://139.155.6.69:5000/apphome/hometab/details1/',
+          fetch('http://localhost:5000/apphome/hometab/details1/',
           {method:'GET'})
           .then((res)=>res.json())
           .then((res)=>{
@@ -89,7 +89,7 @@ export default class Details extends Component {
     componentDidUpdate(prevProps,prevState){
         if(prevProps.match.params.id!==this.props.match.params.id){//
             let id = this.props.match.params.id//
-            fetch('http://139.155.6.69:5000/apphome/hometab/details1/',
+            fetch('http://localhost:5000/apphome/hometab/details1/',
             {method:'GET'})//
             .then((res)=>res.json())
             .then((res)=>{
@@ -138,7 +138,7 @@ export default class Details extends Component {
         commentlist.push(commenttime);
         commentlist = commentlist.join(',')
         console.log(commentlist)
-        fetch('http://139.155.6.69:5000/comment1',{
+        fetch('http://localhost:5000/comment1',{
             method:'POST', 
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             body: JSON.stringify({
@@ -174,7 +174,7 @@ export default class Details extends Component {
         }
         num = num.join(',')
         let id = this.props.match.params.id
-        fetch('http://139.155.6.69:5000/heart1',{
+        fetch('http://localhost:5000/heart1',{
             method:'POST', 
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             body: JSON.stringify({
@@ -185,7 +185,7 @@ export default class Details extends Component {
           .then(res=>res.json())
           .then(res=>{      
         })
-        fetch('http://139.155.6.69:5000/apphome/hometab/details1/',
+        fetch('http://localhost:5000/apphome/hometab/details1/',
         {method:'GET'})
         .then((res)=>res.json())
         .then((res)=>{
@@ -277,7 +277,7 @@ export default class Details extends Component {
                                             }
                                         })
                                         return(
-                                        <img src={'http://139.155.6.69:5000/img?imgname=' + b} style={{width:'40px',height:'40px',marginTop:"10px",marginLeft:'5px'}}/>
+                                        <img src={'http://localhost:5000/img?imgname=' + b} style={{width:'40px',height:'40px',marginTop:"10px",marginLeft:'5px'}}/>
                                         )
                                         
                                     })

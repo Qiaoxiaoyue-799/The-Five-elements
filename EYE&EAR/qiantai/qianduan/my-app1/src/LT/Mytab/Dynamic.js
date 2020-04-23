@@ -53,7 +53,7 @@ export default class Dynamic extends Component {
       }
       componentDidMount() {
         //this.autoFocusInst.focus();
-        fetch('http://139.155.6.69:5000/login',{
+        fetch('http://localhost:5000/login',{
         method:'GET', 
         headers: {'Content-Type': 'application/json; charset=utf-8'},
       })
@@ -158,7 +158,7 @@ export default class Dynamic extends Component {
       } 
     }
    
-        fetch('http://139.155.6.69:5000/dynamic',{
+        fetch('http://localhost:5000/dynamic',{
             method:'POST',
             headers: {'Content-Type': 'application/json; charset=utf-8'},
             body: JSON.stringify({

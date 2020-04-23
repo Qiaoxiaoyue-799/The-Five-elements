@@ -27,7 +27,7 @@ export default class App extends Component {
 }
 componentDidMount() {
 
-    fetch('http://139.155.6.69:5000/login',{
+    fetch('http://localhost:5000/login',{
       method:'GET', 
       headers: {'Content-Type': 'application/json; charset=utf-8'},
     })
@@ -39,7 +39,7 @@ componentDidMount() {
         console.log(this.state.data1.user_id);
     } 
     )
-    fetch('http://139.155.6.69:5000/active', {
+    fetch('http://localhost:5000/active', {
       method: 'GET'
     })
     .then(res => res.json())
@@ -56,7 +56,7 @@ componentDidMount() {
 click = (e,i) => {
    console.log(this.state.data[0].time);
    console.log(i);
-  fetch('http://139.155.6.69:5000/apphome/hometab/sticky',{
+  fetch('http://localhost:5000/apphome/hometab/sticky',{
       method:'POST',
       headers: {'Content-Type': 'application/json; charset=utf-8'},
       body: JSON.stringify({
@@ -89,7 +89,7 @@ click = (e,i) => {
                     <li style={{ height: '110px', width: '95%', margin: '0 auto', marginBottom: '10px', border: '1px solid #8794a8' }} key={index}>
                       <button onClick={()=>this.click(item.id,item.time)} style={{float:'right',backgroundColor:'#eee',width:50,padding:0,
                              fontSize:18,border:'none',textAlign:'center'}}>置顶</button>
-                          <img style={{ width: '90px', height: '90px', float: 'left' }} src={'http://139.155.6.69:5000/img?imgname=' + item.img1} />
+                          <img style={{ width: '90px', height: '90px', float: 'left' }} src={'http://localhost:5000/img?imgname=' + item.img1} />
                           <div style={{ display: 'inline-block', marginLeft: '10px' }}>
                             <p style={{ overflow: 'hidden', width: '150px', height: '40px' }}>{item.content}</p>
                             <p>{item.time}</p>
