@@ -70,50 +70,8 @@ getConnect = (e) => {  //api请求函数
   } 
   )
 }
-onChange = (files, type, index) => {
-  console.log(files, type, index);
-  this.setState({
-    files,
-  });
-}
-click = () => {
-  var files = this.state.files;
-  console.log(files);
-  console.log(files[0].url);
-  console.log(files[0].file.name);
-  // this.img0=files[i].url;
-  // this.name0=files[i].file.name   
-  // this.img0='0.png'   
- 
 
-  fetch('http://localhost:5000/apphome/hometab/dressup',{
-      method:'POST',
-      headers: {'Content-Type': 'application/json; charset=utf-8'},
-      body: JSON.stringify({
-        time:this.time,
-        content:this.state.content, 
-        img0:this.img0,
-        img1:this.img1,
-        img2:this.img2,
-        img3:this.img3,
-        img4:this.img4,
-        img5:this.img5,
-        name0:this.name0,
-        name1:this.name1,
-        name2:this.name2,
-        name3:this.name3,
-        name4:this.name4,
-        name5:this.name5,
-        length:this.length
-      })})
-    .then(res=>res.json())
-    .then(res=>{
-      // this.setState({
-      //     data1:res
-      // })
-    } 
-  )
-}
+
   render() {
     const{files}=this.state; 
     return (
@@ -141,17 +99,17 @@ click = () => {
           推荐背景
           <div style={{width:'100%'}}>
             <div style={{width:'40%',height:'200px',marginTop:'20px',
-            display:'inline-block',marginLeft:'10px',backgroundImage: 'url(' +this.state.data.backgroundImage1 + ')'}} onClick={()=>this.getConnect(this.state.data.backgroundImage1)}>
+            display:'inline-block',marginLeft:'10px',backgroundImage: 'url('+'http://localhost:5000/img?imgname=' +this.state.data.backgroundImage1 + ')'}} onClick={()=>this.getConnect(this.state.data.backgroundImage1)}>
             </div>
             <div style={{width:'40%',height:'200px',backgroundColor:'green',
-            display:'inline-block',marginLeft:'20px',backgroundImage: 'url(' +this.state.data.backgroundImage2 + ')'}} onClick={()=>this.getConnect(this.state.data.backgroundImage2)}></div>
+            display:'inline-block',marginLeft:'20px',backgroundImage: 'url('+'http://localhost:5000/img?imgname=' +this.state.data.backgroundImage2 + ')'}} onClick={()=>this.getConnect(this.state.data.backgroundImage2)}></div>
           </div>
           <div style={{width:'100%'}}>
             <div style={{width:'40%',height:'200px',marginTop:'20px',
-            display:'inline-block',marginLeft:'10px',backgroundImage: 'url(' +this.state.data.backgroundImage3 + ')'}} onClick={()=>this.getConnect(this.state.data.backgroundImage3)}>
+            display:'inline-block',marginLeft:'10px',backgroundImage: 'url('+'http://localhost:5000/img?imgname=' +this.state.data.backgroundImage3 + ')'}} onClick={()=>this.getConnect(this.state.data.backgroundImage3)}>
             </div>
             <div style={{width:'40%',height:'200px',backgroundColor:'green',
-            display:'inline-block',marginLeft:'20px',backgroundImage: 'url(' +this.state.data.backgroundImage4 + ')'}} onClick={()=>this.getConnect(this.state.data.backgroundImage4)}></div>
+            display:'inline-block',marginLeft:'20px',backgroundImage: 'url('+'http://localhost:5000/img?imgname=' +this.state.data.backgroundImage4 + ')'}} onClick={()=>this.getConnect(this.state.data.backgroundImage4)}></div>
           </div>
         </div>
       </div>

@@ -63,7 +63,7 @@ router.post('/register', function (req, res, next) {
           if (err) {
             console.log(err);
           } else {
-            console.log(result);
+            
             res.send({ state: true });
           }
         });
@@ -78,7 +78,7 @@ router.get('/apphome/hometab/member',function(req,res,next) {
     if(err) {
       console.log(err);
     } else {
-      console.log( result);
+      
       res.send(result);
     }
   });
@@ -113,7 +113,7 @@ router.post('/apphome/hometab/member',function(req,res,next) {
             if(err) {            
               console.log(err);
             } else {
-              console.log(result);
+             
               res.send({state:true});
             }
           });
@@ -151,8 +151,6 @@ router.get('/apphome/hometab/member',function(req,res,next) {
     if(err) {
       console.log(err);
     } else {
-      console.log( result);
-      res.send(result);
     }
   });
 });
@@ -176,7 +174,7 @@ router.post('/apphome/hometab/member', function (req, res, next) {
     if (err) {
       console.log(err);
     } else {
-      console.log(result)
+     
       for (var i = 0; i < result.length; i++) {
         if (result[i].username == username1) {
           con.query("update user set (username,age,sex,birth,star,job,hobby,place,sign) = (?,?,?,?,?,?,?,?,?) where username = username1",
@@ -184,8 +182,6 @@ router.post('/apphome/hometab/member', function (req, res, next) {
               if (err) {
                 console.log(err);
               } else {
-                console.log(result);
-                res.send({ state: true });
               }
             });
         }
@@ -196,64 +192,49 @@ router.post('/apphome/hometab/member', function (req, res, next) {
 router.post('/apphome/hometab/dressup',function(req,res,next) {
   var user_id1=req.body.user_id;
   var backgroundImage1=req.body.backgroundImage
-  var time = new Date();
-  console.log(user_id1);
-  time = time.toLocaleDateString();
   var con = mysql.createConnection(dbconfig);
   con.connect();
   con.query("select * from user",function(err,result) {
     if(err) {
       console.log(err);
     } else {
-      console.log(result)
+ 
       con.query("update user set backgroundImage=? where user_id = ?",
           [backgroundImage1,user_id1],function(err,result) {
             if(err) {            
               console.log(err);
             } else {
-              console.log(result);
-              res.send({state:true});
             }
           });
         }
       })
 });
-router.post('/apphome/hometab/myvippic',function(req,res,next) {
-  var user_id1=req.body.user_id;
-  var backgroundImage1=req.body.backgroundImage
-  var img = req.body.img0;
-  var name = req.body.name0;
-  // var time = new Date();
-  console.log(user_id1);
-  var con = mysql.createConnection(dbconfig);
-  con.connect();
+router.post('/apphome/hometab/myvippic', function (req, res, next) {
+  var time=req.body.time;
+  var img= req.body.img0;
+  var name= req.body.name0;
+  var user_id=req.body.user_id
+  name = time + name
   var base64Data = img.replace(/^data:image\/\w+;base64,/, "");
   var dataBuffer = Buffer.from(base64Data, 'base64');
-  fs.writeFile(__dirname+"\\images\\"+name, dataBuffer, function(err) {
-    if(err){
-    }else{
-      // res.send("保存成功！");
-      console.log(name)
+  console.log(__dirname + "\\img\\" + name)
+  fs.writeFile(__dirname + "\\img\\" + name, dataBuffer, function (err) {
+    if (err) {
+    } else {
+      console.log("会员更改背景存储成功！")
     }
   });
-  name='./images/'+name;
-  con.query("select * from user",function(err,result) {
-    if(err) {
+  var con = mysql.createConnection(dbconfig);
+  con.connect();
+  con.query("update user set backgroundImage=? where user_id = ?",[name,user_id],function(err,result) {
+    if(err) {            
       console.log(err);
     } else {
-      console.log(result)
-      con.query("update user set backgroundImage=? where user_id = ?",
-          [name,user_id1],function(err,result) {
-            if(err) {            
-              console.log(err);
-            } else {
-              console.log(result);
-              res.send({state:true});
-            }
-          });
-        }
-      })
-});
+      console.log('会员更改背景成功');      
+    }
+  });
+})
+
 router.post('/apphome/hometab/sticky',function(req,res,next) {
   var user_id1=req.body.user_id;
   var time2=req.body.time;
@@ -268,7 +249,7 @@ router.post('/apphome/hometab/sticky',function(req,res,next) {
     if(err) {            
       console.log(err);
     } else {
-      console.log(result);
+   
       // res.send({status:'success'});      
     }
   });
@@ -277,7 +258,7 @@ router.post('/apphome/hometab/sticky',function(req,res,next) {
     if(err) {            
       console.log(err);
     } else {
-      console.log(result);
+     
       // res.send({status:'success'});      
     }
   });
@@ -286,7 +267,7 @@ router.post('/apphome/hometab/sticky',function(req,res,next) {
     if(err) {            
       console.log(err);
     } else {
-      console.log(result);
+   
       // res.send({status:'success'});      
     }
   });
@@ -300,7 +281,7 @@ router.get('/apphome/hometab/eye/class', function (req, res, next) {
     if (err) {
       console.log(err);
     } else {
-      console.log(result);
+      
       res.send(result);
     }
   });
@@ -314,7 +295,7 @@ router.get('/apphome/hometab/ear/class', function (req, res, next) {
     if (err) {
       console.log(err);
     } else {
-      console.log(result);
+     
       res.send(result);
     }
   });
@@ -330,7 +311,7 @@ router.get('/apphome/hometab/ear', function (req, res, next) {
     if (err) {
       console.log(err);
     } else {
-      console.log(result);
+     
       res.send(result);
     }
   });
@@ -345,7 +326,7 @@ router.get('/apphome/hometab/eye', function (req, res, next) {
     if (err) {
       console.log(err);
     } else {
-      console.log(result);
+  
       res.send(result);
     }
   });
@@ -360,7 +341,7 @@ router.get('/apphome/hometab/details', function (req, res, next) {
     if (err) {
       console.log(err);
     } else {
-      console.log(result);
+    
       res.send(result);
     }
   });
@@ -375,7 +356,7 @@ router.get('/apphome/hometab/details1', function (req, res, next) {
     if (err) {
       console.log(err);
     } else {
-      console.log(result);
+    
       res.send(result);
     }
   });
@@ -390,7 +371,7 @@ router.get('/apphome/hometab/author', function (req, res, next) {
     if (err) {
       console.log(err);
     } else {
-      console.log(result);
+
       res.send(result);
     }
   });
@@ -405,7 +386,7 @@ router.get('/apphome/hometab/author1', function (req, res, next) {
     if (err) {
       console.log(err);
     } else {
-      console.log(result);
+     
       res.send(result);
     }
   });
@@ -419,7 +400,7 @@ router.get('/apphome/hometab/eye/search', function (req, res, next) {
     if (err) {
       console.log(err);
     } else {
-      console.log(result.length);
+   
       res.send(result);
     }
   });
@@ -433,7 +414,7 @@ router.get('/apphome/hometab/ear/search', function (req, res, next) {
     if (err) {
       console.log(err);
     } else {
-      console.log(result.length);
+    
       res.send(result);
     }
   });
@@ -633,7 +614,7 @@ router.post('/publish', function (req, res, next) {
     if (err) {
       console.log(err);
     } else {
-      console.log(result);
+     
       // res.send({status:'success'});      
     }
   });
@@ -643,9 +624,9 @@ router.post('/publish', function (req, res, next) {
  * update chapters set content-? where chapterid=?
  */
 router.get('/images', function (req, res, next) {
-  console.log(req.query.imgname)
+
   var files = fs.readdirSync(__dirname + "/images");
-  console.log(files);
+
   for (var i = 0; i < files.length; i++) {
     if (files[i] == req.query.imgname) {
       fs.readFile(__dirname + "/images/" + files[i], function (err, data) {
@@ -667,7 +648,7 @@ router.get('/img', function (req, res, next) {
         if (err) throw err;
 
         res.send(data);
-        console.log(data)
+ 
       });
 
     }
@@ -709,7 +690,7 @@ router.post('/dynamic',function(req,res,next) {
           time0='';
         }
         name=time0+name0
-        console.log(name)
+  
 
       }
       if(i==1){
@@ -767,7 +748,7 @@ router.post('/dynamic',function(req,res,next) {
     if(err) {            
       console.log(err);
     } else {
-      console.log(result);
+ 
       // res.send({status:'success'});      
     }
   });
@@ -779,7 +760,7 @@ router.get('/active', function (req, res, next) {
     if (err) {
       console.log(err);
     } else {
-      console.log(result)
+
       res.send(result);
     }
   });
@@ -793,7 +774,7 @@ router.post('/cart', function (req, res, next) {
     if (err) {
       console.log(err);
     } else {
-      console.log(result);
+   
       res.send({ status: 'success' });
 
     }
@@ -808,7 +789,7 @@ router.post('/cart1', function (req, res, next) {
     if (err) {
       console.log(err);
     } else {
-      console.log(result);
+ 
       res.send({ status: 'success' });
 
     }
@@ -817,11 +798,10 @@ router.post('/cart1', function (req, res, next) {
 router.get('/cartlist', function (req, res, next) {
   var con = mysql.createConnection(dbconfig);
   con.connect();
-  con.query("select * from cart", function (err, result) {
+  con.query("select * from cart",function (err, result) {
     if (err) {
       console.log(err);
     } else {
-      console.log(result);
       res.send(result);
 
     }
@@ -853,7 +833,7 @@ router.post('/heart',function(req,res,next) {
     if(err) {            
       console.log(err);
     } else {
-      console.log(1111);
+
       res.send({status:'success'});      
     }
   });
@@ -870,7 +850,7 @@ router.post('/heart1',function(req,res,next) {
     if(err) {            
       console.log(err);
     } else {
-      console.log(1111);
+
       res.send({status:'success'});      
     }
   });
@@ -969,6 +949,29 @@ router.post('/authorLiked1',function(req,res,next) {
       res.send({status:'success'});      
     }
   });
+});
+router.post('/apphomeoptab/cartlist',function(req,res,next) {
+  var order_name=req.body.order_name;
+  var order_tel=req.body.order_tel;
+  var order_address=req.body.order_address;
+  var gName = req.body.gName;
+  var con = mysql.createConnection(dbconfig);
+  con.connect();
+  con.query("select * from cart",function(err,result) {
+    if(err) {
+      console.log(err);
+    } else {
+      console.log(result)
+      con.query("update cart set order_name=?,order_tel=?,order_address=?,gstate=? where gName = ?",
+          [order_name,order_tel,order_address,'已购买',gName],function(err,result) {
+            if(err) {            
+              console.log(err);
+            } else {
+              res.send({state:true});
+            }
+          });
+        }
+      })
 });
 /**
  * update chapters set content-? where chapterid=?

@@ -21,7 +21,9 @@ export default class App extends Component {
       sign:'',
       backgroundImage:''
     }
+    this.time='';
   }
+  
   
   componentDidMount(){
     //api请求函数
@@ -77,15 +79,19 @@ onChange = (files, type, index) => {
   });
 }
 click = () => {
+  var curDate = new Date();
+  var curYear =curDate.getFullYear();  
+  var curMonth = curDate.getMonth()+1;  
+  var curDay = curDate.getDate();       
+  var curHour = curDate.getHours();     
+  var curMinute = curDate.getMinutes();   
+  var curSecond = curDate.getSeconds(); 
+  this.time= curYear+'年'+curMonth+'月'+curDay+'日'+curHour+'时'+curMinute+'分'+curSecond+'秒';
+
   var files = this.state.files;
-  console.log(files);
-  console.log(files[0].url);
-  console.log(files[0].file.name);
   this.img0=files[0].url;
   this.name0=files[0].file.name   
-  // this.img0='0.png'   
- 
-
+  
   fetch('http://localhost:5000/apphome/hometab/myvippic',{
       method:'POST',
       headers: {'Content-Type': 'application/json; charset=utf-8'},
@@ -93,7 +99,7 @@ click = () => {
         user_id:this.state.data.user_id,
         img0:this.img0,
         name0:this.name0,
-        length:this.length
+        time:this.time
       })})
     .then(res=>res.json())
     .then(res=>{
@@ -118,7 +124,6 @@ click = () => {
         <ImagePicker
                     files={files}
                     onChange={this.onChange}
-                    // selectable={files.length < 6}
                     multiple
                     accept="image/gif,image/jpeg,image/jpg,image/png"
         />  

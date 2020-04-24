@@ -59,6 +59,22 @@ export default class App extends Component {
       )
     
   }
+  componentWillReceiveProps(nextProps) {
+    if(this.props != nextProps) {
+      fetch('http://localhost:5000/login',{
+        method:'GET', 
+        headers: {'Content-Type': 'application/json; charset=utf-8'},
+      })
+      .then(res=>res.json())
+      .then(res=>{
+          this.setState({
+            data:res[0]
+          })
+          console.log(this.state.data.avatar);
+      } 
+      )
+    }
+}
   change1 = (e) => {
     this.setState({
       name: e.target.value
@@ -179,7 +195,7 @@ export default class App extends Component {
         <Icon onClick={()=>{this.props.history.go(-1)}} style={{width:"40px",height:"40px"}} type="left" />
         </div>
         {/* <i className={dataItem.icon} style={{fontSize:40,color:'black',height:80,width:80,paddingTop:1,float:'left'}} ></i> */}
-        <div style={{backgroundImage: 'url(' +this.state.data.backgroundImage + ')',width:'100%',position:'relative',marginTop:'10px'}}>
+        <div style={{backgroundImage: 'url('+'http://localhost:5000/img?imgname=' +this.state.data.backgroundImage + ')',width:'100%',position:'relative',marginTop:'10px'}}>
           <div style={{width:"28px",height:"28px",position:"absolute",top:"50px",left:"60px",backgroundColor:"#8794a8"}}>
             <ImagePicker
               files={files}
@@ -191,8 +207,8 @@ export default class App extends Component {
           </div>
           <img src={'http://localhost:5000/img?imgname=' + this.state.data.avatar}  style={{width:'60px',height:'60px','margin-top':'10px',borderRadius:'10px',marginLeft:'20px'}}/>
           <font style={{marginBottom:'60px',fontSize:'20px',marginLeft:'20px',marginTop:'10px'}}>{this.state.data.username}</font>
-          <div style={{background:'white',display:'inline-block',width:"55px",marginLeft:'10px'}}>关注 {this.state.data.like_number}</div>
-          <div style={{background:'white',display:'inline-block',width:"55px"}}>粉丝 {this.state.data.liked_number}</div>
+          {/* <div style={{background:'white',display:'inline-block',width:"55px",marginLeft:'10px'}}>关注 {this.state.data.like_number}</div>
+          <div style={{background:'white',display:'inline-block',width:"55px"}}>粉丝 {this.state.data.liked_number}</div> */}
 
           {/* <p className='name'>Kika Kong</p> */}
         </div>
