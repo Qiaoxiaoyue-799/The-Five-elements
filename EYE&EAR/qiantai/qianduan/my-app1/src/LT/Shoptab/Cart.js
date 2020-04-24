@@ -10,7 +10,7 @@ export default class cart extends Component {
         super(props);
 
         this.state = {
-            list: [],
+            list: [],//购物车数据
             data1: [
                 { icon: './img/18.jpg', tit: '开心麻花《皇帝的新娘》' },
                 { icon: './img/13.jpg', tit: '2020新年音乐会' },
@@ -21,10 +21,35 @@ export default class cart extends Component {
             ],
             hasError: false,
             value: '',
+            order_name:'',
+            order_tell:'',
+            order_address:''
         };
     }
+    componentDidMount() {
+        fetch('http://localhost:5000/cartlist', {
+            "method": "get",
+        })
+        .then(res => res.json())
+        .then(res => {
+            this.setState({
+                list:res
+            })
+            console.log(this.state.list);
+        })
+        .then(res=>{
+            // console.log(this.state.list)
+        })
+        
+            
+    }
 
-    onChange = (value) => {
+    change1 = (e) => {
+        this.setState({
+            order_name: e.target.value
+        })
+    }
+    change2 = (value,e) => {
         if (value.replace(/\s/g, '').length < 11) {
           this.setState({
             hasError: true,
@@ -36,9 +61,40 @@ export default class cart extends Component {
         }
         this.setState({
           value,
+          order_tell:e.target.value
         });
-      }
+    }
+    change3 = (e) => {
+        this.setState({
+            order_address: e.target.value
+        })
+    }
 
+    getConnect = () => {  //api请求函数
+        console.log(this.state.order_name);
+        console.log(this.state.order_tell);
+        console.log(this.state.order_address);
+        console.log(this.state.list[1].gName);
+        fetch('http://localhost:5000/apphome/shoptab/cartlist',{
+          method:'POST', 
+          headers: {'Content-Type': 'application/json; charset=utf-8'},
+          body: JSON.stringify({
+            order_name:this.state.order_name,
+            order_tell:this.state.order_tell,
+            order_address:this.state.order_address,
+            gName:this.state.list[1].gName
+          })})
+        .then(res=>{
+        //   console.log('22')
+          res.json()
+        })
+        .then(res=>{
+        //   console.log('1');
+          // if(res.state) {
+            window.alert('获取成功！');      
+        } 
+        )
+    }
     updateFinished(todoItem) {
         var sum=0;
         this.state.list.forEach((item) => {
@@ -71,22 +127,6 @@ export default class cart extends Component {
         });
     
     }
-    componentDidMount() {
-        fetch('http://localhost:5000/cartlist', {
-            "method": "get",
-        })
-        .then(res => res.json())
-        .then(res => {
-            this.setState({
-                list:res
-            })
-        })
-        .then(res=>{
-            // console.log(this.state.list)
-        })
-        
-            
-    }
     handleClick = () => {
         this.inputRef.focus();
     }
@@ -103,11 +143,12 @@ export default class cart extends Component {
                 <div className="Cb1">
                     <List>
                         <InputItem
+                            onChange={this.change1}
                             style={{ width: '100%' }}
                             placeholder="请输入您的名字"
                             ref={el => this.labelFocusInst = el}
                         >
-                            <div onClick={() => this.labelFocusInst.focus()}>收货人</div>
+                            <div onClick={() => this.labelFocusInst.focus()} >收货人</div>
                         </InputItem>
                         <InputItem
                             error={this.state.hasError}
@@ -116,61 +157,65 @@ export default class cart extends Component {
                                   Toast.info('请输入正确的手机号');
                                 }
                             }}
-                            onChange={this.onChange}
+                            onChange={this.change2}
                             placeholder="请输入您的电话"
                             value={this.state.value}
                         >
                             <div onClick={() => this.labelFocusInst.focus()} style={{ float: 'left' }}>收货电话</div>
                         </InputItem>
-                        <InputItem
+                        {/* <InputItem
                             ref={el => this.labelFocusInst = el}
                         >
                             <div onClick={() => this.labelFocusInst.focus()}>收货省区</div>
-                        </InputItem>
+                        </InputItem> */}
                         <TextareaItem
                             title="详细地址"
                             placeholder="请输入详细地址"
                             data-seed="logId"
                             autoHeight
+                            onChange={this.change3}
                             ref={el => this.customFocusInst = el}
                         />
                     </List>
                 </div>
                 <p id="wen">以下是您选购的商品</p>
-                <div className="container" style={{width:'100%',overflow:'scroll',marginBottom:'50px'}}>
+                <div className="container" style={{width:'100%',overflow:'scroll',marginBottom:'20px'}}>
                     <ul style={{width:'100%'}}>
                         {this.state.list.map((item, index) =>
-                            
-                            <ListItem
-                                item={item}
-                                finishedChange={this.updateFinished.bind(this)}
-                                totalChange={this.updateTotal.bind(this)}
-                                key={index}
-                            />
-                          
+                            {
+                                if(item.gstate=='未付款'){
+                                    return(
+                                        <ListItem
+                                            item={item}
+                                            finishedChange={this.updateFinished.bind(this)}
+                                            totalChange={this.updateTotal.bind(this)}
+                                            key={index}/>
+                                    )
+                                }
+                            }
                         )}
-                        <li style={{position:'absolute',bottom:160,right:10}}>
-                            {/* <span style={{ display: 'block', paddingLeft: '50%', margin: 0, float: 'left' }}>
-                                已选中：{finished}
-                            </span> */}
-                            <Link to='/apphome/shoptab/buy'>
-                                <button style={{
-                                    height: 40, width: 80, border: '1px solid rgb(241, 98, 42)',
-                                    borderRadius: '5px', marginLeft: 15, color: 'white',
-                                    background: 'rgb(241, 98, 42)',
-                                    textAlign: 'center',
-                                    float:'right'
-                                }}>
-                                    购买
-                                </button>
-                            </Link>
-                         
-                        </li>
                     </ul>
                     {/* <Dialog addNewTask={this.addTask.bind(this)} nums={this.state.list.length}/> */}
                 </div>
+                <div style={{width:'100%',height:30,paddingRight:20}}>
+                    {/* <span style={{ display: 'block', paddingLeft: '50%', margin: 0, float: 'left' }}>
+                        已选中：{finished}
+                    </span> */}
+                    <Link to='/apphome/shoptab/buy'>
+                        <button style={{
+                            height: 40, width: 80, border: '1px solid rgb(241, 98, 42)',
+                            borderRadius: '5px', marginLeft: 15, color: 'white',
+                            background: 'rgb(241, 98, 42)',
+                            textAlign: 'center',
+                            float:'right'
+                        }} onClick={this.getConnect}>
+                            购买
+                        </button>
+                    </Link>
+                    
+                </div>
                 <div className="Cbottom">
-                    <p style={{ display: 'inline-block', fontSize: 20, border: '1px solid #bbb', padding: '10px 10px', borderRadius: '10px',marginTop:"15px" }}>猜你喜欢</p>
+                    <p style={{ display: 'inline-block', fontSize: 20, border: '1px solid #bbb', padding: '10px 10px', borderRadius: '10px',marginTop:"25px",marginLeft:'120px',textAlign:'center' }}>猜你喜欢</p>
                     <Grid data={this.state.data1}
                         // style={{border:'1px solid #fff'}}
                         columnNum={2}

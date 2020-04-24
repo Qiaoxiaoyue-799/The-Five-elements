@@ -85,7 +85,8 @@ ul li:last-child{
 #wen{
     display: inline-block;
     font-size: 18px;
-    margin-left:15px;
+	margin-left:15px;
+	padding-top: 10px;
 }
 
 .delete-btn {
