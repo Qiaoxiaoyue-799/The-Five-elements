@@ -61,14 +61,11 @@ getConnect = (e) => {  //api请求函数
       backgroundImage:e
     })})
   .then(res=>{
-    console.log(this.state.user_id);
-    res.json()
-  })
-  .then(res=>{
     console.log('1');
-    window.alert('设置成功！');
+    window.alert('设置成功!');
   } 
   )
+  window.alert('设置成功!');
 }
 
 

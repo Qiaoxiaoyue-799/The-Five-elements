@@ -99,9 +99,6 @@ export default class Author extends Component {
           num:len,
           id:id
         })})
-      .then(res=>res.json())
-      .then(res=>{     
-    })
     fetch('http://localhost:5000/apphome/hometab/details/',
     {method:'GET'})
     .then((res)=>res.json())
@@ -110,6 +107,7 @@ export default class Author extends Component {
             dataItem:res
         })                
     })
+    window.location.reload()
     
   }
   render() {

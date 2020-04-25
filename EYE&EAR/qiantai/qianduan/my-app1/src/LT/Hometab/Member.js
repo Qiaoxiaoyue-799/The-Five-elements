@@ -184,13 +184,14 @@ export default class App extends Component {
           .then(res=>{
           } 
         )
+    window.location.reload();
   } 
   render() {
     var {todo} = this.props;
     const{files}=this.state
     return (
-      <div style={{width: '100%',height:'108%',backgroundImage: 'url('+'http://localhost:5000/img?imgname=' +this.state.data.backgroundImage + ')',zIndex:999,
-      position:'absolute',overflow:'auto'}}>        
+      <div style={{width: '100%',height:'110%',backgroundImage: 'url('+'http://localhost:5000/img?imgname=' +this.state.data.backgroundImage + ')',zIndex:999,
+      position:'absolute',overflow:'auto',backgroundColor:'#fff',zIndex:999}}>        
       <div style={{width:'100%',position:'relative',background:"#8794a8"}}>
         <Icon onClick={()=>{this.props.history.go(-1)}} style={{width:"40px",height:"40px"}} type="left" />
         </div>
@@ -277,7 +278,7 @@ export default class App extends Component {
                  name='sign'  placeholder={this.state.data.sign}  value={this.state.sign} onChange={this.change9}/>
                 {/* {this.state.data.sign} */}
               </p>
-              <input  value='修改 ' onClick={this.getConnect} style={{ background: '#8693a6', color: '#fff' ,textAlign:'center'}}/>
+              <input  value='修改 ' type="button" onClick={this.getConnect} style={{ background: '#8693a6', color: '#fff' ,textAlign:'center',height:'30px'}}/>
             </div>
           </div>
       </div>

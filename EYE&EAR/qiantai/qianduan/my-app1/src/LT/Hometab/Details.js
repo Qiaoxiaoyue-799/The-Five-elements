@@ -216,6 +216,7 @@ export default class Details extends Component {
         //         dataItem:res
         //     })                
         // })
+        window.location.reload()
     }
     render() {     
         return(

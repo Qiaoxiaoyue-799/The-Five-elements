@@ -106,6 +106,7 @@ click = () => {
      console.log('修改成功！');
     } 
   )
+  window.alert('修改成功')
 }
   render() {
     const{files}=this.state; 

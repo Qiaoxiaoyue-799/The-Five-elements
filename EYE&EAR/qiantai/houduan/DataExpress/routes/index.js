@@ -250,7 +250,7 @@ router.post('/apphome/hometab/sticky',function(req,res,next) {
       console.log(err);
     } else {
    
-      // res.send({status:'success'});      
+      res.send('success');      
     }
   });
   con.query("update active set id=? where time=? ",
@@ -950,7 +950,7 @@ router.post('/authorLiked1',function(req,res,next) {
     }
   });
 });
-router.post('/apphomeoptab/cartlist',function(req,res,next) {
+router.post('/apphome/shoptab/cartlist',function(req,res,next) {
   var order_name=req.body.order_name;
   var order_tel=req.body.order_tel;
   var order_address=req.body.order_address;

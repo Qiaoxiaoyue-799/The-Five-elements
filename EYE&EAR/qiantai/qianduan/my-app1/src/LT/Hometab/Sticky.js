@@ -54,8 +54,6 @@ componentDidMount() {
     })
 }
 click = (e,i) => {
-   console.log(this.state.data[0].time);
-   console.log(i);
   fetch('http://localhost:5000/apphome/hometab/sticky',{
       method:'POST',
       headers: {'Content-Type': 'application/json; charset=utf-8'},
@@ -68,11 +66,10 @@ click = (e,i) => {
         name0:this.name0,
         length:this.length
       })})
-    .then(res=>res.json())
     .then(res=>{
-     console.log('置顶成功！');
-    } 
-  )
+      console.log(res);
+      window.location.reload();
+    })
 }
   render() {
     return (
