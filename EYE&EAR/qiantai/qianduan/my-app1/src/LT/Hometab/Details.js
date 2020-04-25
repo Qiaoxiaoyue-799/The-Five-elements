@@ -32,8 +32,9 @@ export default class Details extends Component {
                 fontSize: '25px',
             },
             data:[],
-            userdata:[]
-            
+            userdata:[],
+            tips1:false,
+            tips2:false            
         }
     }
     componentDidMount() {
@@ -80,24 +81,23 @@ export default class Details extends Component {
             })
         
     }
-    componentWillReceiveProps(nextProps) {
-        if(this.props != nextProps) {
-          fetch('http://localhost:5000/apphome/hometab/details/',
-          {method:'GET'})
-          .then((res)=>res.json())
-          .then((res)=>{
-              this.setState({
-                dataItem:res
-              })                
-          })
-        }
-    }
-    componentDidUpdate(prevProps,prevState){
-        
-        if(prevProps.match.params.id!==this.props.match.params.id){//
-            let id = this.props.match.params.id//
+    // componentWillReceiveProps(nextProps) {
+    //     if(this.props != nextProps) {
+    //       fetch('http://localhost:5000/apphome/hometab/details/',
+    //       {method:'GET'})
+    //       .then((res)=>res.json())
+    //       .then((res)=>{
+    //           this.setState({
+    //             dataItem:res
+    //           })                
+    //       })
+    //     }
+    // }
+    componentDidUpdate(prevProps,prevState){        
+        if((prevProps.match.params.id!==this.props.match.params.id) || (prevState.tips1 != this.state.tips1) || (prevState.tips2 != this.state.tips2)){
+            let id = this.props.match.params.id
             fetch('http://localhost:5000/apphome/hometab/details/',
-            {method:'GET'})//
+            {method:'GET'})
             .then((res)=>res.json())
             .then((res)=>{
                 this.setState({
@@ -105,6 +105,16 @@ export default class Details extends Component {
                 })                
             })
         }
+        // if(prevState.tips != this.state.tips) {
+        //     fetch('http://localhost:5000/apphome/hometab/details/',
+        //     {method:'GET'})
+        //     .then((res)=>res.json())
+        //     .then((res)=>{
+        //         this.setState({
+        //             dataItem:res
+        //         })                
+        //     })
+        // }
     }
     change = (e) => {
         this.setState({
@@ -159,6 +169,9 @@ export default class Details extends Component {
             console.log(user_id)
             console.log("评论存储成功！")
         })
+        this.setState({
+            tips2:true
+        })
     }
     btn = (item) => {
         var num = [];
@@ -190,16 +203,19 @@ export default class Details extends Component {
               id:id
             })})
           .then(res=>res.json())
-          .then(res=>{      
+          .then(()=>{    
         })
-        fetch('http://localhost:5000/apphome/hometab/details/',
-        {method:'GET'})
-        .then((res)=>res.json())
-        .then((res)=>{
-            this.setState({
-                dataItem:res
-            })                
-        })
+        this.setState({
+            tips1:true
+        }) 
+        // fetch('http://localhost:5000/apphome/hometab/details/',
+        // {method:'GET'})
+        // .then((res)=>res.json())
+        // .then((res)=>{
+        //     this.setState({
+        //         dataItem:res
+        //     })                
+        // })
     }
     render() {     
         return(
