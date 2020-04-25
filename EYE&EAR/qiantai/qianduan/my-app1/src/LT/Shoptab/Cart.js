@@ -45,8 +45,9 @@ export default class cart extends Component {
     }
 
     change1 = (e) => {
+        console.log(e);
         this.setState({
-            order_name: e.target.value
+            order_name: e
         })
     }
     change2 = (value,e) => {
@@ -61,12 +62,12 @@ export default class cart extends Component {
         }
         this.setState({
           value,
-          order_tell:e.target.value
+          order_tell:e
         });
     }
     change3 = (e) => {
         this.setState({
-            order_address: e.target.value
+            order_address: e
         })
     }
 
