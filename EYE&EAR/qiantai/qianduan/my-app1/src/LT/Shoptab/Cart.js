@@ -4,6 +4,7 @@ import { List, InputItem, TextareaItem, Grid,NavBar,Toast } from 'antd-mobile';
 import ListItem from './ListItem';
 import { HashRouter as Router, withRouter, Route, Link, Switch, Redirect } from 'react-router-dom';
 var finished=0;
+var checked='';
 export default class cart extends Component {
 
     constructor(props) {
@@ -22,8 +23,9 @@ export default class cart extends Component {
             hasError: false,
             value: '',
             order_name:'',
-            order_tell:'',
-            order_address:''
+            order_tel:'',
+            order_address:'',
+            // checked:'123'
         };
     }
     componentDidMount() {
@@ -45,7 +47,6 @@ export default class cart extends Component {
     }
 
     change1 = (e) => {
-        console.log(e);
         this.setState({
             order_name: e
         })
@@ -75,7 +76,7 @@ export default class cart extends Component {
         console.log(this.state.order_name);
         console.log(this.state.order_tell);
         console.log(this.state.order_address);
-        console.log(this.state.list[1].gName);
+        // console.log(this.state.list[1].gName);
         fetch('http://localhost:5000/apphome/shoptab/cartlist',{
           method:'POST', 
           headers: {'Content-Type': 'application/json; charset=utf-8'},
@@ -83,7 +84,7 @@ export default class cart extends Component {
             order_name:this.state.order_name,
             order_tell:this.state.order_tell,
             order_address:this.state.order_address,
-            gName:this.state.list[1].gName
+            gName:checked
           })})
         .then(res=>{
         //   console.log('22')
@@ -92,16 +93,20 @@ export default class cart extends Component {
         .then(res=>{
         //   console.log('1');
           // if(res.state) {
-            window.alert('获取成功！');      
+            // window.alert('获取成功！');      
         } 
         )
     }
     updateFinished(todoItem) {
+        // this.setState({checked:todoItem.gName})
+        // console.log(this.state.checked);
         var sum=0;
         this.state.list.forEach((item) => {
-           
             if (item.id === todoItem.id) {
                 item.gstatus = todoItem.status;
+                console.log(item.gName);
+                checked=item.gName;
+                console.log(checked);
             }
             if (item.gstatus === 1) {
                 sum++;
@@ -113,8 +118,10 @@ export default class cart extends Component {
     }
 
     updateTotal(todoItem){
+        
         var obj = [], sum = 0;
         this.state.list.forEach((item) => {
+            console.log(item.gName);
             if (item.id !== todoItem.id) {
                 obj.push(item);
                 if (item.status === 1) {

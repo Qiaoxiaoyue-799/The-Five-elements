@@ -32,12 +32,10 @@ export default class VIP extends Component {
             {icon:'iconfont icon-huiyuan',tit:'会员福利',src:'/apphome/hometab/dressup'},
             {icon:'iconfont icon-zu',tit:'更多',src:'/apphome/hometab/sticky'},
           ],
-          grade:5
+        //   grade:2
         }
     }
     componentDidMount(){
-        //api请求函数
-
         fetch('http://localhost:5000/login',{
         method:'GET', 
         headers: {'Content-Type': 'application/json; charset=utf-8'},
@@ -45,15 +43,12 @@ export default class VIP extends Component {
         .then(res=>res.json())
         .then(res=>{
             this.setState({
-            data:res[0]
+                data:res[0]
             })
-            console.log(this.state.data);
-            this.state.grade=this.state.data.growth/10+1;
-            console.log(this.state.grade);
+            console.log(res[0])
         } 
         )
     }
-
     render() {
         return (
             <div style={{width: '100%',height:'108%',backgroundColor: '#fff',zIndex:999,position:'absolute'}}>
@@ -64,8 +59,8 @@ export default class VIP extends Component {
                     >会员中心</NavBar>
                 <div className="Vheader">
                     <div className="Vmessage">
-                        <img src={'http://localhost:5000/img?imgname=' + this.state.data.avatar} id="Vtou" style={{width:80,height:80}}></img>
-                        <p id="Vname">{this.state.data.username}</p>
+                        <img src="./images/16.jpg" id="Vtou" style={{width:80,height:80}}></img>
+                        <p id="Vname">KIki</p>
                         <p id="Vdevelop">成长值：{this.state.data.growth}</p>
                         <p id="Vgrade">积分：{this.state.data.integral}</p>
                     </div>
@@ -77,7 +72,7 @@ export default class VIP extends Component {
                         {/* <Steps current={1} direction="horizontal" size="small">
                             {steps}
                         </Steps> */}
-                        <Progress nums={10} index={this.state.grade} progressColor='#dabb84' />
+                        <Progress nums={Math.floor(this.state.data.integral/10)} index={Math.floor(this.state.data.integral/10)} progressColor='#dabb84' />
                         {/* <Progress nums={10} index={1} progressColor='#dabb84' /> */}
                         <WhiteSpace />
                     </div>

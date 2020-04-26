@@ -11,6 +11,7 @@ class ListItem extends Component {
 	} 
 
 	handleFinished=(item)=>{
+		console.log(item.gName);
 
 		item.gstatus = (item.gstatus === 0 ? 1 : 0);
 		if(item.gstatus===1){
@@ -51,7 +52,7 @@ class ListItem extends Component {
 		const item = this.props.item;
 		
 		return (
-			<li key={item.id} style={{width:'100%',borderBottom:'2px solid #fff'}}>
+			<li key={item.id} style={{width:'100%',borderBottom:'2px solid #fff'}} >
 				<span
 					onClick={()=>this.handleFinished(item)} 
 					id={item.id}

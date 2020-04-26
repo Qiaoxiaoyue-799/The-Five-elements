@@ -10,9 +10,10 @@ export default class Progress extends Component {
  
     renderProgress () {
         const progressItemStyle = {
-            width: `${(this.props.nums+1)/2}%`,
+            width: '10%',
             height: '100%'
         };
+        console.log(this.props.nums);
         var ele = [];
         for (var i = 0; i < this.props.nums; i++) {
             if (i <= this.props.index) {

@@ -8,13 +8,47 @@ export default class Pay extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            list:[]
         };
         this.getValue = this.getValue.bind(this)
     }
     getValue(value) {
         console.log(value)
     }
+    componentDidMount() {
+        fetch('http://localhost:5000/cartlist', {
+            "method": "get",
+        })
+        .then(res => res.json())
+        .then(res => {
+            this.setState({
+                list:res
+            })
+            console.log(this.state.list);
+        })
+        .then(res=>{
+            // console.log(this.state.list)
+        })    
+    }
+    getConnect = () => {  //api请求函数
+        fetch('http://localhost:5000/apphome/shoptab/pay',{
+          method:'POST', 
+          headers: {'Content-Type': 'application/json; charset=utf-8'},
+          body: JSON.stringify({
+            // gstate:this.state.list
+          })})
+        .then(res=>{
+        //   console.log('22')
+          res.json()
+        })
+        .then(res=>{
+        //   console.log('1');
+          // if(res.state) {
+            window.alert('支付成功！');      
+        } 
+        )
+    }
+
     render() {
         return (
             <div>
@@ -25,7 +59,15 @@ export default class Pay extends Component {
                 >支付页面</NavBar>
                 <div style={{backgroundColor:'#eee',width:'100%',height:572,paddingTop:50}}>
                     <div style={{backgroundColor:'#fff',width:'80%',height:350,margin:'0 auto',fontSize:20,paddingTop:30}}>
-                        <p style={{textAlign:'center',paddingBottom:30}}>¥<span style={{fontSize:30}}>34.80</span></p>
+                        {this.state.list.map((item, index) =>
+                            {
+                                if(item.gstate=='支付中'){
+                                    return(
+                                        <p style={{textAlign:'center',paddingBottom:30}}>¥<span style={{fontSize:30}}>{item.gPrice2}</span></p>
+                                    )
+                                }
+                            }
+                        )}
                         <p style={{width:'100%',height:30}}>
                             <span style={{fontSize:20,float:'left'}}>支付宝账号</span>
                             <span style={{fontSize:20,float:'right'}}>152******31</span>
@@ -43,7 +85,7 @@ export default class Pay extends Component {
                         </p>
                         <p>
                             <Link to='/apphome/shoptab/cart'>
-                                <button style={{width:80,height:35,marginLeft:110,fontSize:20,borderRadius:8,backgroundColor:'#eee',color:'black',padding:0}}>支付</button>
+                                <button onClick={this.getConnect} style={{width:80,height:35,marginLeft:110,fontSize:20,borderRadius:8,backgroundColor:'#eee',color:'black',padding:0}}>支付</button>
                             </Link>
                         </p>
                     </div>
