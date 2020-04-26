@@ -950,6 +950,7 @@ router.post('/authorLiked1',function(req,res,next) {
     }
   });
 });
+
 router.post('/apphome/shoptab/cartlist',function(req,res,next) {
   var order_name=req.body.order_name;
   var order_tel=req.body.order_tel;
@@ -963,16 +964,44 @@ router.post('/apphome/shoptab/cartlist',function(req,res,next) {
     } else {
       console.log(result)
       con.query("update cart set order_name=?,order_tel=?,order_address=?,gstate=? where gName = ?",
-          [order_name,order_tel,order_address,'已购买',gName],function(err,result) {
+          [order_name,order_tel,order_address,'支付中',gName],function(err,result) {
             if(err) {            
               console.log(err);
             } else {
+              console.log(result);
               res.send({state:true});
             }
           });
         }
       })
 });
+
+router.post('/apphome/shoptab/pay',function(req,res,next) {
+  // var order_name=req.body.order_name;
+  // var order_tel=req.body.order_tel;
+  // var order_address=req.body.order_address;
+  // var gName = req.body.gName;
+  // var gstate = req.body.gstate;
+  var con = mysql.createConnection(dbconfig);
+  con.connect();
+  con.query("select * from cart",function(err,result) {
+    if(err) {
+      console.log(err);
+    } else {
+      console.log(result)
+      con.query("update cart set gstate=? where gstate = ?",
+          ['已购买','支付中'],function(err,result) {
+            if(err) {            
+              console.log(err);
+            } else {
+              console.log(result);
+              res.send({state:true});
+            }
+          });
+        }
+      })
+});
+
 /**
  * update chapters set content-? where chapterid=?
  */
