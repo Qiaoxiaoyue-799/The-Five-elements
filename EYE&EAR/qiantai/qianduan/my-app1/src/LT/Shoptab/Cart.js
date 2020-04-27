@@ -52,6 +52,8 @@ export default class cart extends Component {
         })
     }
     change2 = (value,e) => {
+        console.log(e);
+        console.log(value);
         if (value.replace(/\s/g, '').length < 11) {
           this.setState({
             hasError: true,
@@ -62,8 +64,7 @@ export default class cart extends Component {
           });
         }
         this.setState({
-          value,
-          order_tel:e
+          order_tel:value
         });
         console.log(this.state.order_tel);
     }
