@@ -82,7 +82,7 @@ export default class cart extends Component {
         //时间获取：
         var date=new Date();
         var year=date.getFullYear();
-        var month=date.getMonth();
+        var month=date.getMonth()+1;
         var day=date.getDate();
         var time=+year+'/'+month+'/'+day;
         fetch('http://localhost:5000/apphome/shoptab/cartlist',{
