@@ -956,6 +956,7 @@ router.post('/apphome/shoptab/cartlist',function(req,res,next) {
   var order_tel=req.body.order_tel;
   var order_address=req.body.order_address;
   var gName = req.body.gName;
+  var time = req.body.time;
   var con = mysql.createConnection(dbconfig);
   con.connect();
   con.query("select * from cart",function(err,result) {
@@ -963,8 +964,8 @@ router.post('/apphome/shoptab/cartlist',function(req,res,next) {
       console.log(err);
     } else {
       console.log(result)
-      con.query("update cart set order_name=?,order_tel=?,order_address=?,gstate=? where gName = ?",
-          [order_name,order_tel,order_address,'支付中',gName],function(err,result) {
+      con.query("update cart set order_name=?,order_tel=?,order_address=?,gstate=?,time=? where gName = ?",
+          [order_name,order_tel,order_address,'支付中',time,gName],function(err,result) {
             if(err) {            
               console.log(err);
             } else {

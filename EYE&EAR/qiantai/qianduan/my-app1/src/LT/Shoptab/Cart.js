@@ -63,8 +63,9 @@ export default class cart extends Component {
         }
         this.setState({
           value,
-          order_tell:e
+          order_tel:e
         });
+        console.log(this.state.order_tel);
     }
     change3 = (e) => {
         this.setState({
@@ -74,17 +75,24 @@ export default class cart extends Component {
 
     getConnect = () => {  //api请求函数
         console.log(this.state.order_name);
-        console.log(this.state.order_tell);
+        console.log(this.state.order_tel);
         console.log(this.state.order_address);
         // console.log(this.state.list[1].gName);
+        //时间获取：
+        var date=new Date();
+        var year=date.getFullYear();
+        var month=date.getMonth();
+        var day=date.getDate();
+        var time=+year+'/'+month+'/'+day;
         fetch('http://localhost:5000/apphome/shoptab/cartlist',{
           method:'POST', 
           headers: {'Content-Type': 'application/json; charset=utf-8'},
           body: JSON.stringify({
             order_name:this.state.order_name,
-            order_tell:this.state.order_tell,
+            order_tel:this.state.order_tel,
             order_address:this.state.order_address,
-            gName:checked
+            gName:checked,
+            time:time
           })})
         .then(res=>{
         //   console.log('22')
@@ -167,7 +175,7 @@ export default class cart extends Component {
                             }}
                             onChange={this.change2}
                             placeholder="请输入您的电话"
-                            value={this.state.value}
+                            // value={this.state.value}
                         >
                             <div onClick={() => this.labelFocusInst.focus()} style={{ float: 'left' }}>收货电话</div>
                         </InputItem>
