@@ -59,8 +59,8 @@ export default class VIP extends Component {
                     >会员中心</NavBar>
                 <div className="Vheader">
                     <div className="Vmessage">
-                        <img src="./images/16.jpg" id="Vtou" style={{width:80,height:80}}></img>
-                        <p id="Vname">KIki</p>
+                        <img src={'http://localhost:5000/img?imgname=' + this.state.data.avatar} id="Vtou" style={{width:80,height:80}}></img>
+                        <p id="Vname">{this.state.data.username}</p>
                         <p id="Vdevelop">成长值：{this.state.data.growth}</p>
                         <p id="Vgrade">积分：{this.state.data.integral}</p>
                     </div>
