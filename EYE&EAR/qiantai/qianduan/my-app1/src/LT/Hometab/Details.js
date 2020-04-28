@@ -233,8 +233,7 @@ export default class Details extends Component {
                         color = 'red';
                     }
                 }
-                if(item.article_id==id){
-                    
+                if(item.article_id==id){                    
                     return(
                     <div className='box'>
                         <div className="header" style={this.state.style}>
@@ -245,7 +244,7 @@ export default class Details extends Component {
                                 <span>{item.author}</span>
                             </Link>
                             <div style={{display:'inline-block',float:'right',padding:'1px 7px'}}>
-                                <Link to={'/apphome/hometab/mychat/' + item.article_id}>
+                                <Link to={'/apphome/hometab/eyemychat/' + item.article_id}>
                                     <button>进入圈子</button>
                                 </Link>
                             </div>

@@ -9,33 +9,38 @@ import './mychat.css'
 const t = new Date().getTime();
 const local = window.location.hash.split('/');
 export default class MyChat extends Component {
-  state = {
-    inputValue: '',
-    messages: [
-      {
-        timestamp: t,
-        userInfo: {
-          avatar: "http://img.binlive.cn/6.png",
-          name: "小E",
-          userId: "0"
-        },
-        value: "你好！"
-      },
-      {
-        timestamp: t,
-        userInfo: {
-          avatar: "http://img.binlive.cn/6.png",
-          name: "小E",
-          userId: "0"
-        },
-        value: "一起来聊天吧！",
-        error: true
-      }],
-    timestamp: new Date().getTime()
-  }
   username = '';
   avatar = '';
+  constructor() {
+    super();
+    this.state = {
+      message:[],
+      inputValue: '',
+      messages: [
+        {
+          timestamp: t,
+          userInfo: {
+            avatar: "http://img.binlive.cn/6.png",
+            name: "小E",
+            userId: "0"
+          },
+          value: "你好！"
+        },
+        {
+          timestamp: t,
+          userInfo: {
+            avatar: "http://img.binlive.cn/6.png",
+            name: "小E",
+            userId: "0"
+          },
+          value: "一起来聊天吧！",
+          error: true
+        }],
+      timestamp: new Date().getTime()
+    }
+  }
   componentDidMount(){
+    var tip = this.props.match.path.slice(17,20);
     fetch('http://localhost:5000/users/chatroom',{
       method:'POST', 
       headers: {'Content-Type': 'application/json; charset=utf-8'},
@@ -57,6 +62,18 @@ export default class MyChat extends Component {
       this.avatar = 'http://localhost:5000/img?imgname='+res[0].avatar;
       // console.log(res[0],this.username,this.avatar)
     })
+    fetch('http://localhost:5000/chatroom'+tip+'?id='+this.props.match.params.id,{
+      method:'GET', 
+      headers: {'Content-Type': 'application/json; charset=utf-8'}
+      })
+    .then(res=>res.json())
+    .then(res=>{
+      console.log(res);
+      this.setState({
+        message:res
+      })
+      console.log(this.state.message)
+    })
   }
   
   setInputfoucs = () => {
@@ -66,7 +83,7 @@ export default class MyChat extends Component {
     this.chat.refs.message.setScrollTop(1200);  //set scrollTop position
   }
   sendMessage = (v) => {
-    console.log(v)
+    console.log(v.value)
     const { value } = v;
     if (!value) return;
     var v1 ={

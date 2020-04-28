@@ -19,10 +19,8 @@ import Sticky from './Sticky';
 export default class Hometab extends Component {
   render() {
     return (
-      <div>
-         
-        <Switch>
-            
+      <div>         
+        <Switch>            
             <Route exact path='/apphome' component={Home}/> 
             <Route path='/apphome/hometab/eye' component={Eye}/> 
             <Route path='/apphome/hometab/ear' component={Ear}/>
@@ -30,7 +28,8 @@ export default class Hometab extends Component {
             <Route path='/apphome/hometab/details1/:id' component={Details1}/> 
             <Route path='/apphome/hometab/author/:id' component={Author}/> 
             <Route path='/apphome/hometab/author1/:id' component={Author1}/> 
-            <Route path='/apphome/hometab/mychat/:id' component={MyChat}/>
+            <Route path='/apphome/hometab/eyemychat/:id' component={MyChat}/>
+            <Route path='/apphome/hometab/earmychat/:id' component={MyChat}/>
             <Route path='/apphome/hometab/member' component={Member}/>
             <Route path='/apphome/hometab/connectus' component={Connectus}/>
             <Route path='/apphome/hometab/vip' component={Vip}/>
@@ -38,8 +37,7 @@ export default class Hometab extends Component {
             <Route path='/apphome/hometab/dressup' component={Dressup}/>
             <Route path='/apphome/hometab/sticky' component={Sticky}/>
             <Route path='/apphome/hometab/myvippic' component={Myvippic}/>
-        </Switch>
-        
+        </Switch>        
       </div>
     );
   }

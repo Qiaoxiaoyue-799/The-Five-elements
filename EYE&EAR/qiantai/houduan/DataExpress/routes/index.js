@@ -1003,6 +1003,32 @@ router.post('/apphome/shoptab/pay',function(req,res,next) {
       })
 });
 
+router.get('/chatroomeye',function(req,res,next) {
+  let id = req.query.id;
+  var con = mysql.createConnection(dbconfig);
+  con.connect();
+  con.query("select * from chatroomeye where article_id = ? ",[id],function(err,result) {
+    if(err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
+router.get('/chatroomear',function(req,res,next) {
+  let id = req.query.id;
+  var con = mysql.createConnection(dbconfig);
+  con.connect();
+  con.query("select * from chatroomear where article_id = ? ",[id],function(err,result) {
+    if(err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
 /**
  * update chapters set content-? where chapterid=?
  */

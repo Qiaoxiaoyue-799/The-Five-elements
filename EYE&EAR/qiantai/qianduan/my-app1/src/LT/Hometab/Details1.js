@@ -220,7 +220,7 @@ export default class Details extends Component {
                                 <span>{item.author}</span>
                             </Link>
                             <div style={{display:'inline-block',float:'right',padding:'1px 7px'}}>
-                                <Link to={'/apphome/hometab/mychat/' + item.article_id}>
+                                <Link to={'/apphome/hometab/earmychat/' + item.article_id}>
                                     <button>进入圈子</button>
                                 </Link>
                             </div>
