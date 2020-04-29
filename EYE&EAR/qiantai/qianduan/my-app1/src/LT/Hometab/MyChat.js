@@ -9,58 +9,59 @@ import './mychat.css'
 const t = new Date().getTime();
 const local = window.location.hash.split('/');
 export default class MyChat extends Component {
-  username = '';
-  avatar = '';
-  constructor() {
-    super();
-    this.state = {
-      message:[],
-      inputValue: '',
-      messages: [
-        {
-          timestamp: t,
-          userInfo: {
-            avatar: "http://img.binlive.cn/6.png",
-            name: "小E",
-            userId: "0"
-          },
-          value: "你好！"
-        },
-        {
-          timestamp: t,
-          userInfo: {
-            avatar: "http://img.binlive.cn/6.png",
-            name: "小E",
-            userId: "0"
-          },
-          value: "一起来聊天吧！",
-          error: true
-        }],
-      timestamp: new Date().getTime()
-    }
-  }
-  componentDidMount(){
+  state = {
+    inputValue: '',
+    userid:'',
+    username : '',
+    avatar : '',
+    data:"",
+    messages:[]
+  };
+  componentWillMount(){
     var tip = this.props.match.path.slice(17,20);
-    fetch('http://localhost:5000/users/chatroom',{
-      method:'POST', 
-      headers: {'Content-Type': 'application/json; charset=utf-8'},
-      body: JSON.stringify({
-        id:local[local.length-1],
-        data:JSON.stringify(this.state.messages)
-      })})
-    .then(res=>res.json())
-    .then(res=>{
-      console.log('消息存储成功')
+    fetch('http://localhost:5000/login', {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json; charset=utf-8' },
+        })
+        .then(res => res.json())
+        .then(res => {
+            this.setState({
+                userid: res[0].user_id,
+                username: res[0].username,
+                avatar: res[0].avatar,
+            })
+        }
+        ).then(()=>{
+            console.log(this.state.userid);
     })
-    fetch('http://localhost:5000/login',{
-      method:'GET', 
-      headers: {'Content-Type': 'application/json; charset=utf-8'}
-      })
+    fetch('http://localhost:5000/chatroomeye?id='+this.props.match.params.id,{
+        method:'GET', 
+        headers: {'Content-Type': 'application/json; charset=utf-8'}
+    })
     .then(res=>res.json())
     .then(res=>{
-      this.username = res[0].username;
-      this.avatar = 'http://localhost:5000/img?imgname='+res[0].avatar;
-      // console.log(res[0],this.username,this.avatar)
+        this.setState({
+          data:res[0]
+        })
+    })
+    .then(()=>{
+      var arr=this.state.data.user_id.split(',');
+      var arr1=this.state.data.message.split(',');
+      var arr2=this.state.data.time.split(',')
+      var arr3=this.state.data.user_id.split(',')
+      var len=arr.length
+      for(var i=0;i<len;i++){
+        var obj={}
+        obj.timestamp=arr2[i]
+        var innnerobj={}
+        innnerobj.avatar='http://localhost:5000/img?imgname='+"0.jpg";
+        innnerobj.name="username";
+        innnerobj.userId= "userid";
+        obj.userInfo=innnerobj;
+        obj.value=arr1[i];
+        this.state.messages.push(obj)
+        console.log(this.state.messages)
+      }
     })
     fetch('http://localhost:5000/chatroom'+tip+'?id='+this.props.match.params.id,{
       method:'GET', 
@@ -83,23 +84,63 @@ export default class MyChat extends Component {
     this.chat.refs.message.setScrollTop(1200);  //set scrollTop position
   }
   sendMessage = (v) => {
-    console.log(v.value)
-    const { value } = v;
-    if (!value) return;
-    var v1 ={
-      timestamp: new Date().getTime(),
-      userInfo: {
-        avatar: "http://img.binlive.cn/6.png",
-        name: "小E",
-        userId: "0"
-      },
-      value: value,
-      error: true
+    console.log(v)
+    var useridarr = [];
+    if(this.state.data.user_id) {
+        useridarr = this.state.data.user_id.split(',')
     }
-    const { messages = [] } = this.state;
-    messages.push(v);
-    messages.push(v1);
-    this.setState({ messages, timestamp: new Date().getTime(), inputValue: '' });
+    useridarr.push(this.state.userid)
+    useridarr = useridarr.join(',')
+    console.log(useridarr)
+
+    var messagearr = [];
+    if(this.state.data.message) {
+        messagearr = this.state.data.message.split(',')
+    }
+    messagearr.push(v.value)
+    messagearr = messagearr.join(',')
+    console.log(messagearr)
+
+    var date=new Date();
+    var year=date.getFullYear();
+    var month=date.getMonth();
+    var day=date.getDate();
+    var hour=date.getHours();
+    var minute=date.getMinutes();
+    var second=date.getSeconds();
+    if (hour<10) {
+        hour='0'+hour;
+    }
+    if (minute<10) {
+        minute='0'+minute;
+    }
+    if (second<10) {
+        second='0'+second;
+    }
+    var time=year+'/'+month+'/'+day+'/'+hour+':'+minute+':'+second;
+
+    var timearr = [];
+    if(this.state.data.time) {
+        timearr = this.state.data.time.split(',')
+    }
+    timearr.push(time)
+    timearr = timearr.join(',')
+    console.log(timearr)
+
+   
+    fetch('http://localhost:5000/chatroomeye',{
+      method:'POST', 
+      headers: {'Content-Type': 'application/json; charset=utf-8'},
+      body: JSON.stringify({
+        userid:useridarr,
+        eyeid :this.props.match.params.id,
+        time:timearr,
+        message:messagearr
+      })})
+    .then(res=>res.json())
+    .then(res=>{
+      console.log('消息存储成功')
+    })
   }
   onChange = (key) => {
     console.log(key);
@@ -108,12 +149,11 @@ export default class MyChat extends Component {
     this.props.history.push('/apphome/hometab/member');
   }
   render() {
-    console.log(this.avatar)
-    const { inputValue, messages, timestamp } = this.state;
+    const { inputValue,messages} = this.state;
     const userInfo = {
-      avatar: this.avatar,
-      userId: "59e454ea53107d66ceb0a598",
-      name: this.username
+      avatar:'http://localhost:5000/img?imgname='+this.state.avatar,
+      userId: this.state.userid,
+      name: this.state.username
     };
     return (
       <div style={{ width:'100%',height: '100%', background: "white",zIndex:99999,position:'fixed',top:0,bottom:0}}>
@@ -122,6 +162,7 @@ export default class MyChat extends Component {
             <Link to={'/apphome/hometab/details/'+this.props.match.params.id} style={{ color: 'black' }}><i style={{ fontSize: 22, lineHeight: '22px', marginLeft: '-10px' }} className='iconfont icon-fanhui'></i></Link>,
           ]}
         >聊天室</NavBar>
+
         <Chat
           style={{ width: '100%', height: '100%', position: 'fixed', top: 30 }}
           ref={el => this.chat = el}
@@ -129,7 +170,7 @@ export default class MyChat extends Component {
           userInfo={userInfo}
           value={inputValue}
           sendMessage={this.sendMessage}
-          timestamp={timestamp}
+          // timestamp={timestamp}
           placeholder="请输入"
           avatarClick={this.onUser}
           messageListStyle={{ width: '100%', height: '80%', color: 'black', background: 'white',top:30,overflow:'auto'}}
