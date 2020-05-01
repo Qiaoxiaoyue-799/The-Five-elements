@@ -4,7 +4,7 @@ var mysql = require("mysql");
 var dbconfig = require("../config/dbconfig.json");
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
   res.send('respond with a resource');
 });
 router.post('/chatroom', function (req, res, next) {
@@ -13,18 +13,18 @@ router.post('/chatroom', function (req, res, next) {
   console.log(id)
   var con = mysql.createConnection(dbconfig);
   con.connect();
-  con.query("select * from chat",[id],function(err,result){
-    if(err){
+  con.query("select * from chat", [id], function (err, result) {
+    if (err) {
       console.log(err)
-    }else{
-      con.query("update chat set data=? where id = ? ", [data,id], function (err, result) {
+    } else {
+      con.query("update chat set data=? where id = ? ", [data, id], function (err, result) {
         if (err) {
           console.log(err);
         } else {
-          con.query("select * from chat where id = ?",[id],function(err,result){
-            if(err){
+          con.query("select * from chat where id = ?", [id], function (err, result) {
+            if (err) {
               console.log(err)
-            }else{
+            } else {
               res.send(result)
             }
           })
@@ -32,6 +32,27 @@ router.post('/chatroom', function (req, res, next) {
       })
     }
   })
+})
+router.post('/find', function (req, res, next) {
+  var username = req.body.username
+  var password = req.body.password
+  console.log(username)
+  console.log(password)
+  var con = mysql.createConnection(dbconfig);
+  con.connect();
+  con.query("select * from user where username = ?", [username], function (err, result) {
+    if (err) {
+      console.log(err)
+    } else {
+      con.query("update user set password=? where username=? ", [password, username], function (err, result) {
+        if (err) {
+          console.log(err)
+        } else {
+          console.log('成功修改密码')
+        }
+      })
+    }
+})
 })
 
 module.exports = router;

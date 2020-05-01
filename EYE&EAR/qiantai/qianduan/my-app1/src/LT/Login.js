@@ -86,7 +86,7 @@ export default class Login extends React.Component {
               <p></p>
               <input type="password" placeholder='密码' name="password" id="" value={this.state.pwd} onChange={this.change2} />
               <br />
-              <span><a>忘记密码？</a></span>
+              <span><Link to='/find'>忘记密码？</Link></span>
               <br />
               <input  value='登录 ' className='button' type='button' onClick={this.getConnect} style={{ background: '#8693a6', color: '#fff' ,textAlign:'center',borderRadius: '15px',width:'75%'}}/>
             </form>

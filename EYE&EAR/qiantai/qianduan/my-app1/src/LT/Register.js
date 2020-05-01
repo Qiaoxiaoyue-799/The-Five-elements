@@ -144,8 +144,8 @@ export default class Register extends Component {
   render() {
       return (
           <div style={{width:'100%',textAlign:'center',background:'#fff'}}>        
+          <p style={{display:"inline-block",width:"100%",height:50,paddingTop:'10px',color:"white",fontSize:20,background:'rgb(149, 170, 184)'}}>注册</p>
           <WhiteSpace />
-          <p>注册</p>
           <Flex align="start">
             <div className='placeholder'>
               <div className='img' style={{position:'relative'}}>
