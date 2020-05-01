@@ -15,6 +15,7 @@ import Connectus from './Connectus';
 import Dressup from './Dressup';
 import Myvippic from './Myvippic';
 import Sticky from './Sticky';
+import ClockIn from './ClockIn';
 
 export default class Hometab extends Component {
   render() {
@@ -37,6 +38,7 @@ export default class Hometab extends Component {
             <Route path='/apphome/hometab/dressup' component={Dressup}/>
             <Route path='/apphome/hometab/sticky' component={Sticky}/>
             <Route path='/apphome/hometab/myvippic' component={Myvippic}/>
+            <Route path='/apphome/hometab/clockIn' component={ClockIn}/>
         </Switch>        
       </div>
     );

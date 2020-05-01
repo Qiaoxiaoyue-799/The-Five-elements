@@ -27,7 +27,7 @@ export default class VIP extends Component {
           data1:[
             {icon:'iconfont icon-chongzhi',tit:'个人定制',src:'/apphome/hometab/dressup'},
             {icon:'iconfont icon-wodehezi',tit:'动态置顶',src:'/apphome/hometab/sticky'},
-            {icon:'iconfont icon-huiyuan-',tit:'选购指南',src:'/apphome/hometab/dressup'},
+            {icon:'iconfont icon-huiyuan-',tit:'会员打卡',src:'/apphome/hometab/clockIn'},
             {icon:'iconfont icon-yifu',tit:'外观',src:'/apphome/hometab/sticky'},
             {icon:'iconfont icon-huiyuan',tit:'会员福利',src:'/apphome/hometab/dressup'},
             {icon:'iconfont icon-zu',tit:'更多',src:'/apphome/hometab/sticky'},

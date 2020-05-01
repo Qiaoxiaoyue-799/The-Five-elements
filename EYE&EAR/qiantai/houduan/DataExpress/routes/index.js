@@ -1028,6 +1028,32 @@ router.get('/chatroomear',function(req,res,next) {
     }
   });
 });
+router.post('/apphome/hometab/clockIn',function(req,res,next) {
+  var clockIn = req.body.clockIn;
+  var user_id = req.body.user_id;
+  var integral = req.body.integral;
+  console.log(integral);
+  var con = mysql.createConnection(dbconfig);
+  con.connect();
+  con.query("select * from user",function(err,result) {
+    if(err) {
+      console.log(err);
+    } else {
+      console.log(result)
+      con.query("update user set clockIn=?,integral=? where user_id = ?",
+          [clockIn,integral,user_id],function(err,result) {
+            if(err) {            
+              console.log(err);
+            } else {
+              console.log(result);
+              res.send({state:true});
+            }
+          });
+        }
+      });
+         
+});
+
 
 /**
  * update chapters set content-? where chapterid=?
