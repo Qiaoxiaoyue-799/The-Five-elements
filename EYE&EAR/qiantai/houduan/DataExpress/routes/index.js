@@ -1032,7 +1032,7 @@ router.post('/apphome/hometab/clockIn',function(req,res,next) {
   var clockIn = req.body.clockIn;
   var user_id = req.body.user_id;
   var integral = req.body.integral;
-  console.log(integral);
+  var content = req.body.content;
   var con = mysql.createConnection(dbconfig);
   con.connect();
   con.query("select * from user",function(err,result) {
@@ -1040,8 +1040,8 @@ router.post('/apphome/hometab/clockIn',function(req,res,next) {
       console.log(err);
     } else {
       console.log(result)
-      con.query("update user set clockIn=?,integral=? where user_id = ?",
-          [clockIn,integral,user_id],function(err,result) {
+      con.query("update user set clockIn=?,set integral=?,set content=? where user_id = ?",
+          [clockIn,integral,'打卡成功',user_id],function(err,result) {
             if(err) {            
               console.log(err);
             } else {
@@ -1053,7 +1053,20 @@ router.post('/apphome/hometab/clockIn',function(req,res,next) {
       });
          
 });
-
+// router.post('/clockIn/content', function (req, res, next) {
+//   username = req.body.username;
+//   password = req.body.password;
+//   var con = mysql.createConnection(dbconfig);
+//   con.connect();
+//   con.query("select * from user where username = ? and password = ?", [username, password], function (err, result) {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       console.log(result);
+//       res.send(result);
+//     }
+//   });
+// });
 
 /**
  * update chapters set content-? where chapterid=?
