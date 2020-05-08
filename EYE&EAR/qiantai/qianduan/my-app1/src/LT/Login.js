@@ -49,32 +49,37 @@ export default class Login extends React.Component {
     //     // console.log(error)//错误处理 相当于error
     //     // window.alert('验证失败，用户名或密码错误');
     //   })
-    fetch('http://localhost:5000/login',{
-      method:'POST', 
-      headers: {'Content-Type': 'application/json; charset=utf-8'},
+    fetch('http://localhost:5000/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json; charset=utf-8' },
       body: JSON.stringify({
-        username:this.state.name,
-        password:this.state.pwd
-      })})
-    .then(res=>res.json())
-    .then(res=>{
-      if(!res[0]) {
-        window.alert('验证失败，用户名或密码错误');
+        username: this.state.name,
+        password: this.state.pwd
+      })
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (!res[0]) {
+          window.alert('验证失败，用户名或密码错误');
+        }
+        else {
+          this.setState({
+            data: res[0]
+          })
+          this.props.history.push('/apphome');
+          // window.location.reload();
+        }
       }
-      else {
-        this.setState({
-          data:res[0]
-        })
-        this.props.history.push('/apphome');
-        // window.location.reload();
-      }
-    } 
-    )
+      )
   }
+  login = () => {
+    // var A=window.open("/#/qq_login","_self - URL","width=450,height=320,menubar=0,scrollbars=1,resizable=1,status=1,titlebar=0,toolbar=0,location=0");
+  }
+
   render() {
     return (
       <div style={{ width: '100%', textAlign: 'center', background: '#fff' }}>
-         <p style={{display:"inline-block",width:"100%",height:50,paddingTop:'10px',color:"white",fontSize:20,background:'rgb(149, 170, 184)'}}>登录</p>
+        <p style={{ display: "inline-block", width: "100%", height: 50, paddingTop: '10px', color: "white", fontSize: 20, background: 'rgb(149, 170, 184)' }}>登录</p>
         <WhiteSpace />
         <Flex align="start">
           <div className='placeholder'>
@@ -88,20 +93,20 @@ export default class Login extends React.Component {
               <br />
               <span><Link to='/find'>忘记密码？</Link></span>
               <br />
-              <input  value='登录 ' className='button' type='button' onClick={this.getConnect} style={{ background: '#8693a6', color: '#fff' ,textAlign:'center',borderRadius: '15px',width:'75%'}}/>
+              <input value='登录 ' className='button' type='button' onClick={this.getConnect} style={{ background: '#8693a6', color: '#fff', textAlign: 'center', borderRadius: '15px', width: '75%' }} />
             </form>
           </div>
         </Flex>
         <p><Link style={{ color: '#bbb' }} to='/register'>新用户？点击这里注册</Link></p>
         <ul>
           <li>
-            <img src='./images/qq.png' style={{width:'40px',height:'40px'}}/>
+          <span id="qqLoginBtn"></span>
           </li>
           <li>
-            <img src='./images/wechat.png' style={{width:'40px',height:'40px'}}/>
+            <img src='./images/wechat.png' style={{ width: '40px', height: '40px' }} />
           </li>
           <li>
-            <img src='./images/weibo.png' style={{width:'40px',height:'40px',float:'left'}}/>
+            <img src='./images/weibo.png' style={{ width: '40px', height: '40px', float: 'left' }} />
           </li><li></li>
         </ul>
 

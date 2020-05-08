@@ -3,6 +3,7 @@ import {HashRouter  as Router,withRouter,Route,Link,Switch,Redirect} from 'react
 
 import Apphome from './LT/Apphome';
 import Login from './LT/Login';
+import qq_login from './LT/qq_login';
 import Register from './LT/Register';
 import Find from './LT/Find';
 import Greeting from './LT/Greeting';
@@ -21,6 +22,7 @@ export default class App extends React.Component {
         <Route path='/greeting' component={Greeting}/> 
         <Route path='/register' component={Register}/> 
         <Route path='/login' component={Login}/> 
+        <Route path='/qq_login' component={qq_login}/> 
         <Route path='/find' component={Find}/> 
         <Route path='/apphome' component={Apphome}/> 
         <Route path='/apphome/shoptab/cart' component={cart}/> 
