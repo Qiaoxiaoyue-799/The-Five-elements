@@ -297,6 +297,7 @@ router.get('/apphome/hometab/ear/class', function (req, res, next) {
     } else {
      
       res.send(result);
+
     }
   });
 });
@@ -1040,8 +1041,8 @@ router.post('/apphome/hometab/clockIn',function(req,res,next) {
       console.log(err);
     } else {
       console.log(result)
-      con.query("update user set clockIn=?,set integral=?,set content=? where user_id = ?",
-          [clockIn,integral,'打卡成功',user_id],function(err,result) {
+      con.query("update user set clockIn=?, integral=?, content=? where user_id = ?",
+          [clockIn,integral,content,user_id],function(err,result) {
             if(err) {            
               console.log(err);
             } else {

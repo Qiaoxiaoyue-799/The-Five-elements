@@ -8,40 +8,52 @@ class ClockIn extends React.Component {
     data:[],
     content:'立即打卡'
   }
-  componentDidMount () {
-    fetch('http://localhost:5000/login', {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json; charset=utf-8' },
+  // componentDidMount (nextProps) {
+  //   // if (this.props != nextProps){
+  //   console.log(1);
+  //   fetch('http://localhost:5000/login', {
+  //     method: 'GET',
+  //     headers: { 'Content-Type': 'application/json; charset=utf-8' },
+  //   })
+  //     .then(res => res.json())
+  //     .then(res => {
+  //       this.setState({
+  //         data: res[0]
+  //       })
+  //       console.log(this.state.data.place);
+  //     }
+  //   )
+  //   console.log('延迟执行外部：'+this.state.data.place);
+  //   // }
+  // }
+  componentDidMount(){
+    fetch('http://localhost:5000/login',{
+    method:'GET', 
+    headers: {'Content-Type': 'application/json; charset=utf-8'},
     })
-      .then(res => res.json())
-      .then(res => {
+    .then(res=>res.json())
+    .then(res=>{
         this.setState({
-          data: res[0]
+            data:res[0]
         })
-        console.log(this.state.data.place);
-      }
+        // console.log(res[0])
+    } 
     )
-    // const cityCode = 101210101
-    // const url = `/data/cityinfo/${cityCode}.html`
-    const place = this.state.data.place;
-    console.log(this.state.data.place);
-    fetch(`http://api.help.bj.cn/apis/weather36h/?id=`+'杭州').then(res => {
-      res.json().then(resJson => {
+}
+  componentDidUpdate(){
+    // console.log(this.state.data.place);
+    fetch(`http://api.help.bj.cn/apis/weather36h/?id=`+this.state.data.place)
+    .then(res => {
+      res.json().
+      then(resJson => {
         this.setState({
           weather: resJson
         })
-        console.log(this.state.weather);
+        // console.log(this.state.weather);
       })
     })
   }
 
-  // btn (){
-  //   // this.setState({
-  //   //   content:'打卡成功'
-  //   // })
-  //   // this.state.data.clockIn += 1;
-  //   console.log(this.state.data)
-  // }
   add = () => {  //api请求函数
     console.log(this.state.data.integral);
     console.log(this.state.data.clockIn);
