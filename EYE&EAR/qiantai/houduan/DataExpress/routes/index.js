@@ -1004,6 +1004,21 @@ router.post('/apphome/shoptab/pay',function(req,res,next) {
       })
 });
 
+router.post('/chatroomeye',function(req,res,next) {
+  var userid = req.body.userid;
+  var eyeid = req.body.eyeid;
+  var time=req.body.time;
+  var message=req.body.message;
+  var con = mysql.createConnection(dbconfig);
+  con.connect();
+  con.query("update chatroomeye set user_id=?,time=?,message=? where article_id = ?",[userid,time,message,eyeid],function(err,result) {
+    if(err) {            
+      console.log(err);
+    } else {
+      res.send({status:'success'});      
+    }
+  });
+})
 router.get('/chatroomeye',function(req,res,next) {
   let id = req.query.id;
   var con = mysql.createConnection(dbconfig);
@@ -1016,19 +1031,7 @@ router.get('/chatroomeye',function(req,res,next) {
     }
   });
 });
-
-router.get('/chatroomear',function(req,res,next) {
-  let id = req.query.id;
-  var con = mysql.createConnection(dbconfig);
-  con.connect();
-  con.query("select * from chatroomear where article_id = ? ",[id],function(err,result) {
-    if(err) {
-      console.log(err);
-    } else {
-      res.send(result);
-    }
-  });
-});
+/**
 router.post('/apphome/hometab/clockIn',function(req,res,next) {
   var clockIn = req.body.clockIn;
   var user_id = req.body.user_id;
