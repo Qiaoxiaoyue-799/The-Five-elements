@@ -10,7 +10,7 @@ const data = [
     { icon: 'images/8.png' },
     { icon: 'images/9.png' }
 ];
-
+var bgm;
 export default class Community extends Component {
     constructor() {
         super();
@@ -30,25 +30,32 @@ export default class Community extends Component {
         fetch('http://localhost:5000/active', {
             method: 'GET'
         })
-            .then(res => res.json())
-            .then(res => {
-                this.setState({
-                    data: res
-
-                })
+        .then(res => res.json())
+        .then(res => {
+            this.setState({
+                data: res
+                    
             })
+        })
         fetch('http://localhost:5000/login', {
             method: 'GET',
             headers: { 'Content-Type': 'application/json; charset=utf-8' },
         })
-            .then(res => res.json())
-            .then(res => {
-                this.setState({
-                    name: res[0]
-                })
-                console.log(this.state.name);
-            }
-            )
+        .then(res => res.json())
+        .then(res => {
+            this.setState({
+                name: res[0]
+            })
+            console.log(this.state.name);
+        }
+        )
+        // bgm=require('../Taylor/'+this.state.data.audio);
+        // console.log(this.state.data.audio);
+        // console.log(bgm);
+        // this.setState({
+        //     data[audio]:'../Taylor'+data.audio
+        // })
+        // console.log(this.state.data.)
     }
     state = {
         name: [],
@@ -105,12 +112,22 @@ export default class Community extends Component {
                                                 {
                                                     this.state.data.map((item, index) => (
 
-                                                        <li style={{ height: '110px', width: '95%', margin: '0 auto', marginBottom: '10px', border: '1px solid #8794a8' }} key={index}>
+                                                        <li style={{ height: '210px', width: '95%', margin: '0 auto', marginBottom: '10px', border: '1px solid #8794a8' }} key={index}>
                                                             <img style={{ width: '90px', height: '90px', float: 'left' }} src={'http://localhost:5000/img?imgname=' + item.img1} />
-                                                            <div style={{ display: 'inline-block', marginLeft: '10px' }}>
-                                                                <p style={{ overflow: 'hidden', width: '200px', height: '40px' }}>{item.content}</p>
-                                                                <p>{item.time}</p>
+                                                            <div style={{ display: 'inline-block', marginLeft: '10px',width:'70%' }}>
+                                                                <p style={{ overflow: 'hidden', width: '230px', height: '40px',float:'right' }}>{item.content}</p>
+                                                                <p style={{ overflow: 'hidden', width: '230px', height: '40px',float:'right' }}>{item.time}</p>
+                                             
                                                             </div>
+                                                            {item.audio ? 
+                                                                <div id='load' style={{display:'block'}}>
+                                                                    <audio src={require('../Taylor/'+item.audio)} id='audio' loop="loop" controls >
+                                                                    　　<track kind="captions" />
+                                                                    　　您的浏览器不支持 audio 元素。
+                                                                    </audio>
+                                                                </div>
+                                                                :<div></div>
+                                                            }
                                                         </li>
 
                                                     ))
@@ -118,6 +135,7 @@ export default class Community extends Component {
                                             </ul>
                                         )
                                     } else if (item.title == '聊天室') {
+                                        
                                         return (
 
                                             <ul style={{ listStyle: 'none', margin: '0px auto',height:'150%'  }}>
@@ -129,7 +147,6 @@ export default class Community extends Component {
                                                                 <img style={{ width: '90px', height: '90px', float: 'left' }} src={item.img} />
                                                                 <div style={{ display: 'inline-block', marginLeft: '10px' }}>
                                                                     <h2>{item.title}</h2>
-
                                                                 </div>
                                                             </li>
                                                         </Link>

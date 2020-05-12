@@ -23,7 +23,7 @@ const tabs = [
   ];
   let musicName ='';
   let name='';
-
+  var b;
 export default class Dynamic extends Component {
   constructor(props) {
     super(props);
@@ -87,8 +87,9 @@ export default class Dynamic extends Component {
       console.log(name);
       // console.log(reader.result);
       // dataURL2Audio()
-      var b=require('../Taylor/'+name);
+      b=require('../Taylor/'+name);
       audio.src=b;
+      console.log(b);
       console.log(audio.src);
     }
   }
@@ -135,7 +136,7 @@ export default class Dynamic extends Component {
         var curMinute = curDate.getMinutes();   // 获取当前分钟数(0-59)
         var curSecond = curDate.getSeconds(); 
         this.time= curYear+'年'+curMonth+'月'+curDay+'日'+curHour+'时'+curMinute+'分'+curSecond+'秒';
-
+console.log(name);
   
         var files = this.state.files;
 
@@ -221,10 +222,12 @@ export default class Dynamic extends Component {
               name3:this.name3,
               name4:this.name4,
               name5:this.name5,
-              length:this.length
+              length:this.length,
+              audio:name
             })})
           .then(res=>res.json())
           .then(res=>{
+            
             // this.setState({
             //     data1:res
             // })
@@ -270,7 +273,7 @@ export default class Dynamic extends Component {
                   {/* <Input id='MusicFile' type="file" name="file" title='选择音乐' onChange={this.handleFile} /> */}
                   <div class="upload-wrap anticon" nv-file-drop="" uploader="uploader">
                       <input class="file-ele" type="file" file-model="image" name="image" 
-                        nv-file-select uploader="uploader" multiple 
+                        nv-file-select uploader="uploader" multiple  
                         id='MusicFile' type="file" name="file" title='选择音乐'
                         onChange={this.handleFile} />
                       <div class="file-open"><em class="icon icon-upload"></em>&nbsp;添加音乐</div>    
@@ -294,7 +297,6 @@ export default class Dynamic extends Component {
                             <a>点击更多...</a>
                             </div>
                         </Tabs>
-            
                 </div>
             </div>
         )

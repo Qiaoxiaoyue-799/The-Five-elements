@@ -655,7 +655,7 @@ router.get('/img', function (req, res, next) {
     }
   }
 });
-router.post('/dynamic',function(req,res,next) {
+router.post('/得意namic',function(req,res,next) {
   var user_id1=req.body.user_id;
   var time = req.body.time;
   var content = req.body.content;
@@ -680,7 +680,7 @@ router.post('/dynamic',function(req,res,next) {
   var time4=req.body.time;
   var time5=req.body.time;
 
-
+  var name=req.body.audio;
   for(var i=0;i<length;i++){
     (function(i){
       var img=''
@@ -744,8 +744,8 @@ router.post('/dynamic',function(req,res,next) {
   }
   var con = mysql.createConnection(dbconfig);
   con.connect();
-  con.query("insert into active(img1,content,time,img2,img3,img4,img5,img6,user_id) values(?,?,?,?,?,?,?,?,?)",
-  [time+name0,content,time,time+name1,time+name2,time+name3,time+name4,time+name5,user_id1],function(err,result) {
+  con.query("insert into active(img1,content,time,img2,img3,img4,img5,img6,user_id,audio) values(?,?,?,?,?,?,?,?,?,?)",
+  [time+name0,content,time,time+name1,time+name2,time+name3,time+name4,time+name5,user_id1,name],function(err,result) {
     if(err) {            
       console.log(err);
     } else {
@@ -754,6 +754,7 @@ router.post('/dynamic',function(req,res,next) {
     }
   });
 })
+
 router.get('/active', function (req, res, next) {
   var con = mysql.createConnection(dbconfig);
   con.connect();
