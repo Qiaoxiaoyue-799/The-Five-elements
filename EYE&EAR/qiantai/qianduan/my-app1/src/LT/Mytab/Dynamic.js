@@ -4,6 +4,7 @@ import { Accordion, List } from 'antd-mobile';
 import { Grid } from 'antd-mobile';
 import { Tabs, WhiteSpace, Badge,ImagePicker } from 'antd-mobile';
 import {HashRouter  as Router,withRouter,Route,Link,Switch,Redirect} from 'react-router-dom';
+import music from '../Taylor/Taylor Swift - Clean.mp3';
 
 const data = Array.from(new Array(17)).map((_val, i) => ({
   icon: './img/夜晚.png',
