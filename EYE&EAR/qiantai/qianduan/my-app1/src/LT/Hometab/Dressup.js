@@ -96,20 +96,21 @@ getConnect = (e) => {  //api请求函数
           推荐背景
           <div style={{width:'100%'}}>
             <div style={{width:'40%',height:'200px',marginTop:'20px',
-            display:'inline-block',marginLeft:'10px',backgroundImage: 'url('+'http://localhost:5000/img?imgname=' +this.state.data.backgroundImage1 + ')'}} onClick={()=>this.getConnect(this.state.data.backgroundImage1)}>
+            display:'inline-block',marginLeft:'10px',backgroundImage: 'url(' +this.state.data.backgroundImage1 + ')'}} onClick={()=>this.getConnect(this.state.data.backgroundImage1)}>
             </div>
             <div style={{width:'40%',height:'200px',backgroundColor:'green',
-            display:'inline-block',marginLeft:'20px',backgroundImage: 'url('+'http://localhost:5000/img?imgname=' +this.state.data.backgroundImage2 + ')'}} onClick={()=>this.getConnect(this.state.data.backgroundImage2)}></div>
+            display:'inline-block',marginLeft:'20px',backgroundImage: 'url(' +this.state.data.backgroundImage2 + ')'}} onClick={()=>this.getConnect(this.state.data.backgroundImage2)}></div>
           </div>
           <div style={{width:'100%'}}>
             <div style={{width:'40%',height:'200px',marginTop:'20px',
-            display:'inline-block',marginLeft:'10px',backgroundImage: 'url('+'http://localhost:5000/img?imgname=' +this.state.data.backgroundImage3 + ')'}} onClick={()=>this.getConnect(this.state.data.backgroundImage3)}>
+            display:'inline-block',marginLeft:'10px',backgroundImage: 'url('+this.state.data.backgroundImage3 + ')'}} onClick={()=>this.getConnect(this.state.data.backgroundImage3)}>
             </div>
             <div style={{width:'40%',height:'200px',backgroundColor:'green',
-            display:'inline-block',marginLeft:'20px',backgroundImage: 'url('+'http://localhost:5000/img?imgname=' +this.state.data.backgroundImage4 + ')'}} onClick={()=>this.getConnect(this.state.data.backgroundImage4)}></div>
+            display:'inline-block',marginLeft:'20px',backgroundImage: 'url(' +this.state.data.backgroundImage4 + ')'}} onClick={()=>this.getConnect(this.state.data.backgroundImage4)}></div>
           </div>
         </div>
       </div>
     )
   }
 }
+// +'http://localhost:5000/img?imgname='

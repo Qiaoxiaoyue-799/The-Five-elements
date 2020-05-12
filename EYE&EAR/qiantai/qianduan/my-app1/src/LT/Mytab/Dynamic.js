@@ -20,7 +20,8 @@ const tabs = [
     { title: <i className='iconfont icon-gengduo' 
     style={{fontSize:30,color:'black',height:30,width:30,marginBottom:5,float:'left'}} ></i> }
   ];
-  
+  let musicName ='';
+  let name='';
 
 export default class Dynamic extends Component {
   constructor(props) {
@@ -47,6 +48,48 @@ export default class Dynamic extends Component {
       this.name3='0.png'
       this.name4='0.png'
       this.name5='0.png'
+  }
+  getFileURL(file) {
+    var getUrl = null;
+    if (window.createObjectURL !== undefined) { // basic
+      getUrl = window.createObjectURL(file);
+    } else if (window.URL !== undefined) { // mozilla(firefox)
+      getUrl = window.URL.createObjectURL(file);
+    } else if (window.webkitURL !== undefined) { // webkit or chrome
+      getUrl = window.webkitURL.createObjectURL(file);
+    }
+    return getUrl;
+  }
+  handleFile (event){
+    let audio=document.getElementById('audio');
+    let load=document.getElementById('load');
+    console.log(audio)
+    console.log(audio.src)
+     const files = [...event.target.files];
+    if (files.length === 0) return;
+    console.log(files)  
+    console.log(files.src);
+    
+    for(let i=0;i<files.length;i++) {
+      console.log(files[i])
+      console.log(files[i].name)
+      musicName = files[i];
+      name=musicName.name;
+    }
+    var reader = new FileReader();
+    reader.readAsDataURL(musicName);
+    reader.onprogress=function(){
+      load.style.display='block';
+    }
+    reader.onload=function(){
+      // console.log(audio.src);
+      console.log(name);
+      // console.log(reader.result);
+      // dataURL2Audio()
+      var b=require('../Taylor/'+name);
+      audio.src=b;
+      console.log(audio.src);
+    }
   }
     onChange = (key) => {
         console.log(key);
@@ -216,7 +259,21 @@ export default class Dynamic extends Component {
                     selectable={files.length < 6}
                     multiple
                     accept="image/gif,image/jpeg,image/jpg,image/png"
-                  />    
+                  />  
+                  <div id='load' style={{display:'none'}}>
+                    <audio src={music} id='audio' loop="loop" controls >
+                  　　<track kind="captions" />
+                  　　您的浏览器不支持 audio 元素。
+                   </audio>
+                  </div>
+                  {/* <Input id='MusicFile' type="file" name="file" title='选择音乐' onChange={this.handleFile} /> */}
+                  <div class="upload-wrap anticon" nv-file-drop="" uploader="uploader">
+                      <input class="file-ele" type="file" file-model="image" name="image" 
+                        nv-file-select uploader="uploader" multiple 
+                        id='MusicFile' type="file" name="file" title='选择音乐'
+                        onChange={this.handleFile} />
+                      <div class="file-open"><em class="icon icon-upload"></em>&nbsp;添加音乐</div>    
+                  </div>  
                         <Tabs tabs={tabs}
                             initialPage={1}
                             onChange={(tab, index) => { console.log('onChange', index, tab); }}

@@ -112,24 +112,23 @@ click = () => {
     const{files}=this.state; 
     return (
       <div style={{width: '100%',height:'108%',backgroundColor: '#fff',zIndex:999,position:'absolute',overflow:'auto'}}>
-        <div style={{width:'100%',position:'relative',background:"#8794a8"}}>
-        <Link to='/apphome/hometab/dressup' style={{color:'black',background:"#8794a8"}}><Icon style={{width:"40px",height:"40px"}} type="left" /></Link>
+        <div style={{width:'100%',height:"40px",position:'relative',background:"#8794a8",marginBottom:20}}>
+        <Link to='/apphome/hometab/dressup' style={{width:'100%',height:"40px",color:'black',background:"#8794a8"}}>
+          <Icon style={{width:"10%",height:"40px",position:'absolute',left:0,top:0}} type="left" />
+          <div style={{width:'100%',float:'right',textAlign:'center',fontSize:20,paddingTop:5}}> <span>从相册上传</span></div>
+        </Link>
         </div>
+        
         <div>
-        <div style={{width:'100%',height:'35px',position:'relative',fontSize:'20px',
-        marginTop:'10px',paddingLeft:'10px',color:'black',backgroundColor: '#ccc'}}>
-          从相册选择
-          <Icon style={{width:"40px",height:"40px",float:'right'}} type="right" />
-         
-        </div>
+        
         <ImagePicker
-                    files={files}
-                    onChange={this.onChange}
-                    multiple
-                    accept="image/gif,image/jpeg,image/jpg,image/png"
+            files={files}
+            onChange={this.onChange}
+            multiple
+            accept="image/gif,image/jpeg,image/jpg,image/png"
         />  
-         <button onClick={this.click} style={{float:'right',backgroundColor:'purple',
-          fontSize:18,marginTop:8,marginRight:10,border:'none',textAlign:'center'}}>上 传</button>
+         <button onClick={this.click} style={{float:'right',backgroundColor:'#8794a8',width:200,height:35,borderRadius:5,
+          fontSize:18,marginTop:8,marginRight:80,border:'none',textAlign:'center'}}>上 传</button>
         </div>
        
       </div>

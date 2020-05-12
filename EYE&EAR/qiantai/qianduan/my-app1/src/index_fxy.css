@@ -30,6 +30,30 @@
   font-size:12px;
   border-width:0px 0px 1px 0px;
   }
+  .upload-wrap{
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    border:1px solid #2d78f4;
+    border-radius: 3px;
+    }
+    .upload-wrap .file-ele{
+    position: absolute;
+    top:0;
+    right:0;
+    opacity: 0;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+    }
+    .upload-wrap .file-open{
+    width:90px;
+    height:30px;
+    line-height:30px;
+    text-align: center;
+    color:#fff;
+    background: #3385ff;
+    }
   @font-face {font-family: "iconfont";
     src: url('//at.alicdn.com/t/font_1512813_wk6c4kxxdo.eot?t=1574909654761'); /* IE9 */
     src: url('//at.alicdn.com/t/font_1512813_wk6c4kxxdo.eot?t=1574909654761#iefix') format('embedded-opentype'), /* IE6-IE8 */

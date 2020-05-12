@@ -4,6 +4,7 @@ import { SearchBar, Button, WhiteSpace, WingBlank } from 'antd-mobile';
 import { NavBar, Carousel, Grid, SegmentedControl, ListView, Accordion, List } from 'antd-mobile';
 import ReactDOM from 'react-dom';
 import './Search.css';
+import { Icon, ImagePicker } from 'antd-mobile';
 const axios = require('axios');
 const querystring = require('querystring');
 export default class Search extends Component {
@@ -109,14 +110,19 @@ export default class Search extends Component {
     render() {
         return (
             <div style={{width: '100%',height:'108%',backgroundColor: '#fff',zIndex:999,position:'absolute'}}>
+                <div style={{width:'100%',height:"40px",position:'relative',background:"#8794a8",marginBottom:10}}>
+                    <Link to='/apphome' style={{width:'100%',height:"40px",color:'black',background:"#8794a8"}}>
+                    <Icon style={{width:"10%",height:"40px",position:'absolute',left:0,top:0}} type="left" />
+                    <div style={{width:'100%',float:'right',textAlign:'center',fontSize:20,paddingTop:5}}> <span>搜索</span></div>
+                    </Link>
+                </div>
                 {/* 搜索栏 */}
-                <div style={{ width: '100%', height: 40 }}>
-                    <Link to='/apphome'><i className="iconfont icon-fanhui" style={{ fontSize: 20, color: 'black', height: 40, paddingTop: 5, float: 'left' }}></i></Link>
+                <div style={{ width: '90%', height: 32 ,marginLeft:'5%',border: '1px solid gray',borderRadius:5}}>
                     <input
                         name='search'
                         // value={this.state.value}
                         type="text" ref={input => this.input = input}
-                        style={{ margin: '6px 5px', padding: 0, width: '78%', height: 30, float: 'left', background: 'none', borderRadius: '15px', border: '1px solid gray' }}
+                        style={{  padding: 0, width: '80%', height: 30, float: 'left', background: 'none',border:'none' }}
                         placeholder="请输入关键词"
                         onSubmit={value => console.log(value, 'onSubmit')}
                         // onClear={value => console.log(value, 'onClear')}
@@ -131,9 +137,8 @@ export default class Search extends Component {
                     />
                     <button
                         style={{
-                            float: 'right', marginTop: 10, borderRadius: '15px',
-                            padding: 0, width: 40, height: 26,
-                            background: 'gray', color: 'white'
+                            float: 'right', width:'20%', height: 32,borderRadius:5,
+                            background: 'gray', color: 'white',backgroundColor:'#8794a8'
                         }}
                         onClick={() => this.click(this.input.value)}
                     >搜索</button>
@@ -152,6 +157,9 @@ export default class Search extends Component {
                 {/* 历史搜索栏 */}
                 <div id="s1">
                     <p>搜索发现</p>
+                    <p style={{width:65,height:30,fontSize:15,paddingTop:5,borderRadius:'10px',textAlign:'center'}} onClick={(e) => this.delAll(e)}>
+                         <i style={{ fontSize: 25, lineHeight: '22px' }} className='iconfont icon-icon--'></i>
+                    </p>
                     <ul style={{float:'left'}}>
                         {
                             this.state.todo.map((item, idx) =>
@@ -160,7 +168,7 @@ export default class Search extends Component {
                                 </li>)
                         }
                     </ul>
-                    <p style={{width:'30%',height:'5%',fontSize:12,border:'1px solid black',borderRadius:'10px',textAlign:'center',float:'left'}} onClick={(e) => this.delAll(e)}>清除历史记录</p>
+                    
                 </div>
                 <ul style={{ listStyle: 'none', margin: '10px auto',width:'100%',height:'50%',overflow:'auto'}}>
                     {
