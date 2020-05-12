@@ -100,7 +100,9 @@ export default class Login extends React.Component {
         <p><Link style={{ color: '#bbb' }} to='/register'>新用户？点击这里注册</Link></p>
         <ul>
           <li>
-          <span id="qqLoginBtn"></span>
+            <a target="_blank" href="https://graph.qq.com/oauth2.0/authorize?client_id=101464813&redirect_uri=blog.hudong51.cn/login/authorization/callback/qq&response_type=code&state=1&scope=get_user_info,list_album,upload_pic,do_like">
+              <img src='./images/wechat.png' style={{ width: '40px', height: '40px' }} />
+            </a>
           </li>
           <li>
             <img src='./images/wechat.png' style={{ width: '40px', height: '40px' }} />
