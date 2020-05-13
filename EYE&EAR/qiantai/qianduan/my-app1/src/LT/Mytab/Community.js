@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Tabs, Grid } from 'antd-mobile';
 import { HashRouter as Router, withRouter, Route, Link, Switch, Redirect } from 'react-router-dom';
 const tabs = [
-    { title: '动态' },
+    { title: '树洞' },
     { title: '聊天室' }
 ];
 const data = [
@@ -87,11 +87,11 @@ export default class Community extends Component {
                             marginRight: 15
                         }}></div>
                         <p style={{ margin: 0, fontSize: 25, }}>{this.state.name.username}</p>
-                        <button style={{ backgroundColor: '#8794a8', width: 50, height: 25, marginTop: 15, marginLeft: 1, marginRight: 10, backgroundColor: '#fff', border: '1px solid #d4d4d4', borderRadius: 5, fontSize: 15 }}>
+                        {/* <button style={{ backgroundColor: '#8794a8', width: 50, height: 25, marginTop: 15, marginLeft: 1, marginRight: 10, backgroundColor: '#fff', border: '1px solid #d4d4d4', borderRadius: 5, fontSize: 15 }}>
                             粉丝<span>{this.state.name.like_number}</span>
-                        </button>
-                        <button style={{ backgroundColor: '#8794a8', width: 50, height: 25, marginTop: 15, backgroundColor: '#fff', border: '1px solid #d4d4d4', borderRadius: 5, fontSize: 15 }}>
-                            关注<span>{this.state.name.liked_number}</span>
+                        </button> */}
+                        <button style={{ backgroundColor: '#8794a8', width: 120, height: 25, marginTop: 15, backgroundColor: '#fff', border: '1px solid #d4d4d4', borderRadius: 5, fontSize: 15 }}>
+                            我关注的人 <span>{this.state.name.liked_number}</span>
                         </button>
                     </div>
                     <div style={{ borderTop: '1px solid #fff', height: '100%', backgroundColor: '#fff' }}>
@@ -106,13 +106,13 @@ export default class Community extends Component {
                         >
                             {
                                 tabs.map(item => {
-                                    if (item.title == '动态') {
+                                    if (item.title == '树洞') {
                                         return (
                                             <ul style={{ listStyle: 'none', margin: '0px auto',height:'150%' }}>
                                                 {
                                                     this.state.data.map((item, index) => (
 
-                                                        <li style={{ height: '210px', width: '95%', margin: '0 auto', marginBottom: '10px', border: '1px solid #8794a8' }} key={index}>
+                                                        <li style={{ height: 'fixContent', width: '95%', marginLeft:'2.5%', marginBottom: '10px', border: '1px solid #8794a8' }} key={index}>
                                                             <img style={{ width: '90px', height: '90px', float: 'left' }} src={'http://localhost:5000/img?imgname=' + item.img1} />
                                                             <div style={{ display: 'inline-block', marginLeft: '10px',width:'70%' }}>
                                                                 <p style={{ overflow: 'hidden', width: '230px', height: '40px',float:'right' }}>{item.content}</p>

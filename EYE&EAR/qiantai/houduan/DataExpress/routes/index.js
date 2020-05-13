@@ -1032,7 +1032,7 @@ router.get('/chatroomeye',function(req,res,next) {
     }
   });
 });
-/**
+
 router.post('/apphome/hometab/clockIn',function(req,res,next) {
   var clockIn = req.body.clockIn;
   var user_id = req.body.user_id;
@@ -1058,6 +1058,106 @@ router.post('/apphome/hometab/clockIn',function(req,res,next) {
       });
          
 });
+router.post('/dynamic',function(req,res,next) {
+  var user_id1=req.body.user_id;
+  var time = req.body.time;
+  var content = req.body.content;
+  var img0 = req.body.img0;
+  var img1 = req.body.img1;
+  var img2 = req.body.img2;
+  var img3 = req.body.img3;
+  var img4 = req.body.img4;
+  var img5 = req.body.img5;
+  var name0 = req.body.name0;
+  var name1 = req.body.name1;
+  var name2 = req.body.name2;
+  var name3 = req.body.name3;
+  var name4 = req.body.name4;
+  var name5 = req.body.name5;
+  var length=req.body.length
+
+  var time0=req.body.time;
+  var time1=req.body.time;
+  var time2=req.body.time;
+  var time3=req.body.time;
+  var time4=req.body.time;
+  var time5=req.body.time;
+
+  var name=req.body.audio;
+  for(var i=0;i<length;i++){
+    (function(i){
+      var img=''
+      var name=''
+      if(i==0){
+        img=img0
+        if(name0.indexOf("0.png")!=-1){
+          time0='';
+        }
+        name=time0+name0
+  
+
+      }
+      if(i==1){
+        img=img1
+        if(name1.indexOf("0.png")!=-1){
+          time1='';
+        }
+        name=time1+req.body.name1
+      }
+      if(i==2){
+        img=img2
+        if(name2.indexOf("0.png")!=-1){
+          time2='';
+        }
+        name=time2+req.body.name2
+      }
+      if(i==3){
+        img=img3
+        if(name3.indexOf("0.png")!=-1){
+          time3='';
+        }
+        name=time3+req.body.name3
+      }
+      if(i==4){
+        img=img4
+        if(name4.indexOf("0.png")!=-1){
+          time4='';
+        }
+        name=time4+req.body.name4
+      }
+      if(i==5){
+        img=img5
+        if(name5.indexOf("0.png")!=-1){
+          time5='';
+        }
+        name=time5+req.body.name5
+      }
+      var base64Data = img.replace(/^data:image\/\w+;base64,/, "");
+      var dataBuffer = Buffer.from(base64Data, 'base64');
+      console.log(__dirname+"\\img\\"+name)
+      fs.writeFile(__dirname+"\\img\\"+name, dataBuffer, function(err) {
+          if(err){
+          }else{
+            // res.send("保存成功！");
+            // console.log(name)
+            console.log(i)
+          }
+      });
+    })(i)
+  }
+  var con = mysql.createConnection(dbconfig);
+  con.connect();
+  con.query("insert into active(img1,content,time,img2,img3,img4,img5,img6,user_id,audio) values(?,?,?,?,?,?,?,?,?,?)",
+  [time+name0,content,time,time+name1,time+name2,time+name3,time+name4,time+name5,user_id1,name],function(err,result) {
+    if(err) {            
+      console.log(err);
+    } else {
+ 
+      // res.send({status:'success'});      
+    }
+  });
+})
+
 // router.post('/clockIn/content', function (req, res, next) {
 //   username = req.body.username;
 //   password = req.body.password;

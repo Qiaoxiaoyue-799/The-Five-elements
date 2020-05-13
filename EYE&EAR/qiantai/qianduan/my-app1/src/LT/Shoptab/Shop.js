@@ -176,9 +176,9 @@ export default class Goods extends Component {
     render() {
         return (
             <div className='box'>
-                <div className='header' onWheel={(e) => this.handleScroll(e)} style={this.state.style}>
+                {/* <div className='header' onWheel={(e) => this.handleScroll(e)} style={this.state.style}>
                     <SearchBar placeholder="搜索商品" maxLength={8} />
-                </div>                
+                </div>                 */}
                 <div style={{ height: 600}}>
                     <WhiteSpace />
                     <Tabs tabs={tabs}
@@ -230,7 +230,7 @@ export default class Goods extends Component {
                     </Tabs>
                     <WhiteSpace />
                 </div>
-                };
+                
             </div>
         )
     }
