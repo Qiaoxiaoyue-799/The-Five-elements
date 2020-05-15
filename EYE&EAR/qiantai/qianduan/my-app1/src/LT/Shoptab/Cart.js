@@ -75,6 +75,9 @@ export default class cart extends Component {
     }
 
     getConnect = () => {  //api请求函数
+
+        // console.log(this.state.list.aImg)    
+
         console.log(this.state.order_name);
         console.log(this.state.order_tel);
         console.log(this.state.order_address);
@@ -93,16 +96,19 @@ export default class cart extends Component {
             order_tel:this.state.order_tel,
             order_address:this.state.order_address,
             gName:checked,
-            time:time
+            time:time,
+            // gImg:this.state.list.aImg
           })})
         .then(res=>{
         //   console.log('22')
+
           res.json()
         })
         .then(res=>{
         //   console.log('1');
           // if(res.state) {
-            // window.alert('获取成功！');      
+            // window.alert('获取成功！');  
+        console.log(this.state.list.aImg)    
         } 
         )
     }

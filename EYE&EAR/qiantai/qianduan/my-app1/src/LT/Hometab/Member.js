@@ -208,7 +208,7 @@ export default class App extends Component {
     var { todo } = this.props;
     const { files } = this.state
     return (
-      <div style={{
+      <div className='one' style={{
         width: '100%', height: '110%', backgroundImage: 'url(' + 'http://localhost:5000/img?imgname=' + this.state.data.backgroundImage + ')', zIndex: 999,
         position: 'absolute', overflow: 'auto', backgroundColor: '#fff', zIndex: 999
       }}>
@@ -233,7 +233,7 @@ export default class App extends Component {
 
           {/* <p className='name'>Kika Kong</p> */}
         </div>
-        <div style={{ backgroundImage: 'url(' + 'http://localhost:5000/img?imgname=' + this.state.data.backgroundImage + ')', width: '100%', height: '500px', opacity: "1" }}>
+        <div className='one' style={{ backgroundImage: 'url(' + 'http://localhost:5000/img?imgname=' + this.state.data.backgroundImage + ')', width: '100%', height: '500px', opacity: "1" }}>
           <div style={{ width: '270px', height: '110px', margin: '0 auto', marginTop: '30px' }}>
             <div style={{ width: '269px', height: '109px', margin: '0 auto' }}>
               <p style={{ background: '#ccc0d4', border: '1px solid white', borderRadius: '10px', height: '30px', lineHeight: '30px', fontSize: '20px' }} className="neirong">

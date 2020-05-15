@@ -50,12 +50,14 @@ export default class Shop_detail_two extends Component {
     click = () => {
         var aName = this.state.data.aName
         var aPrice = this.state.data.aPrice2
+        var aImg=this.state.data.aImg
         fetch('http://localhost:5000/cart', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json; charset=utf-8' },
             body: JSON.stringify({
                 aName,
-                aPrice
+                aPrice,
+                aImg
             })
         })
             .then(res => res.json())

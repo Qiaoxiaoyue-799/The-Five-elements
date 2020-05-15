@@ -195,8 +195,18 @@ export default class Goods extends Component {
                                  <Link to={'/apphome/shoptab/shop_detail_one/'+item.id}>
                                 <li style={{height:'110px',width:'95%',margin:'0 auto',marginBottom:'10px',border:'1px solid #8794a8'}} key={1}>
                                     <img style={{width:'90px',height:'90px',float:'left'}} src={item.tImg}/>
-                                    <div style={{display:'inline-block',marginLeft:'10px'}}>
-                                    <h4>{item.tName}</h4>
+                                    <div style={{display:'inline-block',marginLeft:'10px',width:'60%'}}>
+                                    <p style={{marginLeft:10,marginBottom:0,fontSize:18,color:'black'}}>
+                                        {item.tName}
+                                    </p>
+                                    <p style={{
+                                        display: "block",fontSize:16,color:'black',
+                                        textOverflow: "ellipsis", whiteSpace: "nowrap",
+                                        overflow: "hidden",marginLeft:10,marginTop:0
+                                        }}>
+                                        {item.tContent}
+                                        </p>
+                                    
                                     </div>
                                 </li>
                                 </Link>
@@ -212,8 +222,17 @@ export default class Goods extends Component {
                                 {/* <Link to='/apphome/shoptab_detail_two'> */}
                                 <li style={{height:'110px',width:'95%',margin:'0 auto',marginBottom:'10px',border:'1px solid #8794a8'}} key={1}>
                                     <img style={{width:'90px',height:'90px',float:'left'}} src={'http://localhost:5000/images?imgname='+item.aImg}/>
-                                    <div style={{display:'inline-block',marginLeft:'10px'}}>
-                                    <h4>{item.aName}</h4>
+                                    <div style={{display:'inline-block',marginLeft:'10px',width:'60%'}}>
+                                    <p style={{marginLeft:10,marginBottom:0,fontSize:18,color:'black'}}>
+                                        {item.aName}
+                                    </p>
+                                    <p style={{
+                                        display: "block",fontSize:16,color:'black',
+                                        textOverflow: "ellipsis", whiteSpace: "nowrap",
+                                        overflow: "hidden",marginLeft:10,marginTop:0
+                                        }}>
+                                        {item.aContent}
+                                        </p>
                                     </div>
                                 </li>
                                 </Link>

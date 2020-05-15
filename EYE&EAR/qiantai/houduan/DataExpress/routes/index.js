@@ -655,7 +655,7 @@ router.get('/img', function (req, res, next) {
     }
   }
 });
-router.post('/得意namic',function(req,res,next) {
+router.post('/dynamic',function(req,res,next) {
   var user_id1=req.body.user_id;
   var time = req.body.time;
   var content = req.body.content;
@@ -770,9 +770,10 @@ router.get('/active', function (req, res, next) {
 router.post('/cart', function (req, res, next) {
   aName = req.body.aName;
   aPrice = req.body.aPrice;
+  aImg=req.body.aImg;
   var con = mysql.createConnection(dbconfig);
   con.connect();
-  con.query("insert into cart(gName,gPrice2) values(?,?)", [aName, aPrice], function (err, result) {
+  con.query("insert into cart(gName,gPrice2,gImg) values(?,?,?)", [aName, aPrice,aImg], function (err, result) {
     if (err) {
       console.log(err);
     } else {
@@ -959,6 +960,7 @@ router.post('/apphome/shoptab/cartlist',function(req,res,next) {
   var order_address=req.body.order_address;
   var gName = req.body.gName;
   var time = req.body.time;
+  var gImg=req.body.gImg
   var con = mysql.createConnection(dbconfig);
   con.connect();
   con.query("select * from cart",function(err,result) {

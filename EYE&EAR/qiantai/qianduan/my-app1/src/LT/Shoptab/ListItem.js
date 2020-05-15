@@ -59,15 +59,18 @@ class ListItem extends Component {
 					className="check-btn"
 					style={this.state.style}
 				></span>
-				<span style={{display:'inline-block',float:'left',width:'80%',fontSize:18}}>
+				<img style={{width:'20%',height:'90px',float:'left'}} src={'http://localhost:5000/images?imgname='+item.gImg}/>
+				<div style={{width:'60%',float:'right',height:'120px'}}>
+				<span style={{display:'inline-block',float:'left',width:'80%',fontSize:18,marginBottom:20}}>
 					{item.gName}
 				</span>
-				<span style={{display:'inline-block',marginLeft:'35%',fontSize:15}}>
+				<span style={{display:'inline-block',fontSize:15}}>
 					单价：{item.gPrice2}
 				</span>
 				<span style={{display:'inline-block',marginLeft:'10%',fontSize:15}}>
 					数量：{item.gNum}
 				</span>
+				</div>
 				{/* <p onClick={()=>this.handleDelete(item)}>??</p> */}
 			</li>
 			
