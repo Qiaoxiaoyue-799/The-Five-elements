@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Tabs, Grid } from 'antd-mobile';
 import { HashRouter as Router, withRouter, Route, Link, Switch, Redirect } from 'react-router-dom';
 const tabs = [
-    { title: '树洞' },
+    { title: '动态' },
     { title: '聊天室' }
 ];
 const data = [
@@ -10,20 +10,20 @@ const data = [
     { icon: 'images/8.png' },
     { icon: 'images/9.png' }
 ];
-var bgm;
+var arr = [];
+var brr = [];
+var arr1 = [];
+var brr1 = [];
 export default class Community extends Component {
     constructor() {
         super();
         this.state = {
-            dataItem: [
-                { img: './images/5.png', title: '毕加索画展的群' },
-                { img: './images/10.png', title: '皮影展的群' },
-                { img: './images/8.png', title: '毕加索画展的群' },
-                { img: './images/9.png', title: '毕加索画展的群' },
-            ],
+            dataItem: [],
+            dataItem2: [],
             data: [],
             name: [],
-
+            message:[],
+            message2:[]
         }
     }
     componentDidMount() {
@@ -34,7 +34,7 @@ export default class Community extends Component {
         .then(res => {
             this.setState({
                 data: res
-                    
+
             })
         })
         fetch('http://localhost:5000/login', {
@@ -47,28 +47,82 @@ export default class Community extends Component {
                 name: res[0]
             })
             console.log(this.state.name);
-        }
-        )
-        // bgm=require('../Taylor/'+this.state.data.audio);
-        // console.log(this.state.data.audio);
-        // console.log(bgm);
-        // this.setState({
-        //     data[audio]:'../Taylor'+data.audio
-        // })
-        // console.log(this.state.data.)
+        })
+        fetch('http://localhost:5000/chateye1',{
+            method:'GET', 
+            headers: {'Content-Type': 'application/json; charset=utf-8'}
+        })
+        .then(res=>res.json())
+        .then(res=>{            
+            res.map((item,index)=>{
+                if(item.user_id!=null) {
+                    if(item.user_id.indexOf(this.state.name.user_id) != -1) {
+                        arr.push(item)
+                    }
+                }
+            })
+            this.setState({
+              dataItem:arr
+            })
+        })
+        fetch('http://localhost:5000/chatear1',{
+            method:'GET', 
+            headers: {'Content-Type': 'application/json; charset=utf-8'}
+        })
+        .then(res=>res.json())
+        .then(res=>{            
+            res.map((item,index)=>{
+                if(item.user_id!=null) {
+                    if(item.user_id.indexOf(this.state.name.user_id) != -1) {
+                        brr.push(item)
+                    }
+                }
+            })
+            this.setState({
+              dataItem2:brr
+            })
+        })
+        fetch('http://localhost:5000/apphome/hometab/details',
+        {method:'GET'})
+        .then((res)=>res.json())
+        .then((res)=>{
+            console.log(res)
+            this.setState({
+                message:res
+            })
+        }).then((res)=>{console.log(this.state.message)})
+        fetch('http://localhost:5000/apphome/hometab/details1',
+        {method:'GET'})
+        .then((res)=>res.json())
+        .then((res)=>{
+            console.log(res)
+            this.setState({
+                message2:res
+            })
+        }).then((res)=>{console.log(this.state.message2)})
+
     }
-    state = {
-        name: [],
-        dataItem: [
-            { img: './images/5.png', title: '毕加索画展的群' },
-            { img: './images/10.png', title: '皮影展的群' },
-            { img: './images/8.png', title: '毕加索画展的群' },
-            { img: './images/9.png', title: '毕加索画展的群' },
-        ]
-    };
-
-
     render() {
+        if(arr) {
+            arr1=[]
+            arr.map((item,index) => {
+                this.state.message.map((item1,index1) => {
+                    if(item.article_id == item1.article_id) {
+                        arr1.push(item1)
+                    }
+                })
+            })
+        }
+        if(brr) {
+            brr1=[]
+            brr.map((item,index) => {
+                this.state.message2.map((item1,index1) => {
+                    if(item.article_id == item1.article_id) {
+                        brr1.push(item1)
+                    }
+                })
+            })
+        }
         return (
             <div style={{ position: 'absolute', width: '100%', height: '100%' }}>
                 <div style={{ width: '100%', backgroundColor: '#8794a8', height: '50px' }}>
@@ -108,7 +162,7 @@ export default class Community extends Component {
                                 tabs.map(item => {
                                     if (item.title == '树洞') {
                                         return (
-                                            <ul style={{ listStyle: 'none', margin: '0px auto',height:'150%' }}>
+                                            <ul style={{ listStyle: 'none', marginBottom: '100px',color:'black',fontSize:'15px',height:'150%' }}>
                                                 {
                                                     this.state.data.map((item, index) => (
 
@@ -134,19 +188,46 @@ export default class Community extends Component {
                                                 }
                                             </ul>
                                         )
-                                    } else if (item.title == '聊天室') {
-                                        
+                                    } else if (item.title == '聊天室') {                                        
                                         return (
-
-                                            <ul style={{ listStyle: 'none', margin: '0px auto',height:'150%'  }}>
+                                            <ul style={{ listStyle: 'none', marginBottom: '100px',color:'black',fontSize:'15px',height:'150%'  }}>
                                                 {
-                                                    this.state.dataItem.map((item, index) => (
+                                                    arr1.map((item, index) => (
                                                         // <Link to={'/details/'+index}>
-                                                        <Link to='/apphome/mytab/chat1'>
+                                                        <Link to={'/apphome/mytab/eyemychat/'+item.article_id}>
                                                             <li style={{ height: '110px', width: '95%', margin: '0 auto', marginBottom: '10px', border: '1px solid #8794a8' }} key={index}>
                                                                 <img style={{ width: '90px', height: '90px', float: 'left' }} src={item.img} />
                                                                 <div style={{ display: 'inline-block', marginLeft: '10px' }}>
-                                                                    <h2>{item.title}</h2>
+                                                                        {
+                                                                            item.title.length <= 10 ? 
+                                                                            <span style={{color:'#8794a8',fontSize:'15px'}}>
+                                                                                {item.title}
+                                                                            </span> :
+                                                                            <span style={{color:'#8794a8',fontSize:'15px'}}>
+                                                                                {item.title.slice(0,10)+'...'}
+                                                                            </span>
+                                                                        }
+                                                                </div>
+                                                            </li>
+                                                        </Link>
+                                                    ))
+                                                }
+                                                {
+                                                    brr1.map((item, index) => (
+                                                        // <Link to={'/details/'+index}>
+                                                        <Link to={'/apphome/mytab/earmychat/'+item.article_id}>
+                                                            <li style={{ height: '110px', width: '95%', margin: '0 auto', marginBottom: '10px', border: '1px solid #8794a8' }} key={index}>
+                                                                <img style={{ width: '90px', height: '90px', float: 'left' }} src={item.img} />
+                                                                <div style={{ display: 'inline-block', marginLeft: '10px' }}>
+                                                                {
+                                                                    item.title.length <= 10 ? 
+                                                                    <span style={{color:'#8794a8',fontSize:'15px'}}>
+                                                                        {item.title}
+                                                                    </span> :
+                                                                    <span style={{color:'#8794a8',fontSize:'15px'}}>
+                                                                        {item.title.slice(0,10)+'...'}
+                                                                    </span>
+                                                                }
                                                                 </div>
                                                             </li>
                                                         </Link>
