@@ -282,9 +282,12 @@ export default class Details extends Component {
                                         item.comment.split(',').map((item,index)=>{
                                             var arr=item.split("+")
                                             return(
-                                                <div className='comment1' style={{width:"90%",height:'40px',marginTop:"10px"}}>
-                                                    <div>{arr[1]}</div>
-                                                    <div>{arr[0]}</div>
+                                                <div className='comment1' style={{width:"90%",height:80,marginTop:"10px"}}>
+                                                    <p style={{height:'30px',fontSize:'18px'}}>{arr[0]}</p>
+                                                    {/* 文字内容 */}
+                                                    
+                                                    <span style={{height:'30px',width:'120px',float:'right'}}>{arr[1]}</span>
+                                                    {/* 时间 */}
                                                 </div>
                                                 
                                             )
@@ -299,13 +302,18 @@ export default class Details extends Component {
                                     item.comment_user_id.split(',').map((item,index)=>{
                                         var that=this
                                         var b
+                                        var c
                                         that.state.userdata.map((a,index)=>{
                                             if(a.user_id==item){
                                                 b=a.avatar
+                                                c=a.username
                                             }
                                         })
                                         return(
-                                        <img src={'http://localhost:5000/img?imgname=' + b} style={{width:'40px',height:'40px',marginTop:"10px",marginLeft:'5px'}}/>
+                                        <div style={{width:'40px',height:80,marginTop:"10px",marginLeft:'5px',borderRadius:10}}>
+                                        <img style={{width:40,height:40}} src={'http://localhost:5000/img?imgname=' + b} />
+                                        <p style={{textAlign:'center'}}>{c}</p>
+                                        </div>
                                         )
                                         
                                     })
