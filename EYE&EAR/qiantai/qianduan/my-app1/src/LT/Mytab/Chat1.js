@@ -216,6 +216,9 @@ export default class MyChat extends Component {
     this.setState({
       say: e.target.value
     })
+    var mess = document.getElementById('mess');
+    mess.style.backgroundColor = '#2883bf'
+    mess.style.color = '#fff'
   }
   onUser = (username)=>{
     this.props.history.push('/apphome/hometab/member');
@@ -449,7 +452,7 @@ export default class MyChat extends Component {
         }   
         </div>    
         <div style={{width:'100%',height:"40px",background: '#8794a8', color: 'black',bottom:"0px",position:'absolute' }}>
-            <div style={{marginTop:"10px"}}>
+            <div>
                 <div style={this.state.emo}>
                   { 
                     this.state.emojiList.map((item,index) => {
@@ -459,7 +462,7 @@ export default class MyChat extends Component {
                 </div>
                 <img onClick={this.click2}  style={{margin:'0 10px',width:'26px',height:'26px',borderRadius:'13px'}} src='./img/timg.jpg'/>
                 <input style={{width:"65%",borderRadius:"20px",marginLeft:'10px'}}  onChange={this.change} value={this.state.say}/>
-                <input style={{width:"40px",borderRadius:"10px",marginLeft:"20px",color:"#8794a8",textAlign:"center"}} value='发送' onClick={()=>this.sendMessage()}/>
+                <input id='mess' style={{ width: "60px", height: '30px', borderRadius: "10px", marginLeft: "10px", color: "#8794a8", textAlign: "center", position: 'fixed', bottom: 3, backgroundColor: '#fff' }} type='button' value='发送' onClick={() => this.sendMessage()} />
             </div>
         </div>
       </div>
