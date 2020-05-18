@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Tabs, Grid } from 'antd-mobile';
 import { HashRouter as Router, withRouter, Route, Link, Switch, Redirect } from 'react-router-dom';
 const tabs = [
-    { title: '动态' },
+    { title: '树洞' },
     { title: '聊天室' }
 ];
 const data = [
@@ -193,7 +193,6 @@ export default class Community extends Component {
                                             <ul style={{ listStyle: 'none', marginBottom: '100px',color:'black',fontSize:'15px',height:'150%'  }}>
                                                 {
                                                     arr1.map((item, index) => (
-                                                        // <Link to={'/details/'+index}>
                                                         <Link to={'/apphome/mytab/eyemychat/'+item.article_id}>
                                                             <li style={{ height: '110px', width: '95%', margin: '0 auto', marginBottom: '10px', border: '1px solid #8794a8' }} key={index}>
                                                                 <img style={{ width: '90px', height: '90px', float: 'left' }} src={item.img} />
@@ -214,7 +213,6 @@ export default class Community extends Component {
                                                 }
                                                 {
                                                     brr1.map((item, index) => (
-                                                        // <Link to={'/details/'+index}>
                                                         <Link to={'/apphome/mytab/earmychat/'+item.article_id}>
                                                             <li style={{ height: '110px', width: '95%', margin: '0 auto', marginBottom: '10px', border: '1px solid #8794a8' }} key={index}>
                                                                 <img style={{ width: '90px', height: '90px', float: 'left' }} src={item.img} />
