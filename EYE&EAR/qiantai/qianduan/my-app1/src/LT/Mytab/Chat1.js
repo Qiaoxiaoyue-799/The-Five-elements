@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Chat from 'chat-react';
 import { NavBar } from 'antd-mobile';
 import 'antd-mobile/dist/antd-mobile.css';
-import './mychat.css'
+// import './mychat.css'
 
 const t = new Date().getTime();
 const local = window.location.hash.split('/');
