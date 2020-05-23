@@ -10,8 +10,9 @@ export default class Mytab extends Component {
         <Switch>
           <Route exact path='/apphome' component={Community}/> 
           <Route path='/apphome/mytab/dynamic' component={Dynamic}/> 
-          <Route path='/apphome/mytab/chat1' component={Chat1}/> 
-          
+          {/* <Route path='/apphome/mytab/chat1' component={Chat1}/>  */}
+          <Route path='/apphome/mytab/eyemychat/:id' component={Chat1}/>
+          <Route path='/apphome/mytab/earmychat/:id' component={Chat1}/>
         </Switch>
       </div>
     );
