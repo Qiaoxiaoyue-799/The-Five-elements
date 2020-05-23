@@ -38,70 +38,6 @@ const tabs = [
     { title: '艺术品'},
     { title: '发布'},
 ];    
-// const TabExample = () => {
-//     return <div style={{ height: 600}}>
-//       <WhiteSpace />
-//       <Tabs tabs={tabs}
-//         initialPage={0}
-//         tabBarPosition="left"
-//         tabDirection="vertical"
-//       >
-//         <div style={{alignItems: 'center', backgroundColor: '#fff' }}>
-//           &nbsp;&nbsp;&nbsp;&nbsp;<h5 style={{marginTop:'-10px'}}>&nbsp;&nbsp;&nbsp;&nbsp;音乐会</h5>
-//           <Grid data={ticket}
-//             columnNum={3}
-//             renderItem={dataItem => (
-//                 <Link to='/apphome/shoptab/shop_detail_one'>
-//                     <div>
-//                         <img src={dataItem.icon} style={{width: '67px', height: '67px'}} alt="" />
-//                         <div style={{ color: '#888', fontSize: '14px' }}>
-//                         <span>{ticketContent.tName}</span>
-//                         </div>
-//                     </div>
-//                 </Link>
-//             )}
-//             />
-//             &nbsp;&nbsp;&nbsp;&nbsp;<h5 style={{marginTop:'-10px'}}>&nbsp;&nbsp;&nbsp;&nbsp;演唱会</h5>
-//             <Grid data={ticket}
-//                 columnNum={3}
-//                 renderItem={dataItem => (
-//                     <Link to='/apphome/shoptab/shop_detail_one'>
-//                         <div>
-//                             <img src={dataItem.icon} style={{width: '67px', height: '67px'}} alt="" />
-//                             <div style={{ color: '#888', fontSize: '14px' }}>
-//                             <span>{ticketContent.tName}</span>
-//                             </div>
-//                         </div>
-//                     </Link>
-//                 )}
-//                 />
-//         </div>
-//         <div style={{  alignItems: 'center', justifyContent: 'center', backgroundColor: '#fff' }}>
-//             <ul style={{listStyle:'none',margin:'0px auto'}}>
-//             {
-//                 this.state.data.map((item,index)=>(
-//                 // <Link to={'/details/'+index}>
-//                 <Link to='/apphome/shoptab_detail_two'>
-//                 <li style={{height:'110px',width:'95%',margin:'0 auto',marginBottom:'10px',border:'1px solid #8794a8'}} key={1}>
-//                     <img style={{width:'90px',height:'90px',float:'left'}} src={item.aImg}/>
-//                     <div style={{display:'inline-block',marginLeft:'10px'}}>
-//                 <h2>{item.aName}</h2>
-//                     </div>
-//                 </li>
-//                 </Link>
-//                 ))
-//             }
-//             </ul>
-
-//         </div>
-//         <div style={{ alignItems: 'center', justifyContent: 'center',  backgroundColor: '#fff' }}>
-//             <Shop_publish/>
-//         </div>
-        
-//       </Tabs>
-//       <WhiteSpace />
-//     </div>
-// };
 export default class Goods extends Component {
     constructor() {
         super();
@@ -176,9 +112,6 @@ export default class Goods extends Component {
     render() {
         return (
             <div className='box'>
-                {/* <div className='header' onWheel={(e) => this.handleScroll(e)} style={this.state.style}>
-                    <SearchBar placeholder="搜索商品" maxLength={8} />
-                </div>                 */}
                 <div style={{ height: 600}}>
                     <WhiteSpace />
                     <Tabs tabs={tabs}
@@ -194,7 +127,7 @@ export default class Goods extends Component {
                                 // <Link to={'/apphome/shoptab_detail_one/'+item.id}>
                                  <Link to={'/apphome/shoptab/shop_detail_one/'+item.id}>
                                 <li style={{height:'110px',width:'95%',margin:'0 auto',marginBottom:'10px',border:'1px solid #8794a8'}} key={1}>
-                                    <img style={{width:'90px',height:'90px',float:'left'}} src={item.tImg}/>
+                                    <img style={{width:'90px',height:'90px',float:'left'}} src={'http://localhost:5000/images?imgname='+item.tImg}/>
                                     <div style={{display:'inline-block',marginLeft:'10px',width:'60%'}}>
                                     <p style={{marginLeft:10,marginBottom:0,fontSize:18,color:'black'}}>
                                         {item.tName}
