@@ -44,7 +44,6 @@ export default class Apphome extends React.Component {
                 selectedTab: 'home',
 
               });
-              window.location.href='http://localhost:3000/?#/apphome'
             }}
             // data-seed="logId"
           >
@@ -66,7 +65,6 @@ export default class Apphome extends React.Component {
               this.setState({
                 selectedTab: 'shop',
               });
-              window.location.href='http://localhost:3000/?#/apphome'
             }}
           >
               {/* <Hometab/> */}
@@ -86,7 +84,6 @@ export default class Apphome extends React.Component {
               this.setState({
                 selectedTab: 'my',
               });
-              window.location.href='http://localhost:3000/?#/apphome'
             }}
           >
             <Mytab/>
