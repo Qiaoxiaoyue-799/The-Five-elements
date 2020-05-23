@@ -39,6 +39,7 @@ router.get('/login', function (req, res, next) {
 });
 
 router.post('/register', function (req, res, next) {
+  var name = req.body.username; 
   var username1 = req.body.username; 
   var password1 = req.body.password;
   var mobile1 = req.body.mobile;
@@ -59,7 +60,7 @@ router.post('/register', function (req, res, next) {
         }
       }
       if (is) {
-        con.query("insert into user(username,password,mobile,time) values(?,?,?,?)", [username1, password1, mobile1, time], function (err, result) {
+        con.query("insert into user(name,username,password,mobile,time) values(?,?,?,?,?)", [name,username1, password1, mobile1, time], function (err, result) {
           if (err) {
             console.log(err);
           } else {

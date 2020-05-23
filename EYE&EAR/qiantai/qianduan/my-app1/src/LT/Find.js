@@ -8,28 +8,53 @@ export default class Find extends Component {
     super(props);
     this.state = {
       data: [],
-      name: '',
+      tel: '',
       pwd: '',
       newPwd: '',
     }
-    this.tip1 = true;
-    this.tip2 = true;
-    this.tip3 = true;
+    this.tip1 = false;
+    this.tip2 = false;
+    this.tip3 = false;
+    this.tip = '';
   }
   change1 = (e) => {
     this.setState({
-      name: e.target.value
+      tel: e.target.value
     })
   }
   blur1 = (e) => {
-    var tipName = document.getElementsByClassName('tipName')[0];
+    var tipMobile = document.getElementsByClassName('tipMobile')[0];
     var con = e.target.value;
-    if (con == '') {
+    var reg1 = /^((13[0-9])|(14[5,7])|(15[0-3,5-9])|(17[0,3,5-8])|(18[0-9])|166|198|199|(147))\d{8}$/g;
+    if (!con.match(reg1) && con !== '') {
+      // this.tip1 = false;
+      tipMobile.innerHTML = '手机号码格式不正确';
+      this.tip1 = true;
+    } else if (con == '') {
       this.tip1 = false;
-      tipName.innerHTML = '用户名不能为空'
+      tipMobile.innerHTML = '手机号不能为空';
     } else {
       this.tip1 = true;
-      tipName.innerHTML = ''
+      tipMobile.innerHTML = '';
+      let Num = '';
+      for (var i = 0; i < 6; i++) {
+        Num += Math.floor(Math.random() * 10);
+      }
+      this.tip = Num;
+      fetch("http://cdcxdxjk.market.alicloudapi.com/chuangxin/dxjk", {
+        method: 'POST',
+        mode: 'cors',
+        headers: { 'Content-Type': 'application/json; charset=utf-8', "Authorization": "APPCODE 25c502911fa74ebe85582423b8dbeb9e" },
+        body: JSON.stringify({
+          content: "你的验证码为" + Num,
+          mobile: this.state.tel
+        })
+      })
+        .then(res => res.json())
+        .then(res => {
+          console.log(res);
+          window.history.back(-1);
+        })
     }
   }
 
@@ -91,26 +116,26 @@ export default class Find extends Component {
   }
 
   getConnect = () => {  //api请求函数    
-    var tipName = document.getElementsByClassName('tipName')[0];
+    var tipMobile = document.getElementsByClassName('tipMobile')[0];
     var tipPwd = document.getElementsByClassName('tipPwd')[0];
     var tipNewPwd = document.getElementsByClassName('tipNewPwd')[0];
     if (this.tip1 == true && this.tip2 == true && this.tip3 == true) {
-      alert("修改成功")
       fetch('http://localhost:5000/users/find', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json; charset=utf-8' },
         body: JSON.stringify({
-          username: this.state.name,
+          username: this.state.tel,
           password: this.state.pwd
         })
       })
         .then(res => res.json())
         .then(res => {
-          console.log(res)
-          this.props.history.push('/login');
+          console.log(res);
+          alert("修改成功")
+          window.history.back(-1);
         })
     } else if (this.tip1 == false) {
-      tipName.innerHTML = '用户名不能为空';
+      tipMobile.innerHTML = '手机号不能为空';
     } else if (this.tip2 == false) {
       tipPwd.innerHTML = '密码不能为空';
     } else if (this.tip3 == false) {
@@ -118,7 +143,7 @@ export default class Find extends Component {
     }
   }
   up = () => {
-
+  
   }
   render() {
     return (
@@ -130,8 +155,8 @@ export default class Find extends Component {
         <Flex align="start">
           <div className='find'>
             <form className='form'>
-              <input onChange={this.change1} placeholder='username' name='username' onBlur={this.blur1} value={this.state.name} />
-              <p className='tip tipName'></p>
+              <input onChange={this.change1} placeholder='tel' name='tel' onBlur={this.blur1} value={this.state.tel} />
+              <p className='tip tipMobile'></p>
               <input onChange={this.change2} type="password" placeholder='new password' name='new-password' onBlur={this.blur2} value={this.state.pwd} />
               <p className='tip tipPwd'></p>
               <input onChange={this.change3} type="password" placeholder='confirm password' name="confirm-password" onBlur={this.blur3} value={this.state.newPwd} />

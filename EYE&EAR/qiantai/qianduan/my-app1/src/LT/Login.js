@@ -67,7 +67,7 @@ export default class Login extends React.Component {
             data: res[0]
           })
           this.props.history.push('/apphome');
-          // window.location.reload();
+          // window.location.reload(); 
         }
       }
       )

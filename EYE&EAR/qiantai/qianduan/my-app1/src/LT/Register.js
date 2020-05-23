@@ -138,7 +138,7 @@ export default class Register extends Component {
       })})
     .then(res=>res.json())
     .then(res=>{
-        this.props.history.push('/login');        
+      window.history.back(-1);       
     })
   }
   render() {
