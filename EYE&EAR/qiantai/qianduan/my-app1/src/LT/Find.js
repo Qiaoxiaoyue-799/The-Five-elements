@@ -9,7 +9,7 @@ export default class Find extends Component {
     this.state = {
       data: [],
       tel: '',
-      pwd: '',
+      verification: '',
       newPwd: '',
     }
     this.tip1 = false;
@@ -36,65 +36,38 @@ export default class Find extends Component {
     } else {
       this.tip1 = true;
       tipMobile.innerHTML = '';
-      let Num = '';
-      for (var i = 0; i < 6; i++) {
-        Num += Math.floor(Math.random() * 10);
-      }
-      this.tip = Num;
-      fetch("http://cdcxdxjk.market.alicloudapi.com/chuangxin/dxjk", {
-        method: 'POST',
-        mode: 'cors',
-        headers: { 'Content-Type': 'application/json; charset=utf-8', "Authorization": "APPCODE 25c502911fa74ebe85582423b8dbeb9e" },
-        body: JSON.stringify({
-          content: "你的验证码为" + Num,
-          mobile: this.state.tel
-        })
+      fetch('http://localhost:5000/users/tel', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json; charset=utf-8' },
+      body: JSON.stringify({
+        tel: this.state.tel
       })
-        .then(res => res.json())
-        .then(res => {
-          console.log(res);
-          window.history.back(-1);
-        })
+    })
+      .then(res => res.json())
+      .then(res => {
+         if(res.result.length != 0){
+           window.alert('手机号存在')
+         }else{
+           window.alert('手机号不存在')
+         }
+      })
     }
   }
 
   change2 = (e) => {
     this.setState({
-      pwd: e.target.value
+      verification: e.target.value
     })
   }
   blur2 = (e) => {
-    var con = e.target.value;
-    var tipPwd = document.getElementsByClassName('tipPwd')[0];
-    var reg1 = /^[0-9]*$/g;
-    var reg2 = /[`~!@#$%^&*()\-+=<>?:"{}|,.\/;'\\[\]·~！@#￥%……&*（）——\-+={}|《》？：“”【】、；‘'，。、]/g;
-    if ((con.match(reg1) || con.match(reg2)) && con !== '') {
+    var tipVerification = document.getElementsByClassName('tipVerification')[0];
+    console.log(this.state.verification,this.tip)
+    if(this.state.verification == this.tip && this.state.verification!='' && this.tip!=''){
+      this.tip2 = true;
+      tipVerification.innerHTML = ''
+    }else{
       this.tip2 = false;
-      tipPwd.innerHTML = '仅支持字符和下划线且不为纯数字';
-    }
-    else if (con == '') {
-      this.tip2 = false;
-      tipPwd.innerHTML = '密码不能为空';
-    } else {
-      var len = 0;
-      for (var i = 0; i < con.length; i++) {
-        // 如果是中文，就+2；否则+1
-        if (con[i].match(/^[\u4e00-\u9fa5]{0,}$/)) {
-          len += 2;
-        } else {
-          len += 1;
-        }
-        if (len > 14) {
-          break;
-        }
-      }
-      if (len > 14) {
-        this.tip2 = false;
-        tipPwd.innerHTML = '最长14个英文或7个汉字';
-      } else {
-        this.tip3 = true;
-        tipPwd.innerHTML = '';
-      }
+      tipVerification.innerHTML = '验证码不正确'
     }
   }
 
@@ -106,26 +79,66 @@ export default class Find extends Component {
   blur3 = (e) => {
     var con = e.target.value;
     var tipNewPwd = document.getElementsByClassName('tipNewPwd')[0];
-    if (con == this.state.pwd) {
-      this.tip3 = true;
-      tipNewPwd.innerHTML = ''
-    } else {
+    var reg1 = /^[0-9]*$/g;
+    var reg2 = /[`~!@#$%^&*()\-+=<>?:"{}|,.\/;'\\[\]·~！@#￥%……&*（）——\-+={}|《》？：“”【】、；‘'，。、]/g;
+    if((con.match(reg1) || con.match(reg2)) && con !== '') {
       this.tip3 = false;
-      tipNewPwd.innerHTML = '密码输入不一致'
+      tipNewPwd.innerHTML = '仅支持字符和下划线且不为纯数字';
+    } 
+    else if(con == '') {
+        this.tip3 = false;
+        tipNewPwd.innerHTML = '密码不能为空';
+    } else {
+        var len = 0;  
+        for (var i = 0; i < con.length; i++ ) {
+            if (con[i].match(/^[\u4e00-\u9fa5]{0,}$/)) {
+                len += 2;
+            } else {
+                len += 1;
+            }
+            if (len > 14) {
+                break;
+            }
+        }
+        if (len > 14) {
+            this.tip3 = false;
+            tipNewPwd.innerHTML = '最长14个英文或7个汉字';
+        } else {
+            this.tip3 = true;
+            tipNewPwd.innerHTML = '';
+        }
     }
   }
-
+  getVerificationCode = () => {
+    var ver = document.getElementsByTagName('input')[2]
+    ver.value='正在发送';
+    ver.style.backgroundColor = '#7e9cda'
+    let Num = '';
+    for (var i = 0; i < 6; i++) {
+      Num += Math.floor(Math.random() * 10);
+    }
+    this.tip = Num;
+    fetch("  http://106.ihuyi.com/webservice/sms.php?method=Submit&account=C05374133&password=744feba5462db69d3807587771312492&mobile="+this.state.tel+"&content=您的验证码是："+Num+"。请不要把验证码泄露给其他人。", {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json; charset=utf-8'},
+    })
+      .then(res => res.json())
+      .then(res => {
+        console.log(res);
+        window.history.back(-1);
+      })
+  }
   getConnect = () => {  //api请求函数    
     var tipMobile = document.getElementsByClassName('tipMobile')[0];
-    var tipPwd = document.getElementsByClassName('tipPwd')[0];
+    var tipVerification = document.getElementsByClassName('tipVerification')[0];
     var tipNewPwd = document.getElementsByClassName('tipNewPwd')[0];
     if (this.tip1 == true && this.tip2 == true && this.tip3 == true) {
       fetch('http://localhost:5000/users/find', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json; charset=utf-8' },
         body: JSON.stringify({
-          username: this.state.tel,
-          password: this.state.pwd
+          tel: this.state.tel,
+          password: this.state.newPwd
         })
       })
         .then(res => res.json())
@@ -137,9 +150,9 @@ export default class Find extends Component {
     } else if (this.tip1 == false) {
       tipMobile.innerHTML = '手机号不能为空';
     } else if (this.tip2 == false) {
-      tipPwd.innerHTML = '密码不能为空';
+      tipVerification.innerHTML = '验证码不能为空';
     } else if (this.tip3 == false) {
-      tipNewPwd.innerHTML = '密码输入不一致';
+      tipNewPwd.innerHTML = '密码不能为空';
     }
   }
   up = () => {
@@ -155,11 +168,12 @@ export default class Find extends Component {
         <Flex align="start">
           <div className='find'>
             <form className='form'>
-              <input onChange={this.change1} placeholder='tel' name='tel' onBlur={this.blur1} value={this.state.tel} />
+              <input onChange={this.change1} placeholder='输入手机号' name='tel' onBlur={this.blur1} value={this.state.tel} />
               <p className='tip tipMobile'></p>
-              <input onChange={this.change2} type="password" placeholder='new password' name='new-password' onBlur={this.blur2} value={this.state.pwd} />
-              <p className='tip tipPwd'></p>
-              <input onChange={this.change3} type="password" placeholder='confirm password' name="confirm-password" onBlur={this.blur3} value={this.state.newPwd} />
+              <input style={{width:120,float:'left',marginLeft:30}} onChange={this.change2} placeholder='填写验证码' name='verification' onBlur={this.blur2} value={this.state.pwd} />
+              <span><input onClick={this.getVerificationCode} style={{width:70,height:35,backgroundColor:'blue',marginRight:30,borderRadius: 15,color:'#fff',fontSize:8,paddingLeft:0}} value='获取验证码' type='button'/></span>
+              <p style={{float:'left'}} className='tip tipVerification'></p>
+              <input onChange={this.change3} type="password" placeholder='输入新密码' name="password" onBlur={this.blur3} value={this.state.newPwd} />
               <p className='tip tipNewPwd'></p>
               <input value='确定' className='button' type='button' name='button' onClick={this.getConnect} style={{ background: '#8693a6', color: '#fff', textAlign: 'center', borderRadius: '15px', width: '75%' }} />
             </form>

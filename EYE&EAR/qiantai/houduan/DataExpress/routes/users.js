@@ -33,18 +33,28 @@ router.post('/chatroom', function (req, res, next) {
     }
   })
 })
-router.post('/find', function (req, res, next) {
-  var username = req.body.username
-  var password = req.body.password
-  console.log(username)
-  console.log(password)
+router.post('/tel', function (req, res, next) {
+  var tel = req.body.tel
   var con = mysql.createConnection(dbconfig);
   con.connect();
-  con.query("select * from user where username = ?", [username], function (err, result) {
+  con.query("select * from user where mobile = ?", [tel], function (err, result) {
     if (err) {
       console.log(err)
     } else {
-      con.query("update user set password=? where username=? ", [password, username], function (err, result) {
+      res.send({result:result})
+    }
+})
+})
+router.post('/find', function (req, res, next) {
+  var tel = req.body.tel;
+  var password = req.body.password;
+  var con = mysql.createConnection(dbconfig);
+  con.connect();
+  con.query("select * from user where mobile = ?", [tel], function (err, result) {
+    if (err) {
+      console.log(err)
+    } else {
+      con.query("update user set password=? where mobile=? ", [password, tel], function (err, result) {
         if (err) {
           console.log(err)
         } else {
