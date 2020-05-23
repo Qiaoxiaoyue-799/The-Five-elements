@@ -1035,6 +1035,30 @@ router.get('/chatroomeye',function(req,res,next) {
   });
 });
 
+router.get('/chateye1',function(req,res,next) {
+  var con = mysql.createConnection(dbconfig);
+  con.connect();
+  con.query("select * from chatroomeye",function(err,result) {
+    if(err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
+router.get('/chatear1',function(req,res,next) {
+  var con = mysql.createConnection(dbconfig);
+  con.connect();
+  con.query("select * from chatroomear",function(err,result) {
+    if(err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
 router.post('/apphome/hometab/clockIn',function(req,res,next) {
   var clockIn = req.body.clockIn;
   var user_id = req.body.user_id;
