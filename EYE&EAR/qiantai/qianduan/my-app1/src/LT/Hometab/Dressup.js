@@ -74,7 +74,7 @@ getConnect = (e) => {  //api请求函数
     return (
       <div style={{width: '100%',height:'108%',backgroundColor: '#fff',zIndex:999,position:'absolute',overflow:'auto'}}>
         <div style={{width:'100%',position:'relative',background:"#8794a8"}}>
-        <Link to='/apphome' style={{color:'black',background:"#8794a8"}}><Icon style={{width:"40px",height:"40px"}} type="left" /></Link>
+        <Link to='/apphome/hometab/vip' style={{color:'black',background:"#8794a8"}}><Icon style={{width:"40px",height:"40px"}} type="left" /></Link>
         </div>
         <div>
         <Link to='/apphome/hometab/myvippic' style={{color:'black',background:"#8794a8"}}>

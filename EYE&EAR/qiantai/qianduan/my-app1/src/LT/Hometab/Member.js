@@ -42,6 +42,20 @@ export default class App extends Component {
     this.img0 = '';
     this.name0 = '';
   }
+  componentWillMount() {
+    fetch('http://localhost:5000/login', {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json; charset=utf-8' },
+    })
+      .then(res => res.json())
+      .then(res => {
+        this.setState({
+          data: res[0]
+        })
+        console.log(this.state.data.avatar);
+      }
+      )
+  }
   componentDidMount() {
     //api请求函数
 
@@ -131,7 +145,7 @@ export default class App extends Component {
       place: e.target.value
     })
   }
-  change8 = (e) => {
+  change9 = (e) => {
     this.setState({
       sign: e.target.value
     })
