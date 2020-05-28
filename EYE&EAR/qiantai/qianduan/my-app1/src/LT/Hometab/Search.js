@@ -156,10 +156,6 @@ export default class Search extends Component {
                 </div>
                 {/* 历史搜索栏 */}
                 <div id="s1">
-                    <p>搜索发现</p>
-                    <p style={{width:65,height:30,fontSize:15,paddingTop:5,borderRadius:'10px',textAlign:'center'}} onClick={(e) => this.delAll(e)}>
-                         <i style={{ fontSize: 25, lineHeight: '22px' }} className='iconfont icon-icon--'></i>
-                    </p>
                     <ul style={{float:'left'}}>
                         {
                             this.state.todo.map((item, idx) =>
@@ -168,6 +164,10 @@ export default class Search extends Component {
                                 </li>)
                         }
                     </ul>
+                    <p>搜索发现</p>
+                    <p style={{width:65,height:30,fontSize:15,paddingTop:5,borderRadius:'10px',textAlign:'center'}} onClick={(e) => this.delAll(e)}>
+                         <i style={{ fontSize: 25, lineHeight: '22px' }} className='iconfont icon-icon--'></i>
+                    </p>
                     
                 </div>
                 <ul style={{ listStyle: 'none', margin: '10px auto',width:'100%',height:'50%',overflow:'auto'}}>

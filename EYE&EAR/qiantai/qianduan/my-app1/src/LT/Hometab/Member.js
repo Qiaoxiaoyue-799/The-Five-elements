@@ -224,10 +224,11 @@ export default class App extends Component {
     return (
       <div className='one' style={{
         width: '100%', height: '110%', backgroundImage: 'url(' + 'http://localhost:5000/img?imgname=' + this.state.data.backgroundImage + ')', zIndex: 999,
-        position: 'absolute', overflow: 'auto', backgroundColor: '#fff', zIndex: 999
+        position: 'absolute', overflow: 'auto', backgroundColor: '#fff'
       }}>
-        <div style={{ width: '100%', position: 'relative', background: "#8794a8" }}>
+        <div style={{ width: '100%', position: 'relative', background: "#fff",opacity:0.7,zIndex:1000 }}>
           <Icon onClick={() => { this.props.history.go(-1) }} style={{ width: "40px", height: "40px" }} type="left" />
+          <span style={{position:'absolute',top:"20%",left:'40%',fontSize:18,color:'#000'}}>个人中心</span>
         </div>
         {/* <i className={dataItem.icon} style={{fontSize:40,color:'black',height:80,width:80,paddingTop:1,float:'left'}} ></i> */}
         <div style={{ width: '100%', position: 'relative', marginTop: '10px' }}>
