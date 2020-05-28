@@ -464,9 +464,9 @@ export default class MyChat extends Component {
                 })
               }
             </div>
-            <img onClick={this.click2} style={{ margin: '0 10px', width: '26px', height: '26px', borderRadius: '13px' }} src='./img/timg.jpg' />
-            <input style={{ width: "65%", height: '30px', marginTop: '5px', borderRadius: "20px", marginLeft: '10px' }} onChange={this.change} value={this.state.say} />
-            <input id='mess' style={{ width: "60px", height: '30px', borderRadius: "10px", marginLeft: "10px", color: "#8794a8", textAlign: "center", position: 'fixed', bottom: 5, backgroundColor: '#fff' }} type='button' value='发送' onClick={() => this.sendMessage()} />
+            <img onClick={this.click2} style={{ margin: '0 3%', width: '9%', height: '26px', borderRadius: '13px' }} src='./img/timg.jpg' />
+            <input style={{ width: "65%", height: '30px', marginTop: '5px', borderRadius: "20px"}} onChange={this.change} value={this.state.say} />
+            <input id='mess' style={{ width: "15%", height: '30px', borderRadius: "10px", margin: "0 2.5%", color: "#8794a8", textAlign: "center", position: 'fixed', bottom: 5, backgroundColor: '#fff' }} type='button' value='发送' onClick={() => this.sendMessage()} />
           </div>
         </div>
       </div>

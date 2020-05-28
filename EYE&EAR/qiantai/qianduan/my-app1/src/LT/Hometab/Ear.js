@@ -98,10 +98,6 @@ export default class Eye extends Component {
         <Grid data={this.state.data}
           columnNum={3}
           renderItem={data => (
-            // {
-            //   this.state.dataItem.map((item, index) => {
-            //     if(this.state.data.tit==item.tab_id){
-            //       return(
                     <Link to={`/apphome/hometab/ear/${data.tit}`} style={{color:'#000'}}>
                     <div onClick={()=>this.click(data.tit)} style={{ border: '1px solid #8794a8', backgroundColor: '#8794a8' }}>
                       <div style={{ width: '100%', height: 85 }} onClick={this.onClick}>
@@ -112,35 +108,28 @@ export default class Eye extends Component {
                       <p style={{ fontSize: 15 }}>{data.tit}</p>
                     </div>
                     </Link>  
-                //   )
-                // }
-            //})
-            //}
             )}
         />
-        
-        {/* <Route path={`/apphome/hometab/eye/:id`}>
-
-        </Route> */}
+      
         <ul style={{ listStyle: 'none', margin: '10px auto',height:'50%',overflow:'auto'}}>
           {
             this.state.dataItem.map((item, index) => (
               <Link to={'/apphome/hometab/details1/' + item.article_id}>
-                {/* <Link to='/apphome/hometab/details'> */}
                 <li style={{ height: '110px', width: '95%', margin: '0 auto', marginBottom: '10px', border: '1px solid #8794a8' }} key={index}>
                   <img style={{ width: '20%', height: '80px', float: 'left' }} src={item.img} />
                   <div style={{ display: 'inline-block', marginLeft: '10px', width: '70%', float: 'left' }}>
-                    <h4 style={{
+                  <h4 style={{
                       display: "block", marginTop: '5', marginLeft: '20px',
                       textOverflow: "ellipsis", whiteSpace: "nowrap",
-                      overflow: "hidden", width: "235px", fontSize: '20px'
+                      overflow: "hidden", width: "90%", fontSize: '20px'
                     }}>
                       {item.title}
                     </h4>
                     <p style={{
-                      width: '230px', height: '40px', display: 'block', wordBreak: "normal",
-                      overflow: 'hidden', display: 'inline-block', marginLeft: '20px', lineHeight: "20px",
-                      color: 'gray', fontSize: '15px'
+                      width: '90%', height: '40px', display: 'block',
+                      display: 'inline-block', marginLeft: '20px', lineHeight: "20px",
+                      color: 'gray', fontSize: '15px',textOverflow: "ellipsis", whiteSpace: "nowrap",
+                      overflow: "hidden"
                     }}>
                       {item.content}
                     </p>

@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import { NavBar,WingBlank,SegmentedControl,ImagePicker,InputItem,List,WhiteSpace,Button} from 'antd-mobile';
-
-
-
 export default class Shop_publish extends Component {
     constructor(props) {
       super(props);
       this.state = {
         files: [],
         data: [],
+        data1: [],
         title:'',
         content:'',
         aprice:'',
@@ -26,6 +24,19 @@ export default class Shop_publish extends Component {
       this.name3='0.png'
       this.name4='0.png'
       this.name5='0.png'
+    }
+    componentDidMount() {  
+      fetch('http://localhost:5000/login', {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json; charset=utf-8' },
+      })
+        .then(res => res.json())
+        .then(res => {
+          this.setState({
+            data1: res[0]
+          })
+        }
+        )  
     }
     change1 = (e) => {
       this.setState({
@@ -134,8 +145,7 @@ export default class Shop_publish extends Component {
         console.log("haahha")   
         }
       )
-    }
-    
+    }    
     
     onChange = (files, type, index) => {
       console.log(files, type, index);
@@ -146,29 +156,24 @@ export default class Shop_publish extends Component {
     }
     handleClick = () => {
       this.inputRef.focus();
-    };
-     
+    };    
       
   render(){  
     const{files}=this.state; 
     return (
-      <div style={{width: '100%',height:'100%',backgroundColor: '#fff',zIndex:999,position:'absolute',overflow:'auto'}}>
-        <div style={{width:'100%',height:'200px',backgroundColor:'#7a727f'}}>
+      <div style={{width: '90%',height:'100%',backgroundColor: '#fff',zIndex:999,position:'absolute',overflow:'auto'}}>
+        <div style={{width:'90%',height:'200px',backgroundColor:'#7a727f'}}>
             <div style={{width: '80px',height:'80px',margin:'0px auto'}}>
-            <img src={`./images/16.jpg`} style={{marginTop:'20px',width: '80px',height:'80px',border:'1px solid black',borderRadius:"50%"}} />
+              <img src={'http://localhost:5000/img?imgname=' + this.state.data1.avatar} style={{marginTop:'20px',width: '80px',height:'80px',border:'1px solid black',borderRadius:"50%"}} />
             </div>
-            {/* {
-              if
-            } */}
             <Button style={{width:'60%',margin:'0 auto',backgroundColor:'#8794a8',marginTop:'40px',color:'white'}}>充值会员即可发布</Button>
-            <p style={{width:'90%',margin:'0 auto',marginTop:'40px',color:'white',textAlign:'center'}}>亲爱的会员，快来发布你的艺术品吧</p>
+            <p style={{width:'75%',margin:'0 auto',marginTop:'40px',color:'white',textAlign:'center'}}>亲爱的会员，快来发布你的艺术品吧</p>
         </div>
         <form className='form' style={{paddingLeft:20}}>        
           <input name='title' placeholder='标题' value={this.state.title} onChange={this.change1} style={{width:'80%',paddingLeft:'20px',marginBottom:10}}/>
           <input  name="aprice" id="" placeholder='价钱' value={this.state.aprice} onChange={this.change3} style={{width:'80%',paddingLeft:'20px',marginBottom:10}}/>
-          <br/>请输入内容<br/><textarea rows="5" cols="20" onChange={this.change2} name='content'  value={this.state.content} style={{width:'80%',paddingLeft:'20px'}}/>
+          <br/>请输入内容<br/><textarea rows="3" cols="20" onChange={this.change2} name='content'  value={this.state.content} style={{width:'75%',paddingLeft:'20px'}}/>
         </form>
-
         <ImagePicker
         style={{overflow:'auto',paddingLeft:10}}
           files={files}
@@ -177,7 +182,7 @@ export default class Shop_publish extends Component {
           multiple
           accept="image/gif,image/jpeg,image/jpg,image/png"
         />
-        <Button onClick={this.click} style={{width:'90%',margin:'0 auto',backgroundColor:'#7a727f',marginTop:'0px',color:'white'}}>发布</Button>
+        <Button onClick={this.click} style={{width:'90%',backgroundColor:'#7a727f',marginTop:'0px',color:'white'}}>发布</Button>
         </div>
     );
   }

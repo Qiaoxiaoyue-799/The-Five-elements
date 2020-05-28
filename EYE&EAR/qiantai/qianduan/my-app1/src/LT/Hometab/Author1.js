@@ -155,8 +155,8 @@ export default class Author extends Component {
                     <div style={{ border: '1px solid #d4d4d4', height: '60%', margin: 15, borderRadius: 5 }}>
                       {item.content}
                     </div>
-                    <button style={{ width: 80, height: 25, float: 'right', marginTop: 15, marginLeft: 30, backgroundColor: '#fff', border: '1px solid #d4d4d4', borderRadius: 5 }}>粉丝<span>{item.author_liked}</span></button>
-                    <button style={{ width: 80, height: 25, float: 'right', marginTop: 15, backgroundColor: '#fff', border: '1px solid #d4d4d4', borderRadius: 5, color:color}} onClick={()=>{this.btn(item)}}>{con}</button>
+                    <button style={{ width: 80, height: 25, float: 'right', marginTop: '10%', marginLeft: 30, backgroundColor: '#fff', border: '1px solid #d4d4d4', borderRadius: 5 }}>粉丝<span>{item.author_liked}</span></button>
+                    <button style={{ width: 80, height: 25, float: 'right', marginTop: '10%', backgroundColor: '#fff', border: '1px solid #d4d4d4', borderRadius: 5, color:color}} onClick={()=>{this.btn(item)}}>{con}</button>
                   </div>
                 </div>
               )
