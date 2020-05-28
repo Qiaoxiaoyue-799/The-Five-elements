@@ -58,6 +58,8 @@ export default class Shop_detail_one extends Component {
     click = () => {
         var tName = this.state.data.tName
         var tPrice = this.state.data.tPrice2
+        var tImg=this.state.data.tImg
+
         // var num=
         console.log(num)
         fetch('http://localhost:5000/cart1', {
@@ -65,7 +67,8 @@ export default class Shop_detail_one extends Component {
             headers: { 'Content-Type': 'application/json; charset=utf-8' },
             body: JSON.stringify({
                 tName,
-                tPrice
+                tPrice,
+                tImg
             })
         })
             .then(res => res.json())

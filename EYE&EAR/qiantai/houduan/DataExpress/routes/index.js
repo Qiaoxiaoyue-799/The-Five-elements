@@ -787,9 +787,11 @@ router.post('/cart', function (req, res, next) {
 router.post('/cart1', function (req, res, next) {
   tName = req.body.tName;
   tPrice = req.body.tPrice;
+  tImg=req.body.tImg;
+
   var con = mysql.createConnection(dbconfig);
   con.connect();
-  con.query("insert into cart(gName,gPrice2) values(?,?)", [tName, tPrice], function (err, result) {
+  con.query("insert into cart(gName,gPrice2,gImg) values(?,?,?)", [tName, tPrice,tImg], function (err, result) {
     if (err) {
       console.log(err);
     } else {

@@ -52,7 +52,7 @@ class ListItem extends Component {
 		const item = this.props.item;
 		
 		return (
-			<li key={item.id} style={{width:'100%',borderBottom:'2px solid #fff'}} >
+			<li key={item.id} style={{width:'100%',borderBottom:'2px solid #fff',paddingLeft:20,marginLeft:0}} >
 				<span
 					onClick={()=>this.handleFinished(item)} 
 					id={item.id}

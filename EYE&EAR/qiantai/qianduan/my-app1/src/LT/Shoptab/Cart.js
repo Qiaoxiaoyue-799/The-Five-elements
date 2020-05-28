@@ -202,7 +202,7 @@ export default class cart extends Component {
                     </List>
                 </div>
                 <p id="wen">以下是您选购的商品</p>
-                <div className="container" style={{width:'100%',overflow:'scroll',marginBottom:'20px'}}>
+                <div className="container" style={{width:'100%',overflow:'scroll'}}>
                     <ul style={{width:'100%'}}>
                         {this.state.list.map((item, index) =>
                             {
