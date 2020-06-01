@@ -145,7 +145,7 @@ export default class Community extends Component {
                             粉丝<span>{this.state.name.like_number}</span>
                         </button> */}
                         <button style={{ backgroundColor: '#8794a8', width: 120, height: 25, marginTop: 15, backgroundColor: '#fff', border: '1px solid #d4d4d4', borderRadius: 5, fontSize: 15 }}>
-                            我关注的人 <span>{this.state.name.liked_number}</span>
+                            我关注的人      <span>{this.state.name.liked_number}</span>
                         </button>
                     </div>
                     <div style={{ borderTop: '1px solid #fff', height: '100%', backgroundColor: '#fff' }}>
@@ -162,7 +162,7 @@ export default class Community extends Component {
                                 tabs.map(item => {
                                     if (item.title == '树洞') {
                                         return (
-                                            <ul style={{ listStyle: 'none', marginBottom: '100px',color:'black',fontSize:'15px',height:'150%' }}>
+                                            <ul style={{ listStyle: 'none', marginBottom: '100px',color:'black',fontSize:'15px',height:'300%' }}>
                                                 {
                                                     this.state.data.map((item, index) => (
 
@@ -190,7 +190,7 @@ export default class Community extends Component {
                                         )
                                     } else if (item.title == '聊天室') {                                        
                                         return (
-                                            <ul style={{ listStyle: 'none', marginBottom: '100px',color:'black',fontSize:'15px',height:'150%'  }}>
+                                            <ul style={{ listStyle: 'none', marginBottom: '100px',color:'black',fontSize:'15px',height:'300%'  }}>
                                                 {
                                                     arr1.map((item, index) => (
                                                         <Link to={'/apphome/mytab/eyemychat/'+item.article_id}>
