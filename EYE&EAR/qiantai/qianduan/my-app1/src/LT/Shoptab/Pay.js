@@ -86,7 +86,7 @@ export default class Pay extends Component {
                         />
                         </p>
                         <p style={{width:'100%',height:30,fontSize:18,textAlign:'center',marginTop:20}}>
-                            <Link to='/apphome/shoptab/cart'><button style={{color:'white',backgroundColor:'#4296c2',width:'60%',height:50,padding:0,borderRadius:8}}>立即付款</button></Link>
+                            <Link to='/apphome/shoptab/cart'><button onClick={this.getConnect} style={{color:'white',backgroundColor:'#4296c2',width:'60%',height:50,padding:0,borderRadius:8}}>立即付款</button></Link>
                         </p>
                     </div>
                 </div>
