@@ -57,11 +57,15 @@ export default class Shop_detail_one extends Component {
     }
     click = () => {
         var tName = this.state.data.tName
-        var tPrice = this.state.data.tPrice2
+        var tPrice = this.state.data4[0]
         var tImg=this.state.data.tImg
 
         // var num=
-        console.log(num)
+        console.log(this.state.data4)
+        console.log('票类的价格'+tPrice)
+        console.log('票类的名字'+tName)
+        console.log('票类的图片'+tImg)
+
         fetch('http://localhost:5000/cart1', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json; charset=utf-8' },

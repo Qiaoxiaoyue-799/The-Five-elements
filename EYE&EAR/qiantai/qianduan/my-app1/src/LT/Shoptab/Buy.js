@@ -19,9 +19,19 @@ export default class buy extends Component {
                 list:res
             })
             console.log(this.state.list);
+        })   
+    }
+    componentDidUpdate() {
+        fetch('http://localhost:5000/cartlist', {
+            "method": "get",
         })
-        
-            
+        .then(res => res.json())
+        .then(res => {
+            this.setState({
+                list:res
+            })
+            console.log(this.state.list);
+        })   
     }
     render() {
         // 支付页面

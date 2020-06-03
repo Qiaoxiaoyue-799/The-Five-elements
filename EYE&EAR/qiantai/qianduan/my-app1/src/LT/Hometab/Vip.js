@@ -49,6 +49,7 @@ export default class VIP extends Component {
         } 
         )
     }
+
     render() {
         return (
             <div style={{width: '100%',height:'108%',backgroundColor: '#fff',zIndex:999,position:'absolute'}}>
