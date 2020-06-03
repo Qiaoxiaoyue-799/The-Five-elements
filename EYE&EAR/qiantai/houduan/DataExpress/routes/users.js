@@ -49,6 +49,7 @@ router.post('/find', function (req, res, next) {
   var tel = req.body.tel;
   var password = req.body.password;
   var con = mysql.createConnection(dbconfig);
+  console.log(password)
   con.connect();
   con.query("select * from user where mobile = ?", [tel], function (err, result) {
     if (err) {

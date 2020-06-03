@@ -51,6 +51,7 @@ export default class Shop_detail_one extends Component {
                 this.setState({
                     data4: this.state.data.money.split('、')
                 })
+                console.log(this.state.data)
 
             }
             )

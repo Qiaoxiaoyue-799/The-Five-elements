@@ -52,18 +52,18 @@ class ClockIn extends React.Component {
         // console.log(this.state.weather);
       })
     })
-    // fetch('http://localhost:5000/login',{
-    //   method:'GET', 
-    //   headers: {'Content-Type': 'application/json; charset=utf-8'},
-    //   })
-    //   .then(res=>res.json())
-    //   .then(res=>{
-    //       this.setState({
-    //           data:res[0]
-    //       })
-    //       // console.log(res[0])
-    //   } 
-    //   )
+    fetch('http://localhost:5000/login',{
+      method:'GET', 
+      headers: {'Content-Type': 'application/json; charset=utf-8'},
+      })
+      .then(res=>res.json())
+      .then(res=>{
+          this.setState({
+              data:res[0]
+          })
+          // console.log(res[0])
+      } 
+      )
   }
 
   add = () => {  //api请求函数

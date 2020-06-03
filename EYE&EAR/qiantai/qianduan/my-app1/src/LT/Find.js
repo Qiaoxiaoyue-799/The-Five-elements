@@ -118,7 +118,7 @@ export default class Find extends Component {
       Num += Math.floor(Math.random() * 10);
     }
     this.tip = Num;
-    fetch("  http://106.ihuyi.com/webservice/sms.php?method=Submit&account=C05374133&password=744feba5462db69d3807587771312492&mobile="+this.state.tel+"&content=您的验证码是："+Num+"。请不要把验证码泄露给其他人。", {
+    fetch("  http://106.ihuyi.com/webservice/sms.php?method=Submit&account=C70139448&password=1375d9594e41f1f891c262da5ab756d1&mobile="+this.state.tel+"&content=您的验证码是："+Num+"。请不要把验证码泄露给其他人。", {
       method: 'GET',
       headers: { 'Content-Type': 'application/json; charset=utf-8'},
     })
@@ -144,8 +144,7 @@ export default class Find extends Component {
         .then(res => res.json())
         .then(res => {
           console.log(res);
-          alert("修改成功")
-          window.history.back(-1);
+          
         })
     } else if (this.tip1 == false) {
       tipMobile.innerHTML = '手机号不能为空';
@@ -154,6 +153,8 @@ export default class Find extends Component {
     } else if (this.tip3 == false) {
       tipNewPwd.innerHTML = '密码不能为空';
     }
+    alert("修改成功")
+    window.history.back(-1);
   }
   up = () => {
   

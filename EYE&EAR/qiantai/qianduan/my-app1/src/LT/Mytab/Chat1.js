@@ -230,7 +230,7 @@ export default class MyChat extends Component {
   }
   chooseEmoji = (item) => {
     var img = '/img/'+item+'.gif';
-    tip = this.props.match.path.slice(17,20);
+    tip = this.props.match.path.slice(15,18);
     var useridarr = [];
     if(this.state.data.user_id) {
         useridarr = this.state.data.user_id.split(',')
