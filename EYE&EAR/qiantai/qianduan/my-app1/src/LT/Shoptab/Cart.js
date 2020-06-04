@@ -25,6 +25,9 @@ export default class cart extends Component {
             order_name:'',
             order_tel:'',
             order_address:'',
+            name:false,
+            tel:false,
+            address:false
             // checked:'123'
         };
     }
@@ -48,11 +51,12 @@ export default class cart extends Component {
 
     change1 = (e) => {
         this.setState({
-            order_name: e
+            order_name: e,
+            name:true
         })
     }
     change2 = (value,e) => {
-        console.log(e);
+        // console.log(e);
         console.log(value);
         if (value.replace(/\s/g, '').length < 11) {
           this.setState({
@@ -64,53 +68,62 @@ export default class cart extends Component {
           });
         }
         this.setState({
-          order_tel:value
+          order_tel:value,
+          tel:true
         });
         console.log(this.state.order_tel);
     }
     change3 = (e) => {
         this.setState({
-            order_address: e
+            order_address: e,
+            address:true
         })
     }
 
     getConnect = () => {  //api请求函数
+        console.log(this.state.name);
+        console.log(this.state.tel);
+        console.log(this.state.address);
+        if(this.state.name==true&&this.state.tel==true&&this.state.address==true){
+            console.log(this.state.order_name);
+            console.log(this.state.order_tel);
+            console.log(this.state.order_address);
+            // console.log(this.state.list[1].gName);
+            //时间获取：
+            var date=new Date();
+            var year=date.getFullYear();
+            var month=date.getMonth()+1;
+            var day=date.getDate();
+            var time=+year+'/'+month+'/'+day;
+            fetch('http://localhost:5000/apphome/shoptab/cartlist',{
+            method:'POST', 
+            headers: {'Content-Type': 'application/json; charset=utf-8'},
+            body: JSON.stringify({
+                order_name:this.state.order_name,
+                order_tel:this.state.order_tel,
+                order_address:this.state.order_address,
+                gName:checked,
+                time:time,
+                // gImg:this.state.list.aImg
+            })})
+            .then(res=>{
+            //   console.log('22')
 
-        // console.log(this.state.list.aImg)    
-
-        console.log(this.state.order_name);
-        console.log(this.state.order_tel);
-        console.log(this.state.order_address);
-        // console.log(this.state.list[1].gName);
-        //时间获取：
-        var date=new Date();
-        var year=date.getFullYear();
-        var month=date.getMonth()+1;
-        var day=date.getDate();
-        var time=+year+'/'+month+'/'+day;
-        fetch('http://localhost:5000/apphome/shoptab/cartlist',{
-          method:'POST', 
-          headers: {'Content-Type': 'application/json; charset=utf-8'},
-          body: JSON.stringify({
-            order_name:this.state.order_name,
-            order_tel:this.state.order_tel,
-            order_address:this.state.order_address,
-            gName:checked,
-            time:time,
-            // gImg:this.state.list.aImg
-          })})
-        .then(res=>{
-        //   console.log('22')
-
-          res.json()
-        })
-        .then(res=>{
-        //   console.log('1');
-          // if(res.state) {
-            // window.alert('获取成功！');  
-        console.log(this.state.list.aImg)    
-        } 
-        )
+            res.json()
+            })
+            .then(res=>{
+            //   console.log('1');
+            // if(res.state) {
+                // window.alert('获取成功！');  
+            console.log(this.state.list.aImg)    
+            } 
+            )
+            this.props.history.push('/apphome/shoptab/buy')
+        }
+        else{
+            alert('请完善收货信息！');
+            this.props.history.push('/apphome/shoptab/cart')
+        }
     }
     updateFinished(todoItem) {
         // this.setState({checked:todoItem.gName})
@@ -224,7 +237,7 @@ export default class cart extends Component {
                     {/* <span style={{ display: 'block', paddingLeft: '50%', margin: 0, float: 'left' }}>
                         已选中：{finished}
                     </span> */}
-                    <Link to='/apphome/shoptab/buy'>
+                    {/* <Link to='/apphome/shoptab/buy'> */}
                         <button style={{
                             height: 40, width: 80, border: '1px solid rgb(241, 98, 42)',
                             borderRadius: '5px', marginLeft: 15, color: 'white',
@@ -234,7 +247,7 @@ export default class cart extends Component {
                         }} onClick={this.getConnect}>
                             购买
                         </button>
-                    </Link>
+                    {/* </Link> */}
                     
                 </div>
                 <div className="Cbottom">
