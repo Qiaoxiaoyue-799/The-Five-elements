@@ -51,7 +51,6 @@ export default class Shop_detail_one extends Component {
                 this.setState({
                     data4: this.state.data.money.split('、')
                 })
-                console.log(this.state.data)
 
             }
             )
@@ -62,11 +61,7 @@ export default class Shop_detail_one extends Component {
         var tImg=this.state.data.tImg
 
         // var num=
-        console.log(this.state.data4)
-        console.log('票类的价格'+tPrice)
-        console.log('票类的名字'+tName)
-        console.log('票类的图片'+tImg)
-
+        console.log(num)
         fetch('http://localhost:5000/cart1', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json; charset=utf-8' },
@@ -109,12 +104,11 @@ export default class Shop_detail_one extends Component {
                         {this.state.data1.map(val => {
                             return <a
                                 key={val}
-                                href="http://www.alipay.com"
                                 style={{ display: 'inline-block', width: '100%', height: this.state.imgHeight }}
                             >
 
                                 <img
-                                    src={val}
+                                    src={'http://localhost:5000/images?imgname=' + val}
                                     alt=""
                                     style={{ width: '100%', verticalAlign: 'top' }}   //图片记得写上宽度百分之百
                                     onLoad={() => {
@@ -162,15 +156,15 @@ export default class Shop_detail_one extends Component {
                         <div style={{ alignItems: 'center', justifyContent: 'center', height: '350px', backgroundColor: '#fff' }}>
                             <ul style={{ listStyle: 'none', margin: '10px auto' }}>
                                 <li style={{ height: 'auto', width: '100%', margin: '10px auto' }} >
-                                    <img style={{ height: 'auto', width: '100%', margin: '0px auto' }} src={this.state.data.img_1} />
+                                    <img style={{ height: 'auto', width: '100%', margin: '0px auto' }} src={'http://localhost:5000/images?imgname=' + this.state.data.img_1} />
                                     <div dangerouslySetInnerHTML={{ __html: this.state.data.detail1 }}></div>
                                 </li>
                                 <li style={{ height: 'auto', width: '100%', margin: '20px auto' }} >
-                                    <img style={{ height: 'auto', width: '100%', margin: '0px auto' }} src={this.state.data.img_2} />
+                                    <img style={{ height: 'auto', width: '100%', margin: '0px auto' }} src={'http://localhost:5000/images?imgname=' + this.state.data.img_2} />
                                     <div dangerouslySetInnerHTML={{ __html: this.state.data.detail2 }}></div>
                                 </li>
                                 <li style={{ height: 'auto', width: '100%', margin: '20px auto' }} >
-                                    <img style={{ height: 'auto', width: '100%', margin: '0px auto' }} src={this.state.data.img_3} />
+                                    <img style={{ height: 'auto', width: '100%', margin: '0px auto' }} src={'http://localhost:5000/images?imgname=' + this.state.data.img_3} />
                                     <div dangerouslySetInnerHTML={{ __html: this.state.data.detail3 }}></div>
                                 </li>
                             </ul>

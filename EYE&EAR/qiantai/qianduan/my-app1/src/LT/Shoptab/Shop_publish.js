@@ -145,6 +145,7 @@ export default class Shop_publish extends Component {
         console.log("haahha")   
         }
       )
+      alert('发布成功！')
     }    
     
     onChange = (files, type, index) => {
