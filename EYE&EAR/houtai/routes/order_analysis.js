@@ -10,7 +10,8 @@ router.get('/', function (req,res,next) {
     if (err) {
       console.log(err);
     } else {
-      console.log(result)      
+      console.log(result[0]);
+      console.log(result[1].gPrice2.slice(1))     
       var today = 1;
       var yesterday = 1;
       var seven = 1;
@@ -31,35 +32,36 @@ router.get('/', function (req,res,next) {
         var date = new Date(result[index].time.replace(/-/g, "/"));
         var days = now.getTime() - date.getTime();
         var day = parseInt(days / (1000 * 60 * 60 * 24));
+        console.log(result[1].gPrice2.slice(1,result[1].gPrice2.length))
         if(day == 0){
           today++;
           if(result[index].gstate == '已购买'){
             today_state++;
-            today_money = today_money + parseInt(result[index].gPrice2);
+            today_money = today_money + parseInt(result[index].gPrice2.slice(1,result[index].gPrice2.length));
           }
         }else if(day == 1){
           yesterday++;
           if(result[index].gstate == '已购买'){
             yesterday_state++;
-            yesterday_money = yesterday_money + parseInt(result[index].gPrice2);
+            yesterday_money = yesterday_money + parseInt(result[index].gPrice2.slice(1,result[index].gPrice2.length));
           }
         }else if(day >= 2 && day <= 7){
           seven++;
           if(result[index].gstate == '已购买'){
             seven_state++;
-            seven_money = seven_money + parseInt(result[index].gPrice2);
+            seven_money = seven_money + parseInt(result[index].gPrice2.slice(1,result[index].gPrice2.length));
           }
         }else if(day > 7 && day <= 15){
           fifteen++;
           if(result[index].gstate == '已购买'){
             fifteen_state++;
-            fifteen_money = fifteen_money + parseInt(result[index].gPrice2);
+            fifteen_money = fifteen_money + parseInt(result[index].gPrice2.slice(1,result[index].gPrice2.length));
           }
         }else if(day > 15 && day <= 30){
           thirty++;
           if(result[index].gstate == '已购买'){
             thirty_state++;
-            thirty_money = thirty_money + parseInt(result[index].gPrice2);
+            thirty_money = thirty_money + parseInt(result[index].gPrice2.slice(1,result[index].gPrice2.length));
           }
         }
       }

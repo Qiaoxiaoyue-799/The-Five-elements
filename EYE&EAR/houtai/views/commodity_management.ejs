@@ -115,7 +115,7 @@
 									style="border-bottom: 1px solid #d4d4d4;width: 1200px;height: 100px;padding-left: 0;margin-top: 30px;position: static;">
 									<li><%=result[i].id%></li>
 									<li><%=result[i].tName%></li>
-									<li><img src="../<%=result[i].tImg%>" alt=""
+									<li><img src="<%='http://localhost:5000/img?imgname='+result[i].tImg%>" alt=""
 											style="width: 40px;height: 40px;position: relative;top:12px"></li>
 									<li><%=result[i].money%></li>
 									<li>
@@ -263,7 +263,7 @@
 							"<ul class='order_message' style='border-bottom: 1px solid #d4d4d4;width: 1200px;height: 100px;padding-left: 0;margin-top: 30px;position: static;'>" +
 							" <li>" + data.result[i].id + "</li>" +
 							" <li>" + data.result[i].tName + "</li>" +
-							" <li><img src=../" + data.result[i].tImg + " style='width: 40px;height: 40px;position: relative;top:12px'></li>" +
+							" <li><img src='http://localhost:5000/img?imgname='" + data.result[i].tImg + " style='width: 40px;height: 40px;position: relative;top:12px'></li>" +
 							" <li>" + data.result[i].money + "</li>" +
 							" <li>" +
 							" <p style='cursor: pointer;' id='state" + i + "'>" + data.result[i].state + "</p>" +
