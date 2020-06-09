@@ -28,7 +28,7 @@ router.post('/change', function(req, res, next) {
               console.log(err);
             }
           })
-          res.end("change success");
+          res.end("修改成功");
         }
       }
       res.end("密码输入错误");

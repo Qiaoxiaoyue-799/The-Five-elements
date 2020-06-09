@@ -33,7 +33,7 @@ router.post('/del', function(req, res, next) {
               console.log(err);
             }
           })
-          res.end("delete success");
+          res.end("删除成功");
         }
       }
       res.end("没有信息");

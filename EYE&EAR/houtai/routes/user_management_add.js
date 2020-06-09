@@ -28,7 +28,7 @@ router.post('/add', function (req, res, next) {
             console.log(err);
           } else {
             if (password == password_again) {
-              res.end("insert success");
+              res.end("添加成功");
             } else {
               res.end("密码输入错误")
             }
