@@ -237,16 +237,14 @@ router.post('/apphome/hometab/myvippic', function (req, res, next) {
 })
 
 router.post('/apphome/hometab/sticky',function(req,res,next) {
-  var user_id1=req.body.user_id;
-  var time2=req.body.time;
-  var time3=req.body.time1;
+  var time=req.body.time;
+  var time1=req.body.time1;
   var id1=req.body.id;
-  var a=1;
   console.log(id1);
   var con = mysql.createConnection(dbconfig);
   con.connect();
   con.query("update active set id=? where time = ? ",
-          [100,time2],function(err,result) {
+          [1000,time],function(err,result) {
     if(err) {            
       console.log(err);
     } else {
@@ -255,21 +253,21 @@ router.post('/apphome/hometab/sticky',function(req,res,next) {
     }
   });
   con.query("update active set id=? where time=? ",
-          [id1,time3],function(err,result) {
+          [id1,time1],function(err,result) {
     if(err) {            
       console.log(err);
     } else {
      
-      // res.send({status:'success'});      
+      res.send('success');           
     }
   });
   con.query("update active set id=? where time = ? ",
-          [1,time2],function(err,result) {
+          [1,time],function(err,result) {
     if(err) {            
       console.log(err);
     } else {
    
-      // res.send({status:'success'});      
+      res.send('success');            
     }
   });
 });

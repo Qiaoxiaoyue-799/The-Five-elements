@@ -54,6 +54,8 @@ componentDidMount() {
     })
 }
 click = (e,i) => {
+  console.log('check')
+  console.log(i,this.state.data[0].time)
   fetch('http://localhost:5000/apphome/hometab/sticky',{
       method:'POST',
       headers: {'Content-Type': 'application/json; charset=utf-8'},
