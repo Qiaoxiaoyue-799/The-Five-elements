@@ -123,6 +123,7 @@ export default class Goods extends Component {
                         <ul style={{listStyle:'none',margin:'0px auto'}}>
                             {
                                 this.state.data1.map((item,index)=>(
+                                item.state=='上架'?
                                 // <Link to={'/apphome/shoptab_detail_one/'+item.id}>
                                  <Link to={'/apphome/shoptab/shop_detail_one/'+item.id}>
                                 <li style={{height:'110px',width:'80%',margin:'0 auto',marginBottom:'10px',border:'1px solid #8794a8'}} key={1}>
@@ -142,7 +143,7 @@ export default class Goods extends Component {
                                         </p>                                    
                                     </div>
                                 </li>
-                                </Link>
+                                </Link>:null
                                 ))
                             }
                             </ul>
@@ -151,6 +152,7 @@ export default class Goods extends Component {
                             <ul style={{listStyle:'none',margin:'0px auto'}}>
                             {
                                 this.state.data.map((item,index)=>(
+                                item.state=='上架'?
                                 <Link to={'/apphome/shoptab/shop_detail_two/'+item.id}>
                                 {/* <Link to='/apphome/shoptab_detail_two'> */}
                                 <li style={{height:'110px',width:'80%',margin:'0 auto',marginBottom:'10px',border:'1px solid #8794a8'}} key={1}>
@@ -169,7 +171,7 @@ export default class Goods extends Component {
                                         </p>
                                     </div>
                                 </li>
-                                </Link>
+                                </Link>:null
                                 ))
                             }
                             </ul>
