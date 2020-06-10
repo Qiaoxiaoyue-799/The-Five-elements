@@ -11,7 +11,7 @@ router.get('/', function (req,res,next) {
       console.log(err);
     } else {
       console.log(result[0]);
-      console.log(result[1].gPrice2.slice(1))     
+      // console.log(result[1].gPrice2.slice(1))     
       var today = 1;
       var yesterday = 1;
       var seven = 1;
@@ -32,7 +32,7 @@ router.get('/', function (req,res,next) {
         var date = new Date(result[index].time.replace(/-/g, "/"));
         var days = now.getTime() - date.getTime();
         var day = parseInt(days / (1000 * 60 * 60 * 24));
-        console.log(result[1].gPrice2.slice(1,result[1].gPrice2.length))
+        // console.log(result[1].gPrice2.slice(1,result[1].gPrice2.length))
         if(day == 0){
           today++;
           if(result[index].gstate == '已购买'){
