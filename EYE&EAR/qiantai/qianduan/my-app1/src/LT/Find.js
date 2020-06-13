@@ -169,9 +169,9 @@ export default class Find extends Component {
         <Flex align="start">
           <div className='find'>
             <form className='form'>
-              <input onChange={this.change1} placeholder='输入手机号' name='tel' onBlur={this.blur1} value={this.state.tel} />
+              <input onChange={this.change1} placeholder='输入手机号' name='tel' onBlur={this.blur1} value={this.state.tel} style={{display:'block',marginBottom:10,marginLeft:'12%'}}/>
               <p className='tip tipMobile'></p>
-              <input style={{width:120,float:'left',marginLeft:30}} onChange={this.change2} placeholder='填写验证码' name='verification' onBlur={this.blur2} value={this.state.pwd} />
+              <input style={{width:120,float:'left',marginLeft:30,marginBottom:10}} onChange={this.change2} placeholder='填写验证码' name='verification' onBlur={this.blur2} value={this.state.pwd} />
               <span><input onClick={this.getVerificationCode} style={{width:70,height:35,backgroundColor:'blue',marginRight:30,borderRadius: 15,color:'#fff',fontSize:8,paddingLeft:0}} value='获取验证码' type='button'/></span>
               <p style={{float:'left'}} className='tip tipVerification'></p>
               <input onChange={this.change3} type="password" placeholder='输入新密码' name="password" onBlur={this.blur3} value={this.state.newPwd} />
